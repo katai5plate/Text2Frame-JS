@@ -17,7 +17,7 @@ npm i -D @babel/core @babel/node @babel/preset-env
 }
 ```
 
-### example.jsx
+### example.js
 
 ```js
 /** @type {import("Text2Frame-MV/Text2Frame.mjs")} */
@@ -71,5 +71,5 @@ console.log(list);
 ### 実行
 
 ```
-npx babel-node example.jsx
+npx babel-node example.js
 ```
