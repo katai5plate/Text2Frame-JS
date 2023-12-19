@@ -1,5 +1,5 @@
 import { BLEND_MODE, CHARACTER, CHARACTER_FREQ, CHARACTER_SPEED, DIRECTION, DIRECTION_CAR, DIRECTION_METHOD, DIRECTION_RETAIN, DIRECTION_ROUTE8, DIRECTION_TURN_METHOD, EVENT, FADE, VEHICLE } from "../constants";
-import { ArgValue, C, MapPosition, DirectOrVariables, Sound } from "../type";
+import { C, MapPosition, DirectOrVariables, Sound, SwitchId } from "../type";
 export declare const TransferPlayer: C<{
     mode: DirectOrVariables;
     position: MapPosition;
@@ -25,12 +25,12 @@ export declare const ScrollMap: C<{
 }>;
 type RouteCode = {
     name: string;
-    args: ArgValue[];
+    args: string[];
 };
 interface Route {
     jump: (x: number, y: number) => RouteCode;
     wait: (v: number) => RouteCode;
-    changeSwitch: (id: number, to: boolean) => RouteCode;
+    changeSwitch: (id: SwitchId, to: boolean) => RouteCode;
     changeSpeed: (speed: keyof typeof CHARACTER_SPEED) => RouteCode;
     changeFreq: (freq: keyof typeof CHARACTER_FREQ) => RouteCode;
     changeImage: (name: string, index: number) => RouteCode;
@@ -52,7 +52,7 @@ export declare const SetMovementRoute: C<{
     repeat: boolean;
     skip: boolean;
     wait: boolean;
-    routes: (route: Route) => string[];
+    routes: (route: Route) => RouteCode[];
 }>;
 export declare const GetOnOffVehicle: C;
 export {};

@@ -3,7 +3,7 @@ export declare const Wait: C<{
     time: number;
 }>;
 export declare const Script: C<{
-    code: string[];
+    code: string;
 }>;
 export declare const PluginCommandMV: C<{
     command: string;

@@ -1,1 +1,1 @@
-export const ev = (arr: string[]) => arr.join("\n");
+export const ev = (...arr: string[]) => arr.join("\n");

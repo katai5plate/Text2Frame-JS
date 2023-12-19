@@ -15,10 +15,22 @@ export declare const WINDOW_POSITION_VERTICAL: {
 };
 export declare const CHOICES_INIT: {
     NONE: string;
+    CASE_1: string;
+    CASE_2: string;
+    CASE_3: string;
+    CASE_4: string;
+    CASE_5: string;
+    CASE_6: string;
 };
 export declare const CHOICES_CANCEL: {
     BRANCH: string;
     DISALLOW: string;
+    CASE_1: string;
+    CASE_2: string;
+    CASE_3: string;
+    CASE_4: string;
+    CASE_5: string;
+    CASE_6: string;
 };
 export declare const ITEM_TYPE: {
     REGULAR: string;

@@ -79,12 +79,7 @@ const tag = (name, arg, textChildren) => {
     const args = (0, exports.joinKeep)(null, arg ?? []);
     return (0, exports.joinSkip)("\n", [
         args !== "" ? `<${name}: ${args}>` : `<${name}>`,
-        ...(textChildren
-            ? [
-                ...(Array.isArray(textChildren) ? textChildren : [textChildren]),
-                `</${name}>`,
-            ]
-            : []),
+        ...(textChildren ? [textChildren, `</${name}>`] : []),
     ]);
 };
 exports.tag = tag;

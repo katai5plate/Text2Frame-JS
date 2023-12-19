@@ -2,7 +2,7 @@ import { ACTOR_MEMBER, CHARACTER, ENEMY_MEMBER } from "./constants";
 import {
   ArgValue,
   FromTo,
-  JSXObject,
+  Text,
   MapPosition,
   DirectOrVariables,
   Sound,
@@ -118,29 +118,20 @@ export const arg = <V extends ArgValue>(
   })}`;
 };
 
-export const joinKeep = (
-  delim: string | null,
-  arr: (JSXObject | undefined)[]
-) => arr.join(delim ?? ", ");
-export const joinSkip = (
-  delim: string | null,
-  arr: (JSXObject | undefined)[]
-) => arr.filter((x) => x !== undefined).join(delim ?? ", ");
+export const joinKeep = (delim: string | null, arr: (Text | undefined)[]) =>
+  arr.join(delim ?? ", ");
+export const joinSkip = (delim: string | null, arr: (Text | undefined)[]) =>
+  arr.filter((x) => x !== undefined).join(delim ?? ", ");
 
 export const tag = (
   name: string,
-  arg?: (JSXObject | undefined)[],
-  textChildren?: string | string[]
+  arg?: (Text | undefined)[],
+  textChildren?: string
 ) => {
   const args = joinKeep(null, arg ?? []);
   return joinSkip("\n", [
     args !== "" ? `<${name}: ${args}>` : `<${name}>`,
-    ...(textChildren
-      ? [
-          ...(Array.isArray(textChildren) ? textChildren : [textChildren]),
-          `</${name}>`,
-        ]
-      : []),
+    ...(textChildren ? [textChildren, `</${name}>`] : []),
   ]);
 };
 

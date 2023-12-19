@@ -14,9 +14,9 @@ const BattleProcessing = ({ id, ifWin, ifEscape, ifLose }) => {
                 return t.validId(v);
             }),
         ]),
-        ...(ifWin ? [(0, validate_1.tag)("IfWin"), ifWin] : []),
-        ...(ifEscape ? [(0, validate_1.tag)("IfEscape"), ifEscape] : []),
-        ...(ifLose ? [(0, validate_1.tag)("IfLose"), ifLose] : []),
+        ifWin ? (0, validate_1.joinSkip)("\n", [(0, validate_1.tag)("IfWin"), ifWin]) : undefined,
+        ifEscape ? (0, validate_1.joinSkip)("\n", [(0, validate_1.tag)("IfEscape"), ifEscape]) : undefined,
+        ifLose ? (0, validate_1.joinSkip)("\n", [(0, validate_1.tag)("IfLose"), ifLose]) : undefined,
         (0, validate_1.tag)("End"),
     ]);
 };

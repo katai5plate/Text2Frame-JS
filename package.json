@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "rimraf dist && tsc && webpack --mode development",
-    "update-tf": "rimraf node_modules/Text2Frame-MV && rimraf node_modules/Text2Frame-JSX && npm i"
+    "update-tf": "rimraf node_modules/Text2Frame-MV && rimraf node_modules/Text2Frame-JSX && npm i",
+    "dev": "npm run build && babel-node test/spec.js"
   },
   "repository": {
     "type": "git",

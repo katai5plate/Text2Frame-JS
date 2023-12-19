@@ -5,7 +5,7 @@ export const Wait: C<{ time: number }> = ({ time }) =>
   tag("Wait", [argInt(time)]);
 
 export const Script: C<{
-  code: string[];
+  code: string;
 }> = ({ code }) => tag("Script", undefined, code);
 
 export const PluginCommandMV: C<{

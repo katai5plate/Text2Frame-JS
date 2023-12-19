@@ -1,6 +1,6 @@
 export type C<P = {}> = (props: P) => string;
 
-export type JSXObject = string | string[] | number | boolean;
+export type Text = string | number | boolean;
 
 export type SelfSwitchName = "A" | "B" | "C" | "D";
 

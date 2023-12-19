@@ -1,4 +1,4 @@
-export { parse } from "./parse";
+export { ev as parse } from "./parse";
 import * as actor from "./events/actor";
 import * as battle from "./events/battle";
 import * as character from "./events/character";

@@ -1,11 +1,11 @@
 import { C } from "../type";
 export declare const Check: C<{
     condition: string;
-    then: string[];
-    otherwise?: string[];
+    then: string;
+    otherwise?: string;
 }>;
 export declare const Loop: C<{
-    children: string[];
+    content: string;
 }>;
 export declare const LoopBreak: C;
 export declare const BreakLoop: C;
@@ -23,6 +23,6 @@ export declare const JumpToLabel: C<{
     name: string;
 }>;
 export declare const Comment: C<{
-    text: string[];
+    text: string;
 }>;
 //# sourceMappingURL=flow.d.ts.map

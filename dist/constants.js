@@ -18,10 +18,22 @@ exports.WINDOW_POSITION_VERTICAL = {
 };
 exports.CHOICES_INIT = {
     NONE: "None",
+    CASE_1: "1",
+    CASE_2: "2",
+    CASE_3: "3",
+    CASE_4: "4",
+    CASE_5: "5",
+    CASE_6: "6",
 };
 exports.CHOICES_CANCEL = {
     BRANCH: "Branch",
     DISALLOW: "Disallow",
+    CASE_1: "1",
+    CASE_2: "2",
+    CASE_3: "3",
+    CASE_4: "4",
+    CASE_5: "5",
+    CASE_6: "6",
 };
 exports.ITEM_TYPE = {
     REGULAR: "Regular Item",

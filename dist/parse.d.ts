@@ -1,2 +1,2 @@
-export declare const parse: (arr: string[]) => string;
+export declare const ev: (...arr: string[]) => string;
 //# sourceMappingURL=parse.d.ts.map

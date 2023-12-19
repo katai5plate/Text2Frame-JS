@@ -20,23 +20,24 @@ npm i -D @babel/core @babel/node @babel/preset-env
 ### example.jsx
 
 ```js
-import { parse as ev, events } from "Text2Frame-JS";
 /** @type {import("Text2Frame-MV/Text2Frame.mjs")} */
-const { convert } = require("Text2Frame-MV");
+const TF = require("Text2Frame-MV");
+//@ts-check
+import { parse as ev, events } from "Text2Frame-JS";
 
-const text = ev([
+const text = ev(
   events.message.Window({ name: "アレックス" }),
   "暇だなー",
   events.message.Window({ name: "ブライアン" }),
   "そうだな",
   events.flow.Check({
     condition: "$gameSwitches.value(10)",
-    then: ev([
+    then: ev(
       events.message.Window({ name: "ぬくりあ" }),
-      "めでてえｗｗｗｗｗｗｗ",
-    ]),
-  }),
-]);
+      "めでてえｗｗｗｗｗｗｗ"
+    ),
+  })
+);
 
 console.log(text);
 // <Name: アレックス>
@@ -48,7 +49,7 @@ console.log(text);
 // めでてえｗｗｗｗｗｗｗ
 // <End>
 
-const list = convert(text);
+const list = TF.convert(text);
 console.log(list);
 // [
 //   { code: 101, indent: 0, parameters: [ '', 0, 0, 2, 'アレックス' ] },

@@ -13,23 +13,8 @@ import {
   FADE,
   VEHICLE,
 } from "../constants";
-import {
-  ArgValue,
-  C,
-  MapPosition,
-  DirectOrVariables,
-  Sound,
-  VariableId,
-} from "../type";
-import {
-  arg,
-  argId,
-  argInt,
-  argPreset,
-  argRange,
-  joinSkip,
-  tag,
-} from "../validate";
+import { C, MapPosition, DirectOrVariables, Sound, SwitchId } from "../type";
+import { arg, argInt, argPreset, argRange, joinSkip, tag } from "../validate";
 
 export const TransferPlayer: C<{
   mode: DirectOrVariables;
@@ -90,11 +75,11 @@ export const ScrollMap: C<{
     wait,
   ]);
 
-type RouteCode = { name: string; args: ArgValue[] };
+type RouteCode = { name: string; args: string[] };
 interface Route {
   jump: (x: number, y: number) => RouteCode;
   wait: (v: number) => RouteCode;
-  changeSwitch: (id: number, to: boolean) => RouteCode;
+  changeSwitch: (id: SwitchId, to: boolean) => RouteCode;
   changeSpeed: (speed: keyof typeof CHARACTER_SPEED) => RouteCode;
   changeFreq: (freq: keyof typeof CHARACTER_FREQ) => RouteCode;
   changeImage: (name: string, index: number) => RouteCode;
@@ -125,7 +110,7 @@ export const SetMovementRoute: C<{
   repeat: boolean;
   skip: boolean;
   wait: boolean;
-  routes: (route: Route) => string[];
+  routes: (route: Route) => RouteCode[];
 }> = ({ id, repeat, skip, wait, routes }) =>
   joinSkip("\n", [
     tag("SetMovementRoute", [
@@ -143,8 +128,11 @@ export const SetMovementRoute: C<{
       wait: (v: number) => {
         return { name: "McWait", args: [argInt(v)] };
       },
-      changeSwitch: (id: number, to: boolean) => {
-        return { name: `Switch${to ? "On" : "Off"}`, args: [argId(id)] };
+      changeSwitch: (id: SwitchId, to: boolean) => {
+        return {
+          name: `Switch${to ? "On" : "Off"}`,
+          args: [arg(id, (v, t) => t.markSwitchId(v))],
+        };
       },
       changeSpeed: (speed: keyof typeof CHARACTER_SPEED) => {
         return {
@@ -221,7 +209,7 @@ export const SetMovementRoute: C<{
       changeTransparent: (active: boolean) => {
         return { name: `Transparent${active ? "On" : "Off"}`, args: [] };
       },
-    }),
+    }).map(({ name, args }) => tag(name, args)),
   ]);
 
 export const GetOnOffVehicle: C = () => tag("GetOnOffVehicle");

@@ -12,9 +12,9 @@ import {
 
 export const BattleProcessing: C<{
   id: keyof typeof BATTLE_TROOP | VariableId | number;
-  ifWin?: string[];
-  ifEscape?: string[];
-  ifLose?: string[];
+  ifWin?: string;
+  ifEscape?: string;
+  ifLose?: string;
 }> = ({ id, ifWin, ifEscape, ifLose }) => {
   return joinSkip("\n", [
     tag("BattleProcessing", [
@@ -24,9 +24,9 @@ export const BattleProcessing: C<{
         return t.validId(v);
       }),
     ]),
-    ...(ifWin ? [tag("IfWin"), ifWin] : []),
-    ...(ifEscape ? [tag("IfEscape"), ifEscape] : []),
-    ...(ifLose ? [tag("IfLose"), ifLose] : []),
+    ifWin ? joinSkip("\n", [tag("IfWin"), ifWin]) : undefined,
+    ifEscape ? joinSkip("\n", [tag("IfEscape"), ifEscape]) : undefined,
+    ifLose ? joinSkip("\n", [tag("IfLose"), ifLose]) : undefined,
     tag("End"),
   ]);
 };

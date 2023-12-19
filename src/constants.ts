@@ -16,10 +16,22 @@ export const WINDOW_POSITION_VERTICAL = {
 
 export const CHOICES_INIT = {
   NONE: "None",
+  CASE_1: "1",
+  CASE_2: "2",
+  CASE_3: "3",
+  CASE_4: "4",
+  CASE_5: "5",
+  CASE_6: "6",
 };
 export const CHOICES_CANCEL = {
   BRANCH: "Branch",
   DISALLOW: "Disallow",
+  CASE_1: "1",
+  CASE_2: "2",
+  CASE_3: "3",
+  CASE_4: "4",
+  CASE_5: "5",
+  CASE_6: "6",
 };
 
 export const ITEM_TYPE = {

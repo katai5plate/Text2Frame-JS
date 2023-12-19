@@ -7,11 +7,7 @@ import {
   WINDOW_POSITION_VERTICAL,
 } from "../constants";
 import { C, VariableId } from "../type";
-import { arg, joinSkip, tag } from "../validate";
-
-export const Message: C<{ children: string | string[] }> = ({ children }) =>
-  Array.isArray(children) ? children.join("\n") : children;
-export const M = Message;
+import { arg, argPreset, joinSkip, tag } from "../validate";
 
 export const Window: C<{
   background?: keyof typeof WINDOW_BACKGROUND;
@@ -29,27 +25,22 @@ export const Window: C<{
     name && tag("Name", [name]),
   ]);
 
-const ChoicesWhen: C<{
-  name: string;
-  children?: string[];
-}> = ({ name, children }) => joinSkip("\n", [tag("When", [name]), children]);
-const ChoicesCancel: C<{
-  children: string[];
-}> = ({ children }) => joinSkip("\n", [tag("WhenCancel"), children]);
-type ChoiceWhenElement =
-  | ReturnType<typeof ChoicesWhen>
-  | ReturnType<typeof ChoicesCancel>;
-const ShowChoices: C<{
+export const ShowChoices: C<{
   background?: keyof typeof WINDOW_BACKGROUND;
   position?: keyof typeof WINDOW_POSITION_HORIZONTAL;
   init?: keyof typeof CHOICES_INIT | number;
   cancel?: keyof typeof CHOICES_CANCEL | number;
-  children: ChoiceWhenElement | ChoiceWhenElement[];
-}> = ({ background, position, init, cancel, children }) =>
-  joinSkip("\n", [
+  cases: {
+    name: string | null;
+    then: string;
+  }[];
+}> = ({ background, position, init, cancel, cases }) => {
+  if (cases.filter((caseItem) => caseItem.name === null).length >= 2)
+    throw new Error("キャンセル扱いとなる name=null は複数設定できません");
+  return joinSkip("\n", [
     tag("ShowChoices", [
-      background,
-      position,
+      background && argPreset(background, WINDOW_BACKGROUND),
+      position && argPreset(position, WINDOW_POSITION_HORIZONTAL),
       init &&
         arg(init, (v, t) =>
           typeof v === "number"
@@ -63,13 +54,19 @@ const ShowChoices: C<{
             : t.markPreset(v, CHOICES_CANCEL)
         ),
     ]),
-    children,
+    joinSkip(
+      "\n",
+      cases.map(({ name, then }) =>
+        joinSkip("\n", [
+          joinSkip("\n", [
+            name ? tag("When", [name]) : tag("WhenCancel"),
+            joinSkip("\n", [then]),
+          ]),
+        ])
+      )
+    ),
     tag("End"),
   ]);
-export const Choices = {
-  Show: ShowChoices,
-  When: ChoicesWhen,
-  Cancel: ChoicesCancel,
 };
 
 export const InputNumber: C<{
@@ -93,6 +90,6 @@ export const SelectItem: C<{
 export const ScrollingText: C<{
   speed?: number;
   noSkip?: boolean;
-  text: string[];
+  text: string;
 }> = ({ speed = 2, noSkip, text }) =>
   tag("ScrollingText", [speed, noSkip], text);

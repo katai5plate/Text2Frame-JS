@@ -77,11 +77,23 @@ var WINDOW_POSITION_VERTICAL = {
   BOTTOM: "Bottom"
 };
 var CHOICES_INIT = {
-  NONE: "None"
+  NONE: "None",
+  CASE_1: "1",
+  CASE_2: "2",
+  CASE_3: "3",
+  CASE_4: "4",
+  CASE_5: "5",
+  CASE_6: "6"
 };
 var CHOICES_CANCEL = {
   BRANCH: "Branch",
-  DISALLOW: "Disallow"
+  DISALLOW: "Disallow",
+  CASE_1: "1",
+  CASE_2: "2",
+  CASE_3: "3",
+  CASE_4: "4",
+  CASE_5: "5",
+  CASE_6: "6"
 };
 var ITEM_TYPE = {
   REGULAR: "Regular Item",
@@ -513,11 +525,11 @@ var Check = function Check(_ref) {
   var condition = _ref.condition,
     then = _ref.then,
     otherwise = _ref.otherwise;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("If", ["Script", condition]), then].concat(_toConsumableArray(otherwise ? [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("Else"), otherwise] : []), [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("End")]));
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("If", ["Script", condition]), then].concat(_toConsumableArray(otherwise ? (0,_validate__WEBPACK_IMPORTED_MODULE_0__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("Else"), otherwise]) : []), [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("End")]));
 };
 var Loop = function Loop(_ref2) {
-  var children = _ref2.children;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("Loop"), children, (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("RepeatAbove")]);
+  var content = _ref2.content;
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("Loop"), content, (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("RepeatAbove")]);
 };
 var LoopBreak = function LoopBreak() {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("BreakLoop");
@@ -734,81 +746,67 @@ var PlayMovie = function PlayMovie(_ref3) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Choices: () => (/* binding */ Choices),
 /* harmony export */   InputNumber: () => (/* binding */ InputNumber),
-/* harmony export */   M: () => (/* binding */ M),
-/* harmony export */   Message: () => (/* binding */ Message),
 /* harmony export */   ScrollingText: () => (/* binding */ ScrollingText),
 /* harmony export */   SelectItem: () => (/* binding */ SelectItem),
+/* harmony export */   ShowChoices: () => (/* binding */ ShowChoices),
 /* harmony export */   Window: () => (/* binding */ Window)
 /* harmony export */ });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./src/constants.ts");
 /* harmony import */ var _validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../validate */ "./src/validate.ts");
 
 
-var Message = function Message(_ref) {
-  var children = _ref.children;
-  return Array.isArray(children) ? children.join("\n") : children;
-};
-var M = Message;
-var Window = function Window(_ref2) {
-  var face = _ref2.face,
-    position = _ref2.position,
-    background = _ref2.background,
-    name = _ref2.name;
+var Window = function Window(_ref) {
+  var face = _ref.face,
+    position = _ref.position,
+    background = _ref.background,
+    name = _ref.name;
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [background && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("Background", [background]), position && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("WindowPosition", [position]), face && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("Face", ["".concat(face.name, "(").concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(face.index, function (v, t) {
     return t.validRange(v, 0, 15);
   }), ")")]), name && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("Name", [name])]);
 };
-var ChoicesWhen = function ChoicesWhen(_ref3) {
-  var name = _ref3.name,
-    children = _ref3.children;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("When", [name]), children]);
-};
-var ChoicesCancel = function ChoicesCancel(_ref4) {
-  var children = _ref4.children;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("WhenCancel"), children]);
-};
-var ShowChoices = function ShowChoices(_ref5) {
-  var background = _ref5.background,
-    position = _ref5.position,
-    init = _ref5.init,
-    cancel = _ref5.cancel,
-    children = _ref5.children;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ShowChoices", [background, position, init && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(init, function (v, t) {
+var ShowChoices = function ShowChoices(_ref2) {
+  var background = _ref2.background,
+    position = _ref2.position,
+    init = _ref2.init,
+    cancel = _ref2.cancel,
+    cases = _ref2.cases;
+  if (cases.filter(function (caseItem) {
+    return caseItem.name === null;
+  }).length >= 2) throw new Error("キャンセル扱いとなる name=null は複数設定できません");
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ShowChoices", [background && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(background, _constants__WEBPACK_IMPORTED_MODULE_0__.WINDOW_BACKGROUND), position && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(position, _constants__WEBPACK_IMPORTED_MODULE_0__.WINDOW_POSITION_HORIZONTAL), init && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(init, function (v, t) {
     return typeof v === "number" ? t.validRange(v, 1, 6) : t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.CHOICES_INIT);
   }), cancel && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(cancel, function (v, t) {
     return typeof v === "number" ? t.validRange(v, 1, 6) : t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.CHOICES_CANCEL);
-  })]), children, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("End")]);
+  })]), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", cases.map(function (_ref3) {
+    var name = _ref3.name,
+      then = _ref3.then;
+    return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [name ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("When", [name]) : (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("WhenCancel"), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [then])])]);
+  })), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("End")]);
 };
-var Choices = {
-  Show: ShowChoices,
-  When: ChoicesWhen,
-  Cancel: ChoicesCancel
-};
-var InputNumber = function InputNumber(_ref6) {
-  var id = _ref6.id,
-    digit = _ref6.digit;
+var InputNumber = function InputNumber(_ref4) {
+  var id = _ref4.id,
+    digit = _ref4.digit;
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("InputNumber", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(id, function (v, t) {
     return t.markVariableId(v);
   }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(digit, function (v, t) {
     return t.validRange(digit, 1, 8);
   })]);
 };
-var SelectItem = function SelectItem(_ref7) {
-  var id = _ref7.id,
-    itemType = _ref7.itemType;
+var SelectItem = function SelectItem(_ref5) {
+  var id = _ref5.id,
+    itemType = _ref5.itemType;
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SelectItem", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(id, function (v, t) {
     return t.markVariableId(v);
   }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(itemType, function (v, t) {
     return t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.ITEM_TYPE);
   })]);
 };
-var ScrollingText = function ScrollingText(_ref8) {
-  var _ref8$speed = _ref8.speed,
-    speed = _ref8$speed === void 0 ? 2 : _ref8$speed,
-    noSkip = _ref8.noSkip,
-    text = _ref8.text;
+var ScrollingText = function ScrollingText(_ref6) {
+  var _ref6$speed = _ref6.speed,
+    speed = _ref6$speed === void 0 ? 2 : _ref6$speed,
+    noSkip = _ref6.noSkip,
+    text = _ref6.text;
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ScrollingText", [speed, noSkip], text);
 };
 
@@ -924,7 +922,9 @@ var SetMovementRoute = function SetMovementRoute(_ref5) {
     changeSwitch: function changeSwitch(id, to) {
       return {
         name: "Switch".concat(to ? "On" : "Off"),
-        args: [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(id)]
+        args: [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(id, function (v, t) {
+          return t.markSwitchId(v);
+        })]
       };
     },
     changeSpeed: function changeSpeed(speed) {
@@ -1029,6 +1029,10 @@ var SetMovementRoute = function SetMovementRoute(_ref5) {
         args: []
       };
     }
+  }).map(function (_ref6) {
+    var name = _ref6.name,
+      args = _ref6.args;
+    return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)(name, args);
   }))));
 };
 var GetOnOffVehicle = function GetOnOffVehicle() {
@@ -1498,7 +1502,7 @@ var BattleProcessing = function BattleProcessing(_ref) {
     if (typeof v === "string") return t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.BATTLE_TROOP);
     if (t.isVariableId(v)) return t.markVariableId(v);
     return t.validId(v);
-  })])].concat(_toConsumableArray(ifWin ? [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("IfWin"), ifWin] : []), _toConsumableArray(ifEscape ? [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("IfEscape"), ifEscape] : []), _toConsumableArray(ifLose ? [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("IfLose"), ifLose] : []), [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("End")]));
+  })]), ifWin ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("IfWin"), ifWin]) : undefined, ifEscape ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("IfEscape"), ifEscape]) : undefined, ifLose ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("IfLose"), ifLose]) : undefined, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("End")]);
 };
 var ShopProcessing = function ShopProcessing(_ref2) {
   var items = _ref2.items,
@@ -1668,9 +1672,12 @@ var ChangeVehicleImage = function ChangeVehicleImage(_ref5) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   parse: () => (/* binding */ parse)
+/* harmony export */   ev: () => (/* binding */ ev)
 /* harmony export */ });
-var parse = function parse(arr) {
+var ev = function ev() {
+  for (var _len = arguments.length, arr = new Array(_len), _key = 0; _key < _len; _key++) {
+    arr[_key] = arguments[_key];
+  }
   return arr.join("\n");
 };
 
@@ -1796,7 +1803,7 @@ var joinSkip = function joinSkip(delim, arr) {
 };
 var tag = function tag(name, arg, textChildren) {
   var args = joinKeep(null, arg !== null && arg !== void 0 ? arg : []);
-  return joinSkip("\n", [args !== "" ? "<".concat(name, ": ").concat(args, ">") : "<".concat(name, ">")].concat(_toConsumableArray(textChildren ? [].concat(_toConsumableArray(Array.isArray(textChildren) ? textChildren : [textChildren]), ["</".concat(name, ">")]) : [])));
+  return joinSkip("\n", [args !== "" ? "<".concat(name, ": ").concat(args, ">") : "<".concat(name, ">")].concat(_toConsumableArray(textChildren ? [textChildren, "</".concat(name, ">")] : [])));
 };
 var argInt = function argInt(v) {
   return arg(v, function (v, t) {
@@ -1928,7 +1935,7 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   events: () => (/* binding */ events),
-/* harmony export */   parse: () => (/* reexport safe */ _parse__WEBPACK_IMPORTED_MODULE_0__.parse)
+/* harmony export */   parse: () => (/* reexport safe */ _parse__WEBPACK_IMPORTED_MODULE_0__.ev)
 /* harmony export */ });
 /* harmony import */ var _parse__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./parse */ "./src/parse.ts");
 /* harmony import */ var _events_actor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./events/actor */ "./src/events/actor.ts");

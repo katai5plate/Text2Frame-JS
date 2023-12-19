@@ -1,4 +1,4 @@
-import { ArgValue, FromTo, JSXObject, MapPosition, DirectOrVariables, Sound, SwitchId, VariableId, Color4, Color3 } from "./type";
+import { ArgValue, FromTo, Text, MapPosition, DirectOrVariables, Sound, SwitchId, VariableId, Color4, Color3 } from "./type";
 export declare const arg: <V extends ArgValue>(value: V, converter: (value: V, tools: {
     markVariableId: (v: VariableId) => string;
     markSwitchId: (v: SwitchId) => string;
@@ -19,9 +19,9 @@ export declare const arg: <V extends ArgValue>(value: V, converter: (value: V, t
     isSound: (v: unknown) => v is Sound;
     isColor: (v: unknown) => v is Color3 | Color4;
 }) => string | number | boolean) => string;
-export declare const joinKeep: (delim: string | null, arr: (JSXObject | undefined)[]) => string;
-export declare const joinSkip: (delim: string | null, arr: (JSXObject | undefined)[]) => string;
-export declare const tag: (name: string, arg?: (JSXObject | undefined)[], textChildren?: string | string[]) => string;
+export declare const joinKeep: (delim: string | null, arr: (Text | undefined)[]) => string;
+export declare const joinSkip: (delim: string | null, arr: (Text | undefined)[]) => string;
+export declare const tag: (name: string, arg?: (Text | undefined)[], textChildren?: string) => string;
 export declare const argInt: (v: number) => string;
 export declare const argId: (v: number) => string;
 export declare const argEnemyIndex: (v: number) => string;

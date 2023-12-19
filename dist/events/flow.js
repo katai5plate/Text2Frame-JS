@@ -5,11 +5,11 @@ const validate_1 = require("../validate");
 const Check = ({ condition, then, otherwise }) => (0, validate_1.joinSkip)("\n", [
     (0, validate_1.tag)("If", ["Script", condition]),
     then,
-    ...(otherwise ? [(0, validate_1.tag)("Else"), otherwise] : []),
+    ...(otherwise ? (0, validate_1.joinSkip)("\n", [(0, validate_1.tag)("Else"), otherwise]) : []),
     (0, validate_1.tag)("End"),
 ]);
 exports.Check = Check;
-const Loop = ({ children }) => (0, validate_1.joinSkip)("\n", [(0, validate_1.tag)("Loop"), children, (0, validate_1.tag)("RepeatAbove")]);
+const Loop = ({ content }) => (0, validate_1.joinSkip)("\n", [(0, validate_1.tag)("Loop"), content, (0, validate_1.tag)("RepeatAbove")]);
 exports.Loop = Loop;
 const LoopBreak = () => (0, validate_1.tag)("BreakLoop");
 exports.LoopBreak = LoopBreak;

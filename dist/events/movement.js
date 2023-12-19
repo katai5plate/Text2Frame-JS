@@ -55,7 +55,10 @@ const SetMovementRoute = ({ id, repeat, skip, wait, routes }) => (0, validate_1.
             return { name: "McWait", args: [(0, validate_1.argInt)(v)] };
         },
         changeSwitch: (id, to) => {
-            return { name: `Switch${to ? "On" : "Off"}`, args: [(0, validate_1.argId)(id)] };
+            return {
+                name: `Switch${to ? "On" : "Off"}`,
+                args: [(0, validate_1.arg)(id, (v, t) => t.markSwitchId(v))],
+            };
         },
         changeSpeed: (speed) => {
             return {
@@ -125,7 +128,7 @@ const SetMovementRoute = ({ id, repeat, skip, wait, routes }) => (0, validate_1.
         changeTransparent: (active) => {
             return { name: `Transparent${active ? "On" : "Off"}`, args: [] };
         },
-    }),
+    }).map(({ name, args }) => (0, validate_1.tag)(name, args)),
 ]);
 exports.SetMovementRoute = SetMovementRoute;
 const GetOnOffVehicle = () => (0, validate_1.tag)("GetOnOffVehicle");
