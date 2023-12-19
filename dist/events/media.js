@@ -1,0 +1,35 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PlayMovie = exports.StopSE = exports.StopME = exports.StopBGS = exports.ReplayBGM = exports.StopBGM = exports.SaveBGM = exports.FadeoutBGS = exports.FadeoutBGM = exports.ChangeDefeatMe = exports.ChangeVictoryMe = exports.ChangeBattleBGM = exports.PlaySE = exports.PlayME = exports.PlayBGS = exports.PlayBGM = void 0;
+const validate_1 = require("../validate");
+const commonSound = (name) => {
+    const component = ({ sound }) => (0, validate_1.tag)(name, [(0, validate_1.arg)(sound, (v, t) => t.markSoundArgs(v))]);
+    return component;
+};
+exports.PlayBGM = commonSound("PlayBGM");
+exports.PlayBGS = commonSound("PlayBGS");
+exports.PlayME = commonSound("PlayME");
+exports.PlaySE = commonSound("PlaySE");
+exports.ChangeBattleBGM = commonSound("ChangeBattleBGM");
+exports.ChangeVictoryMe = commonSound("ChangeVictoryMe");
+exports.ChangeDefeatMe = commonSound("ChangeDefeatMe");
+const commonFadeout = (name) => {
+    const component = ({ time }) => (0, validate_1.tag)(name, [(0, validate_1.argInt)(time)]);
+    return component;
+};
+exports.FadeoutBGM = commonFadeout("FadeoutBGM");
+exports.FadeoutBGS = commonFadeout("FadeoutBGS");
+const SaveBGM = () => (0, validate_1.tag)("SaveBGM");
+exports.SaveBGM = SaveBGM;
+const StopBGM = () => (0, validate_1.tag)("StopBGM");
+exports.StopBGM = StopBGM;
+const ReplayBGM = () => (0, validate_1.tag)("ReplayBGM");
+exports.ReplayBGM = ReplayBGM;
+const StopBGS = () => (0, validate_1.tag)("StopBGS");
+exports.StopBGS = StopBGS;
+const StopME = () => (0, validate_1.tag)("StopME");
+exports.StopME = StopME;
+const StopSE = () => (0, validate_1.tag)("StopSE");
+exports.StopSE = StopSE;
+const PlayMovie = ({ name }) => (0, validate_1.tag)("PlayMovie", [name]);
+exports.PlayMovie = PlayMovie;

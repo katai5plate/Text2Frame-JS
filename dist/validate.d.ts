@@ -1,0 +1,38 @@
+import { ArgValue, FromTo, JSXObject, MapPosition, DirectOrVariables, Sound, SwitchId, VariableId, Color4, Color3 } from "./type";
+export declare const arg: <V extends ArgValue>(value: V, converter: (value: V, tools: {
+    markVariableId: (v: VariableId) => string;
+    markSwitchId: (v: SwitchId) => string;
+    markFromTo: (v: FromTo) => string;
+    markPreset: <P extends Record<string, string>>(value: keyof P, preset: P) => string;
+    markMapPosition: (v: MapPosition, mode: DirectOrVariables) => string;
+    markSoundArgs: (v: Sound) => string;
+    markColorTone: (v: Color3 | Color4) => string;
+    markColorArgs: (v: Color3 | Color4) => string;
+    validInt: (v: number) => number;
+    validRange: (v: number, min: number, max: number) => number;
+    validOne: (v: number) => number;
+    validId: (v: number) => number;
+    isVariableId: (v: unknown) => v is VariableId;
+    isSwitchId: (v: unknown) => v is SwitchId;
+    isFromTo: (v: unknown) => v is FromTo;
+    isMapPosition: (v: unknown) => v is MapPosition;
+    isSound: (v: unknown) => v is Sound;
+    isColor: (v: unknown) => v is Color3 | Color4;
+}) => string | number | boolean) => string;
+export declare const joinKeep: (delim: string | null, arr: (JSXObject | undefined)[]) => string;
+export declare const joinSkip: (delim: string | null, arr: (JSXObject | undefined)[]) => string;
+export declare const tag: (name: string, arg?: (JSXObject | undefined)[], textChildren?: string | string[]) => string;
+export declare const argInt: (v: number) => string;
+export declare const argId: (v: number) => string;
+export declare const argEnemyIndex: (v: number) => string;
+export declare const argPreset: <P extends Record<string, string>>(v: string, preset: P) => string;
+export declare const argNumberPreset: <P extends Record<string, string>>(v: number | string, preset: P, isId?: boolean) => string;
+export declare const argRange: (v: number, range: FromTo) => string;
+export declare const createPresetArg: <P extends Record<string, string>>(preset: P) => (v: ArgValue) => string;
+export declare const createPresetArgWithVariableId: <P extends Record<string, string>>(preset: P, range?: FromTo) => (v: ArgValue) => string;
+export declare const argCharacterIdWithPreset: (v: ArgValue) => string;
+export declare const argIntOrVariableId: (v: number | VariableId) => string;
+export declare const argActorIdWithPreset: (v: ArgValue) => string;
+export declare const argEnemyIndexWithPreset: (v: ArgValue) => string;
+export declare const argEnemyIndexWithPresetAndVariableId: (v: ArgValue) => string;
+//# sourceMappingURL=validate.d.ts.map

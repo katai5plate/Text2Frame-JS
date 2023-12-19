@@ -1,26 +1,5 @@
-# Text2Frame-JS
-
-入力補完付きの JS/TS でイベントコマンドを書きたい！
-
-## 使い方
-
-```
-npm i yktsr/Text2Frame-MV#117-forlib katai5plate/Text2Frame-JS
-npm i -D @babel/core @babel/node @babel/preset-env
-```
-
-### .babelrc
-
-```json
-{
-  "presets": ["@babel/preset-env"]
-}
-```
-
-### example.jsx
-
-```js
-import { parse as ev, events } from "Text2Frame-JS";
+// import { parse as ev, events } from "Text2Frame-JS";
+import { parse as ev, events } from "../dist";
 /** @type {import("Text2Frame-MV/Text2Frame.mjs")} */
 const { convert } = require("Text2Frame-MV");
 
@@ -65,10 +44,3 @@ console.log(list);
 //   { code: 0, indent: 1, parameters: [] },
 //   { code: 412, indent: 0, parameters: [] }
 // ]
-```
-
-### 実行
-
-```
-npx babel-node example.jsx
-```

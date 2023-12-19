@@ -1,0 +1,34 @@
+export { parse } from "./parse";
+import * as actor from "./events/actor";
+import * as battle from "./events/battle";
+import * as character from "./events/character";
+import * as flow from "./events/flow";
+import * as interpreter from "./events/interpreter";
+import * as map from "./events/map";
+import * as media from "./events/media";
+import * as message from "./events/message";
+import * as movement from "./events/movement";
+import * as party from "./events/party";
+import * as picture from "./events/picture";
+import * as progress from "./events/progress";
+import * as scene from "./events/scene";
+import * as screen from "./events/screen";
+import * as system from "./events/system";
+export declare const events: {
+    message: typeof message;
+    progress: typeof progress;
+    flow: typeof flow;
+    party: typeof party;
+    actor: typeof actor;
+    movement: typeof movement;
+    character: typeof character;
+    picture: typeof picture;
+    screen: typeof screen;
+    media: typeof media;
+    scene: typeof scene;
+    system: typeof system;
+    map: typeof map;
+    battle: typeof battle;
+    interpreter: typeof interpreter;
+};
+//# sourceMappingURL=index.d.ts.map

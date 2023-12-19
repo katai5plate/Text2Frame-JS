@@ -1,0 +1,173 @@
+message
+<Face: 名称>
+<WindowPosition: Top|Middle|Bottom>
+<Background: Window|Dim|Transparent>
+<Name: 表記名>
+<ShowChoices: Window|Dim|Transparent, Left|Middle|Right, None|1-6, Branch|Disallow|1-6>
+  <When: 選択肢の文>
+  <WhenCancel>
+<End>
+<InputNumber: 番号, 桁数>
+<SelectItem: 番号, Regular Item|Key Item|Hidden Item A|Hidden Item B>
+<ShowScrollingText: 速度整数, 早送りなし boolean>
+  スクロールさせたい文章
+</ShowScrollingText>
+
+progress
+<Switch: 番号|番号-番号, boolean>
+<Set|Add|Sub|Mul|Div|Mod: 番号|番号-番号, Script[ここにJS]>
+<SelfSwitch: A|B|C|D, boolean>
+<Timer: Start|Stop, 分, 秒>
+
+flow
+<If: Script, ここにJS>
+  条件を満たしている時の処理
+<Else>
+  条件を満たしていない時の処理
+<End>
+<Loop>
+  <BreakLoop>
+<RepeatAbove>
+<ExitEventProcessing> % イベントの処理中断
+<CommonEvent: ID>
+<Label: ラベル名>
+<JumpToLabel: ラベル名>
+<comment>
+注釈の内容
+</comment>
+
+party
+<ChangeGold: +|-, 整数|V[ID]>
+<ChangeItems: ID, +|-, 整数|V[ID]>
+<ChangeWeapons|ChangeArmors: ID, +|-, 整数|V[ID], 装備品を含む boolean>
+<ChangePartyMember: ID, +|-, 初期化 boolean>
+
+actor
+<ChangeHp: Entire Party|ID|V[ID], +|-, 整数|V[ID], 戦闘不能を許可 boolean>
+<ChangeMp|ChangeTp|ChangeState|ChangeSkill: Entire Party|ID|V[ID], +|-, 整数|V[ID]>
+<RecoverAll: Entire Party|ID|V[ID]>
+<ChangeExp|ChangeLevel: Entire Party|ID|V[ID], +|-, 整数|V[ID], レベルアップ表示 boolean>
+<ChangeParameter: Entire Party|ID|V[ID], MaxHP|MaxMP|Attack|Defense|M.Attack|M.Defense|Agility|Luck, +|-, 整数|V[ID]>
+<ChangeEquipment: アクターID, 装備タイプID, None|装備品ID>
+<ChangeName: ID, 名前>
+<ChangeClass: アクターID, 職業ID, レベルと経験値の保存 boolean>
+<ChangeNickname: ID, 二つ名>
+<ChangeProfile: ID, 1行目, 2行目>
+
+movement
+<TransferPlayer: Direct[ID][X][Y]|WithVariables[ID][X][Y], Retain|Down|Left|Right|Up, Black|White|None>
+<SetVehicleLocation: Boat|Ship|AirShip, Direct[ID][X][Y]|WithVariables[ID][X][Y]>
+<SetEventLocation: This Event|ID, Direct[ID][X][Y]|WithVariables[ID][X][Y]|Exchange[This Event|ID], Retain|Down|Left|Right|Up>
+<ScrollMap: Down|Left|Right|Up, 距離整数, x8 Slower|x4 Slower|x2 Slower|Normal|x2 Faster|x4 Faster, 完了までウェイト boolean>
+<SetMovementRoute: Player|This Event|整数, リピート boolean, スキップ boolean, 完了までウェイト boolean>
+  <Jump: X, Y>
+  <McWait: 整数>
+  <SwitchOn|SwitchOff: ID>
+  <ChangeSpeed: x8 Slower|x4 Slower|x2 Slower|Normal|x2 Faster|x4 Faster>
+  <ChangeFrequency: Lowest|Lower|Normal|Higher|Highest>
+  <ChangeImage: ID, 分割位置>
+  <ChangeOpacity: 0-255>
+  <ChangeBlendMode: Normal|Additive|Multiply|Screen>
+  <McPlaySe: 名称, 音量, ピッチ, 位相>
+  <McScript: ここにJS>
+  <MoveDown|MoveLeft|MoveRight|MoveUp|MoveLowerLeft|MoveLowerRight|MoveUpperLeft|MoveUpperRight|MoveAtRandom|MoveTowardPlayer|MoveAwayFromPlayer>
+  <OneStepForward|OneStepBackward>
+  <TurnDown|TurnLeft|TurnRight|TurnUp|TurnAtRandom|TurnTowardPlayer|TurnAwayFromPlayer|Turn90Right|Turn90Left|Turn180|Turn90RightorLeft>
+  <WalkingAnimationOn|WalkingAnimationOff>
+  <SteppingAnimationOn|SteppingAnimationOff>
+  <DirectionFixOn|DirectionFixOff>
+  <ThroughOn|ThroughOff>
+  <TransparentOn|TransparentOff>
+<GetOnOffVehicle>
+
+character
+<ChangeTransparency: 透明状態 boolean>
+<ChangePlayerFollowers: 隊列歩行 boolean>
+<GatherFollowers>
+<ShowAnimation: Player|This Event|整数, ID, 完了までウェイト boolean>
+<ShowBalloonIcon: Player|This Event|整数, Exclamation|Question|Music Note|Heart|Anger|Sweat|Flustration|Silence|Light Bulb|zzz|user-defined1-5, 完了までウェイト boolean>
+<EraseEvent>
+
+picture
+<ShowPicture: ID, 名称, ...オプション1-3>
+  Position[Upper Left|Center][X|V[X]][Y|V[Y]]
+  Scale[W][H]
+  Blend[0-255][Normal|Additive|Multiply|Screen]
+<MovePicture: ID, ...オプション1-3>
+  Duration[整数][Wait|何も書かない]
+  Easing[Linear|Ease-in|Ease-out|Ease-in-out]
+<RotatePicture: ID, 速度 -90-90>
+<TintPicture: ID, ...オプション1-2>
+  ColorTone[R][G][B][K]>|Normal|Dark|Sepia|Sunset|Night
+  整数指定でデュレーション時間
+<ErasePicture: ID>
+
+screen
+<FadeOut|FadeIn>
+<TintScreen: ...オプション1-2>
+  ColorTone[R][G][B][K]>|Normal|Dark|Sepia|Sunset|Night
+  Duration[整数][Wait|何も書かない]
+<FlashScreen: R, G, B, 強さ, 時間, 完了までウェイト boolean>
+<ShakeScreen: 強さ, 速さ, 時間, 完了までウェイト boolean>
+<SetWeatherEffect: None|Rain|Storm|Snow, 強さ, 時間, 完了までウェイト boolean>
+
+media
+<PlayBGM|PlayBGS|PlayME|PlaySE|ChangeBattleBGM|ChangeVictoryMe|ChangeDefeatMe: 名称|None, 音量, ピッチ, 位相>
+<FadeoutBGM|FadeoutBGS: 整数>
+<SaveBGM|StopBGM|ReplayBGM|StopBGS|StopME|StopSE>
+<PlayMovie: 名称>
+
+scene
+<BattleProcessing: 敵グループID|V[ID]|Random>
+  <IfWin>
+    勝利した時の処理
+  <IfEscape>
+    逃走したときの処理
+  <IfLose>
+    敗北したときの処理
+<End>
+<ShopProcessing: 購入のみ boolean>
+  <Merchandise: Item|Weapon|Armor, ID, 価格>
+<NameInputProcessing: ID, 最大文字数>
+<OpenMenuScreen|OpenSaveScreen|GameOver|ReturnToTitleScreen>
+
+system
+<ChangeVehicleBgm: Boat|Ship|Airship, 名称|None, 音量, ピッチ, 位相>
+<ChangeSaveAccess|ChangeMenuAccess|ChangeEncounter|ChangeFormationAccess: 許可 boolean>
+<ChangeWindowColor: R, G, B>
+<ChangeActorImages: ID, 顔名称, 顔位置, 歩行名称, 歩行位置, 戦闘キャラ名称>
+<ChangeVehicleImage: Boat|Ship|Airship, 名称, 位置>
+
+map
+<ChangeMapNameDisplay: 許可 boolean>
+<ChangeTileset: ID>
+<ChangeBattleBackGround: 背景1名称, 背景2名称>
+<ChangeParallax: 名称, ...オプション1-2>
+  LoopHorizontally[-32-32]
+  LoopVertically[-32-32]
+<GetLocationInfo: VID, Terrain Tag|Event ID|Layer 1-4|Region ID, Direct[X][Y]|WithVariables[X][Y]|Character[Player|This Event|整数]>
+
+battle
+<ChangeEnemyHp: Entire Troop|1-8, +|-, 整数|V[ID], 戦闘不能許可 boolean>
+<ChangeEnemyMp|ChangeEnemyTp|ChangeEnemyState: Entire Troop|1-8, +|-, 整数|V[ID]>
+<EnemyRecoverAll: Entire Troop|1-8>
+<EnemyAppear: 1-8>
+<EnemyTransform: 1-8, ID>
+<ShowBattleAnimation: 1-8, ID>
+<ForceAction: 1-8|Actor[ID], ID, Last Target|Random|Index 1-8>
+<AbortBattle>
+
+interpreter
+<Wait: 整数>
+<Script>
+処理させたいスクリプト
+</Script>
+<PluginCommand: MVプラグインコマンド文字列>
+<PluginCommandMZ: 名称, 関数名, コマンド名, ...引数名[値]>
+
+
+export const Component: C<{}> = ({}) => `<: ${[].join()}>`;
+export const Component: C<{}> = ({}) => tag("", [])
+
+https://github.com/yktsr/Text2Frame-MV/wiki/テキストファイルの書き方
+https://github.com/yktsr/Text2Frame-MV/wiki/追加機能(その他イベントコマンドの組み込み)
