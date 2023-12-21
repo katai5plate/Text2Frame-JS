@@ -583,8 +583,8 @@ var ChangeParallax = function ChangeParallax(name, scroll) {
     to: 32
   }), "]")]);
 };
-var GetLocationInfo = function GetLocationInfo(id, layer, position) {
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("GetLocationInfo", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argVariableId)(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(layer, _constants__WEBPACK_IMPORTED_MODULE_0__.LOCATION), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(position, {
+var GetLocationInfo = function GetLocationInfo(variableId, layer, position) {
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("GetLocationInfo", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(variableId), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(layer, _constants__WEBPACK_IMPORTED_MODULE_0__.LOCATION), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(position, {
     object: function object(value, e) {
       var v = value;
       if ("x" in v && "y" in v) {
@@ -718,14 +718,14 @@ var ShowChoices = function ShowChoices(cases, _ref2) {
     return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [name ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("When", [name]) : (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("WhenCancel"), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [then])])]);
   })), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("End")]);
 };
-var InputNumber = function InputNumber(id, digit) {
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("InputNumber", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argVariableId)(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(digit, {
+var InputNumber = function InputNumber(variableId, digit) {
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("InputNumber", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(variableId), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(digit, {
     from: 1,
     to: 8
   })]);
 };
-var SelectItem = function SelectItem(id, itemType) {
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SelectItem", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argVariableId)(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(itemType, _constants__WEBPACK_IMPORTED_MODULE_0__.ITEM_TYPE)]);
+var SelectItem = function SelectItem(variableId, itemType) {
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SelectItem", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(variableId), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(itemType, _constants__WEBPACK_IMPORTED_MODULE_0__.ITEM_TYPE)]);
 };
 var ScrollingText = function ScrollingText(text, _ref4) {
   var _ref4$speed = _ref4.speed,
@@ -814,10 +814,10 @@ var SetMovementRoute = function SetMovementRoute(id, routes) {
         args: [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(v)]
       };
     },
-    changeSwitch: function changeSwitch(id, to) {
+    changeSwitch: function changeSwitch(switchId, to) {
       return {
         name: "Switch".concat(to ? "On" : "Off"),
-        args: [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argSwitchId)(id)]
+        args: [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(switchId)]
       };
     },
     changeSpeed: function changeSpeed(speed) {

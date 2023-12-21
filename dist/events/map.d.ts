@@ -14,6 +14,6 @@ type PositionType = {
     x: VariableId;
     y: VariableId;
 };
-export declare const GetLocationInfo: (id: VariableId, layer: keyof typeof LOCATION, position: PositionType | keyof typeof CHARACTER | number) => string;
+export declare const GetLocationInfo: (variableId: number, layer: keyof typeof LOCATION, position: PositionType | keyof typeof CHARACTER | number) => string;
 export {};
 //# sourceMappingURL=map.d.ts.map

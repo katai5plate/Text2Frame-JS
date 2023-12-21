@@ -1,5 +1,5 @@
 import { BLEND_MODE, CHARACTER, CHARACTER_FREQ, CHARACTER_SPEED, DIRECTION, DIRECTION_CAR, DIRECTION_METHOD, DIRECTION_RETAIN, DIRECTION_ROUTE8, DIRECTION_TURN_METHOD, EVENT, FADE, VEHICLE } from "../constants";
-import { MapPosition, DirectOrVariables, Sound, SwitchId } from "../type";
+import { MapPosition, DirectOrVariables, Sound } from "../type";
 export declare const TransferPlayer: (mode: DirectOrVariables, position: MapPosition, direction: keyof typeof DIRECTION_RETAIN, fade: keyof typeof FADE) => string;
 export declare const SetVehicleLocation: (mode: DirectOrVariables, vehicle: keyof typeof VEHICLE, position: MapPosition) => string;
 export declare const SetEventLocation: (mode: DirectOrVariables | "EXCHANGE", id: keyof typeof EVENT | number, position: MapPosition | keyof typeof EVENT | number, direction: keyof typeof DIRECTION_RETAIN) => string;
@@ -11,7 +11,7 @@ type RouteCode = {
 interface Route {
     jump: (x: number, y: number) => RouteCode;
     wait: (v: number) => RouteCode;
-    changeSwitch: (id: SwitchId, to: boolean) => RouteCode;
+    changeSwitch: (switchId: number, to: boolean) => RouteCode;
     changeSpeed: (speed: keyof typeof CHARACTER_SPEED) => RouteCode;
     changeFreq: (freq: keyof typeof CHARACTER_FREQ) => RouteCode;
     changeImage: (name: string, index: number) => RouteCode;

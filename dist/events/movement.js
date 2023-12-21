@@ -44,10 +44,10 @@ const SetMovementRoute = (id, routes, { repeat = false, skip = false, wait = tru
         wait: (v) => {
             return { name: "McWait", args: [(0, validate_1.argInt)(v)] };
         },
-        changeSwitch: (id, to) => {
+        changeSwitch: (switchId, to) => {
             return {
                 name: `Switch${to ? "On" : "Off"}`,
-                args: [(0, validate_1.argSwitchId)(id)],
+                args: [(0, validate_1.argId)(switchId)],
             };
         },
         changeSpeed: (speed) => {

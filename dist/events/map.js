@@ -16,8 +16,8 @@ const ChangeParallax = (name, scroll) => (0, validate_1.tag)("ChangeParallax", [
     scroll.y && `LoopVertically[${(0, validate_1.argRange)(scroll.y, { from: -32, to: 32 })}]`,
 ]);
 exports.ChangeParallax = ChangeParallax;
-const GetLocationInfo = (id, layer, position) => (0, validate_1.tag)("GetLocationInfo", [
-    (0, validate_1.argVariableId)(id),
+const GetLocationInfo = (variableId, layer, position) => (0, validate_1.tag)("GetLocationInfo", [
+    (0, validate_1.argId)(variableId),
     (0, validate_1.argPreset)(layer, constants_1.LOCATION),
     (0, validate_1.typeCase)(position, {
         object: (value, e) => {

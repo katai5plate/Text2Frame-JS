@@ -36,9 +36,9 @@ const ShowChoices = (cases, { background, position, init, cancel, }) => {
     ]);
 };
 exports.ShowChoices = ShowChoices;
-const InputNumber = (id, digit) => (0, validate_1.tag)("InputNumber", [(0, validate_1.argVariableId)(id), (0, validate_1.argRange)(digit, { from: 1, to: 8 })]);
+const InputNumber = (variableId, digit) => (0, validate_1.tag)("InputNumber", [(0, validate_1.argId)(variableId), (0, validate_1.argRange)(digit, { from: 1, to: 8 })]);
 exports.InputNumber = InputNumber;
-const SelectItem = (id, itemType) => (0, validate_1.tag)("SelectItem", [(0, validate_1.argVariableId)(id), (0, validate_1.argPreset)(itemType, constants_1.ITEM_TYPE)]);
+const SelectItem = (variableId, itemType) => (0, validate_1.tag)("SelectItem", [(0, validate_1.argId)(variableId), (0, validate_1.argPreset)(itemType, constants_1.ITEM_TYPE)]);
 exports.SelectItem = SelectItem;
 const ScrollingText = (text, { speed = 2, noSkip }) => (0, validate_1.tag)("ScrollingText", [speed, noSkip], text);
 exports.ScrollingText = ScrollingText;

@@ -174,7 +174,7 @@ test(
       (r) => [
         r.jump(1, 2),
         r.wait(60),
-        r.changeSwitch({ switchId: 3 }, true),
+        r.changeSwitch(3, true),
         r.changeSpeed("NORMAL"),
         r.changeFreq("NORMAL"),
         r.changeImage("Actor1", 4),
@@ -205,7 +205,7 @@ test(
 <SetMovementRoute: ThisEvent, false, false, true>
 <Jump: 1, 2>
 <McWait: 60>
-<SwitchOn: SW[3]>
+<SwitchOn: 3>
 <ChangeSpeed: Normal>
 <ChangeFrequency: Normal>
 <ChangeImage: Actor1, 4>
