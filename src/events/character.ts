@@ -1,6 +1,16 @@
 import { BALLOON, CHARACTER } from "../constants";
 import { C } from "../type";
-import { argId, argNumberPreset, argPreset, tag } from "../validate";
+import { argId, argInt, argPreset, tag, typeCase } from "../validate";
+
+const argNumberPreset = <P extends Record<string, string>>(
+  v: number | string,
+  preset: P,
+  isId?: boolean
+) =>
+  typeCase(v, {
+    string: (x) => argPreset(x, preset),
+    number: (x) => (isId ? argId(x) : argInt(x)),
+  });
 
 const commonChange = (name: string) => {
   const component: C<{

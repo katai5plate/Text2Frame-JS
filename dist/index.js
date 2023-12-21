@@ -293,19 +293,20 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
+var argActorIdWithPreset = (0,_validate__WEBPACK_IMPORTED_MODULE_1__.createPresetArgWithVariableId)(_constants__WEBPACK_IMPORTED_MODULE_0__.ACTOR_MEMBER);
 var ChangeHp = function ChangeHp(_ref) {
   var id = _ref.id,
     op = _ref.op,
     value = _ref.value,
     allowKnockout = _ref.allowKnockout;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeHp", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argActorIdWithPreset)(id), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value), allowKnockout]);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeHp", [argActorIdWithPreset(id), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value), allowKnockout]);
 };
 var commonChange = function commonChange(name) {
   var component = function component(_ref2) {
     var id = _ref2.id,
       op = _ref2.op,
       value = _ref2.value;
-    return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)(name, [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argActorIdWithPreset)(id), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value)]);
+    return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)(name, [argActorIdWithPreset(id), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value)]);
   };
   return component;
 };
@@ -315,7 +316,7 @@ var ChangeState = commonChange("ChangeState");
 var ChangeSkill = commonChange("ChangeSkill");
 var RecoverAll = function RecoverAll(_ref3) {
   var id = _ref3.id;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("RecoverAll", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argActorIdWithPreset)(id)]);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("RecoverAll", [argActorIdWithPreset(id)]);
 };
 var commonLevelUp = function commonLevelUp(name) {
   var component = function component(_ref4) {
@@ -323,7 +324,7 @@ var commonLevelUp = function commonLevelUp(name) {
       op = _ref4.op,
       value = _ref4.value,
       allowLevelUp = _ref4.allowLevelUp;
-    return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)(name, [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argActorIdWithPreset)(id), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value), allowLevelUp]);
+    return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)(name, [argActorIdWithPreset(id), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value), allowLevelUp]);
   };
   return component;
 };
@@ -334,9 +335,7 @@ var ChangeParameter = function ChangeParameter(_ref5) {
     parameter = _ref5.parameter,
     op = _ref5.op,
     value = _ref5.value;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeParameter", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argActorIdWithPreset)(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(parameter, function (v, t) {
-    return t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.ACTER_PARAMETER);
-  }), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value)]);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeParameter", [argActorIdWithPreset(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(parameter, _constants__WEBPACK_IMPORTED_MODULE_0__.ACTER_PARAMETER), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value)]);
 };
 var ChangeEquipment = function ChangeEquipment(_ref6) {
   var id = _ref6.id,
@@ -392,19 +391,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../validate */ "./src/validate.ts");
 
 
+var argEnemyIndexWithPreset = (0,_validate__WEBPACK_IMPORTED_MODULE_1__.createPresetArgWithVariableId)(_constants__WEBPACK_IMPORTED_MODULE_0__.ENEMY_MEMBER);
+var argEnemyIndexWithPresetAndVariableId = (0,_validate__WEBPACK_IMPORTED_MODULE_1__.createPresetArgWithVariableId)(_constants__WEBPACK_IMPORTED_MODULE_0__.ENEMY_MEMBER, {
+  from: 1,
+  to: 8
+});
 var ChangeEnemyHp = function ChangeEnemyHp(_ref) {
   var index = _ref.index,
     op = _ref.op,
     value = _ref.value,
     allowKnockout = _ref.allowKnockout;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeEnemyHp", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argEnemyIndexWithPresetAndVariableId)(index), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value), allowKnockout]);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeEnemyHp", [argEnemyIndexWithPresetAndVariableId(index), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value), allowKnockout]);
 };
 var commonChange = function commonChange(name) {
   var component = function component(_ref2) {
     var index = _ref2.index,
       op = _ref2.op,
       value = _ref2.value;
-    return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)(name, [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argEnemyIndexWithPresetAndVariableId)(index), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value)]);
+    return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)(name, [argEnemyIndexWithPresetAndVariableId(index), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value)]);
   };
   return component;
 };
@@ -413,11 +417,11 @@ var ChangeEnemyTp = commonChange("ChangeEnemyTp");
 var ChangeEnemyState = commonChange("ChangeEnemyState");
 var EnemyRecoverAll = function EnemyRecoverAll(_ref3) {
   var index = _ref3.index;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("EnemyRecoverAll", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argEnemyIndexWithPresetAndVariableId)(index)]);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("EnemyRecoverAll", [argEnemyIndexWithPresetAndVariableId(index)]);
 };
 var EnemyAppear = function EnemyAppear(_ref4) {
   var index = _ref4.index;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("EnemyAppear", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argEnemyIndexWithPreset)(index)]);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("EnemyAppear", [argEnemyIndexWithPreset(index)]);
 };
 var commonIndexAndEnemyId = function commonIndexAndEnemyId(name) {
   var component = function component(_ref5) {
@@ -434,12 +438,20 @@ var ForceAction = function ForceAction(_ref6) {
     index = _ref6.index,
     id = _ref6.id,
     target = _ref6.target;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ForceAction", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(index, function (v, t) {
-    if (mode === "ACTOR") return "Actor[".concat(t.validId(v), "]");
-    return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argEnemyIndex)(v);
-  }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(target, function (v, t) {
-    if (typeof v === "string") return t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.ACTION_TARGET);
-    return "Index ".concat(t.validRange(v, 1, 8));
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ForceAction", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(index, {
+    number: function number(x) {
+      return mode === "ACTOR" ? "Actor[".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(x), "]") : (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argEnemyIndex)(x);
+    }
+  }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(target, {
+    string: function string(x) {
+      return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(x, _constants__WEBPACK_IMPORTED_MODULE_0__.ACTION_TARGET);
+    },
+    number: function number(x) {
+      return "Index ".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(x, {
+        from: 1,
+        to: 8
+      }));
+    }
   })]);
 };
 
@@ -464,6 +476,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../validate */ "./src/validate.ts");
 
 
+var argNumberPreset = function argNumberPreset(v, preset, isId) {
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(v, {
+    string: function string(x) {
+      return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(x, preset);
+    },
+    number: function number(x) {
+      return isId ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(x) : (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(x);
+    }
+  });
+};
 var commonChange = function commonChange(name) {
   var component = function component(_ref) {
     var active = _ref.active;
@@ -480,13 +502,13 @@ var ShowAnimation = function ShowAnimation(_ref2) {
   var id = _ref2.id,
     animationId = _ref2.animationId,
     wait = _ref2.wait;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ShowAnimation", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argNumberPreset)(id, _constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER, true), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(animationId), wait]);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ShowAnimation", [argNumberPreset(id, _constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER, true), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(animationId), wait]);
 };
 var ShowBalloonIcon = function ShowBalloonIcon(_ref3) {
   var id = _ref3.id,
     balloon = _ref3.balloon,
     wait = _ref3.wait;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ShowBalloonIcon", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argNumberPreset)(id, _constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER, true), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(balloon, _constants__WEBPACK_IMPORTED_MODULE_0__.BALLOON), wait]);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ShowBalloonIcon", [argNumberPreset(id, _constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER, true), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(balloon, _constants__WEBPACK_IMPORTED_MODULE_0__.BALLOON), wait]);
 };
 var EraseEvent = function EraseEvent() {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("EraseEvent");
@@ -619,7 +641,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./src/constants.ts");
 /* harmony import */ var _validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../validate */ "./src/validate.ts");
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 
 
 var ChangeMapNameDisplay = function ChangeMapNameDisplay(_ref) {
@@ -650,12 +671,15 @@ var GetLocationInfo = function GetLocationInfo(_ref5) {
   var id = _ref5.id,
     layer = _ref5.layer,
     position = _ref5.position;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("GetLocationInfo", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(id, function (v, t) {
-    return t.isVariableId(v);
-  }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(layer, _constants__WEBPACK_IMPORTED_MODULE_0__.LOCATION), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(position, function (v, t) {
-    if (_typeof(v) === "object") return "".concat(t.isVariableId(v.x) ? "WithVariables" : "Direct", "[").concat(v.x, "][").concat(v.y, "]");
-    if (typeof v === "string") return t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER);
-    return v;
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("GetLocationInfo", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argVariableId)(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(layer, _constants__WEBPACK_IMPORTED_MODULE_0__.LOCATION), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(position, {
+    object: function object(value, e) {
+      var v = value;
+      if ("x" in v && "y" in v) {
+        if (typeof v.x === "number") return "Direct[".concat(v.x, "][").concat(v.y, "]");
+        if (v.x.variableId) return "WithVariables[".concat(v.x, "][").concat(v.y, "]");
+      }
+      throw e();
+    }
   })]);
 };
 
@@ -691,9 +715,7 @@ __webpack_require__.r(__webpack_exports__);
 var commonSound = function commonSound(name) {
   var component = function component(_ref) {
     var sound = _ref.sound;
-    return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)(name, [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.arg)(sound, function (v, t) {
-      return t.markSoundArgs(v);
-    })]);
+    return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)(name, [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.argsSound)(sound)]);
   };
   return component;
 };
@@ -756,13 +778,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../validate */ "./src/validate.ts");
 
 
+var argChoices = function argChoices(value, preset) {
+  return typeof value === "number" ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(value, {
+    from: 1,
+    to: 6
+  }) : (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(value, preset);
+};
 var Window = function Window(_ref) {
   var face = _ref.face,
     position = _ref.position,
     background = _ref.background,
     name = _ref.name;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [background && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("Background", [background]), position && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("WindowPosition", [position]), face && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("Face", ["".concat(face.name, "(").concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(face.index, function (v, t) {
-    return t.validRange(v, 0, 15);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [background && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("Background", [background]), position && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("WindowPosition", [position]), face && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("Face", ["".concat(face.name, "(").concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(face.index, {
+    from: 0,
+    to: 15
   }), ")")]), name && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("Name", [name])]);
 };
 var ShowChoices = function ShowChoices(_ref2) {
@@ -774,11 +803,7 @@ var ShowChoices = function ShowChoices(_ref2) {
   if (cases.filter(function (caseItem) {
     return caseItem.name === null;
   }).length >= 2) throw new Error("キャンセル扱いとなる name=null は複数設定できません");
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ShowChoices", [background && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(background, _constants__WEBPACK_IMPORTED_MODULE_0__.WINDOW_BACKGROUND), position && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(position, _constants__WEBPACK_IMPORTED_MODULE_0__.WINDOW_POSITION_HORIZONTAL), init && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(init, function (v, t) {
-    return typeof v === "number" ? t.validRange(v, 1, 6) : t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.CHOICES_INIT);
-  }), cancel && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(cancel, function (v, t) {
-    return typeof v === "number" ? t.validRange(v, 1, 6) : t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.CHOICES_CANCEL);
-  })]), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", cases.map(function (_ref3) {
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ShowChoices", [background && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(background, _constants__WEBPACK_IMPORTED_MODULE_0__.WINDOW_BACKGROUND), position && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(position, _constants__WEBPACK_IMPORTED_MODULE_0__.WINDOW_POSITION_HORIZONTAL), init && argChoices(init, _constants__WEBPACK_IMPORTED_MODULE_0__.CHOICES_INIT), cancel && argChoices(cancel, _constants__WEBPACK_IMPORTED_MODULE_0__.CHOICES_CANCEL)]), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", cases.map(function (_ref3) {
     var name = _ref3.name,
       then = _ref3.then;
     return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [name ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("When", [name]) : (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("WhenCancel"), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [then])])]);
@@ -787,20 +812,15 @@ var ShowChoices = function ShowChoices(_ref2) {
 var InputNumber = function InputNumber(_ref4) {
   var id = _ref4.id,
     digit = _ref4.digit;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("InputNumber", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(id, function (v, t) {
-    return t.markVariableId(v);
-  }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(digit, function (v, t) {
-    return t.validRange(digit, 1, 8);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("InputNumber", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argVariableId)(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(digit, {
+    from: 1,
+    to: 8
   })]);
 };
 var SelectItem = function SelectItem(_ref5) {
   var id = _ref5.id,
     itemType = _ref5.itemType;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SelectItem", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(id, function (v, t) {
-    return t.markVariableId(v);
-  }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(itemType, function (v, t) {
-    return t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.ITEM_TYPE);
-  })]);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SelectItem", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argVariableId)(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(itemType, _constants__WEBPACK_IMPORTED_MODULE_0__.ITEM_TYPE)]);
 };
 var ScrollingText = function ScrollingText(_ref6) {
   var _ref6$speed = _ref6.speed,
@@ -843,60 +863,46 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 
+var argIdOrPreset = function argIdOrPreset(value, preset) {
+  return typeof value === "number" ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(value) : (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(value, preset);
+};
 var TransferPlayer = function TransferPlayer(_ref) {
   var mode = _ref.mode,
     position = _ref.position,
     direction = _ref.direction,
     fade = _ref.fade;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("TransferPlayer", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(position, function (v, t) {
-    return t.markMapPosition(v, mode);
-  }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(direction, function (v, t) {
-    return t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.DIRECTION_RETAIN);
-  }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(fade, function (v, t) {
-    return t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.FADE);
-  })]);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("TransferPlayer", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argMapPosition)(position, mode), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(direction, _constants__WEBPACK_IMPORTED_MODULE_0__.DIRECTION_RETAIN), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(fade, _constants__WEBPACK_IMPORTED_MODULE_0__.FADE)]);
 };
 var SetVehicleLocation = function SetVehicleLocation(_ref2) {
   var mode = _ref2.mode,
     vehicle = _ref2.vehicle,
     position = _ref2.position;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SetVehicleLocation", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(vehicle, function (v, t) {
-    return t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.VEHICLE);
-  }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(position, function (v, t) {
-    return t.markMapPosition(v, mode);
-  })]);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SetVehicleLocation", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(vehicle, _constants__WEBPACK_IMPORTED_MODULE_0__.VEHICLE), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argMapPosition)(position, mode)]);
 };
 var SetEventLocation = function SetEventLocation(_ref3) {
   var mode = _ref3.mode,
     id = _ref3.id,
     position = _ref3.position,
     direction = _ref3.direction;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SetEventLocation", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(id, function (v, t) {
-    return typeof v === "number" ? t.validId(v) : t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.EVENT);
-  }), mode === "EXCHANGE" ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(position, function (v, t) {
-    var exchange = function exchange(x) {
-      return "Exchange[".concat(x, "]");
-    };
-    if (typeof v === "string") return exchange(t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.EVENT));
-    if (typeof v === "number") return exchange(t.validId(v));
-    throw new Error("不正なマップ位置指定です");
-  }) : (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(position, function (v, t) {
-    if (t.isMapPosition(v)) return t.markMapPosition(v, mode);
-    throw new Error("不正なマップ位置指定です");
-  }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(direction, function (v, t) {
-    return t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.DIRECTION_RETAIN);
-  })]);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SetEventLocation", [argIdOrPreset(id, _constants__WEBPACK_IMPORTED_MODULE_0__.EVENT), mode === "EXCHANGE" ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(position, {
+    string: function string(x) {
+      return "Exchange[".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(x, _constants__WEBPACK_IMPORTED_MODULE_0__.EVENT), "]");
+    },
+    number: function number(x) {
+      return "Exchange[".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(x), "]");
+    }
+  }) : (0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(position, {
+    mapPosition: function mapPosition(x) {
+      return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argMapPosition)(x, mode);
+    }
+  }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(direction, _constants__WEBPACK_IMPORTED_MODULE_0__.DIRECTION_RETAIN)]);
 };
 var ScrollMap = function ScrollMap(_ref4) {
   var direction = _ref4.direction,
     step = _ref4.step,
     speed = _ref4.speed,
     wait = _ref4.wait;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SetVehicleLocation", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(direction, function (v, t) {
-    return t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.DIRECTION);
-  }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(step), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(speed, function (v, t) {
-    return t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER_SPEED);
-  }), wait]);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SetVehicleLocation", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(direction, _constants__WEBPACK_IMPORTED_MODULE_0__.DIRECTION), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(step), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(speed, _constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER_SPEED), wait]);
 };
 var SetMovementRoute = function SetMovementRoute(_ref5) {
   var id = _ref5.id,
@@ -904,9 +910,7 @@ var SetMovementRoute = function SetMovementRoute(_ref5) {
     skip = _ref5.skip,
     wait = _ref5.wait,
     routes = _ref5.routes;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SetMovementRoute", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(id, function (v, t) {
-    return typeof v === "number" ? t.validId(v) : t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER);
-  }), repeat, skip, wait])].concat(_toConsumableArray(routes({
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SetMovementRoute", [argIdOrPreset(id, _constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER), repeat, skip, wait])].concat(_toConsumableArray(routes({
     jump: function jump(x, y) {
       return {
         name: "Jump",
@@ -922,9 +926,7 @@ var SetMovementRoute = function SetMovementRoute(_ref5) {
     changeSwitch: function changeSwitch(id, to) {
       return {
         name: "Switch".concat(to ? "On" : "Off"),
-        args: [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(id, function (v, t) {
-          return t.markSwitchId(v);
-        })]
+        args: [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argSwitchId)(id)]
       };
     },
     changeSpeed: function changeSpeed(speed) {
@@ -966,9 +968,7 @@ var SetMovementRoute = function SetMovementRoute(_ref5) {
     playSe: function playSe(sound) {
       return {
         name: "McPlaySe",
-        args: [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(sound, function (v, t) {
-          return t.markSoundArgs(v);
-        })]
+        args: [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argsSound)(sound)]
       };
     },
     script: function script(code) {
@@ -1110,6 +1110,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../validate */ "./src/validate.ts");
 
 
+var argPicturePosition = function argPicturePosition(position) {
+  var parse = position.mode === "DIRECT" ? _validate__WEBPACK_IMPORTED_MODULE_1__.argInt : function (variableId) {
+    return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argVariableId)({
+      variableId: variableId
+    });
+  };
+  return "Position[".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(position.origin, _constants__WEBPACK_IMPORTED_MODULE_0__.PICTURE_ORIGIN), "][").concat(parse(position.x), "][").concat(parse(position.y), "]");
+};
+var argPictureScale = function argPictureScale(size) {
+  return "Scale[".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(size.width), "][").concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(size.height), "]");
+};
+var argPictureBlend = function argPictureBlend(blend) {
+  return "Blend[".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(blend.opacity, {
+    from: 0,
+    to: 255
+  }), "][").concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(blend.mode, _constants__WEBPACK_IMPORTED_MODULE_0__.BLEND_MODE), "]");
+};
+var argPictureDuration = function argPictureDuration(duration) {
+  return "Duration[".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(duration.time), "][").concat(duration.wait ? "Wait" : "", "]");
+};
 var ShowPicture = function ShowPicture(_ref) {
   var id = _ref.id,
     name = _ref.name,
@@ -1119,18 +1139,7 @@ var ShowPicture = function ShowPicture(_ref) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ShowPicture", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(id, {
     from: 1,
     to: 100
-  }), name, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)(null, [position && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(position, function (v, t) {
-    var parse = v.mode === "DIRECT" ? t.validInt : function (x) {
-      return t.markVariableId({
-        variableId: x
-      });
-    };
-    return "Position[".concat(t.markPreset(v.origin, _constants__WEBPACK_IMPORTED_MODULE_0__.PICTURE_ORIGIN), "][").concat(parse(position.x), "][").concat(parse(position.y), "]");
-  }), scale && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(scale, function (v, t) {
-    return "Scale[".concat(t.validInt(v.width), "][").concat(t.validInt(v.height), "]");
-  }), blend && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(blend, function (v, t) {
-    return "Blend[".concat(t.validRange(v.opacity, 0, 255), "][").concat(t.markPreset(v.mode, _constants__WEBPACK_IMPORTED_MODULE_0__.BLEND_MODE), "]");
-  })])]);
+  }), name, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)(null, [position && argPicturePosition(position), scale && argPictureScale(scale), blend && argPictureBlend(blend)])]);
 };
 var MovePicture = function MovePicture(_ref2) {
   var id = _ref2.id,
@@ -1142,20 +1151,7 @@ var MovePicture = function MovePicture(_ref2) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("MovePicture", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(id, {
     from: 1,
     to: 100
-  }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)(null, [position && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(position, function (v, t) {
-    var parse = v.mode === "DIRECT" ? t.validInt : function (x) {
-      return t.markVariableId({
-        variableId: x
-      });
-    };
-    return "Position[".concat(t.markPreset(v.origin, _constants__WEBPACK_IMPORTED_MODULE_0__.PICTURE_ORIGIN), "][").concat(parse(position.x), "][").concat(parse(position.y), "]");
-  }), scale && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(scale, function (v, t) {
-    return "Scale[".concat(t.validInt(v.width), "][").concat(t.validInt(v.height), "]");
-  }), blend && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(blend, function (v, t) {
-    return "Blend[".concat(t.validRange(v.opacity, 0, 255), "][").concat(t.markPreset(v.mode, _constants__WEBPACK_IMPORTED_MODULE_0__.BLEND_MODE), "]");
-  }), duration && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(duration, function (v, t) {
-    return "Duration[".concat(t.validInt(v.time), "][").concat(v.wait ? "Wait" : "", "]");
-  }), easing && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(easing, _constants__WEBPACK_IMPORTED_MODULE_0__.EASING)])]);
+  }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)(null, [position && argPicturePosition(position), scale && argPictureScale(scale), blend && argPictureBlend(blend), duration && argPictureDuration(duration), easing && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(easing, _constants__WEBPACK_IMPORTED_MODULE_0__.EASING)])]);
 };
 var RotatePicture = function RotatePicture(_ref3) {
   var id = _ref3.id,
@@ -1175,10 +1171,7 @@ var TintPicture = function TintPicture(_ref4) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("TintPicture", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(id, {
     from: 1,
     to: 100
-  }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)(null, [color && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(color, function (v, t) {
-    if (typeof v === "string") return t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.COLOR_TONE);
-    return t.markColorTone(v);
-  }), time])]);
+  }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)(null, [color && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argColorTone)(color), time])]);
 };
 var ErasePicture = function ErasePicture(_ref5) {
   var id = _ref5.id;
@@ -1213,11 +1206,13 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
+var argCharacterIdWithPreset = (0,_validate__WEBPACK_IMPORTED_MODULE_1__.createPresetArg)(_constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER);
 var Switch = function Switch(_ref) {
   var id = _ref.id,
     toBe = _ref.toBe;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("Switch", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(id, function (v, t) {
-    return t.isSwitchId(v) ? t.markSwitchId(v) : t.markFromTo(v);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("Switch", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(id, {
+    switchId: _validate__WEBPACK_IMPORTED_MODULE_1__.argSwitchId,
+    fromTo: _validate__WEBPACK_IMPORTED_MODULE_1__.argFromTo
   }), toBe]);
 };
 var Variable = function Variable(_ref2) {
@@ -1362,19 +1357,19 @@ var Variable = function Variable(_ref2) {
       },
       character: {
         mapX: function mapX(characterId) {
-          return "GameData[Character][".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argCharacterIdWithPreset)(characterId), "][MapX]");
+          return "GameData[Character][".concat(argCharacterIdWithPreset(characterId), "][MapX]");
         },
         mapY: function mapY(characterId) {
-          return "GameData[Character][".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argCharacterIdWithPreset)(characterId), "][MapY]");
+          return "GameData[Character][".concat(argCharacterIdWithPreset(characterId), "][MapY]");
         },
         direction: function direction(characterId) {
-          return "GameData[Character][".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argCharacterIdWithPreset)(characterId), "][Direction]");
+          return "GameData[Character][".concat(argCharacterIdWithPreset(characterId), "][Direction]");
         },
         screenX: function screenX(characterId) {
-          return "GameData[Character][".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argCharacterIdWithPreset)(characterId), "][ScreenX]");
+          return "GameData[Character][".concat(argCharacterIdWithPreset(characterId), "][ScreenX]");
         },
         screenY: function screenY(characterId) {
-          return "GameData[Character][".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argCharacterIdWithPreset)(characterId), "][ScreenY]");
+          return "GameData[Character][".concat(argCharacterIdWithPreset(characterId), "][ScreenY]");
         }
       },
       last: {
@@ -1434,8 +1429,9 @@ var Variable = function Variable(_ref2) {
   return list.map(function (_ref4) {
     var op = _ref4.op,
       value = _ref4.value;
-    return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)(_constants__WEBPACK_IMPORTED_MODULE_0__.VARIABLE_OPERATOR[op], [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(id, function (v, t) {
-      return t.isFromTo(v) ? t.markFromTo(v) : v;
+    return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)(_constants__WEBPACK_IMPORTED_MODULE_0__.VARIABLE_OPERATOR[op], [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(id, {
+      fromTo: _validate__WEBPACK_IMPORTED_MODULE_1__.argFromTo,
+      number: _validate__WEBPACK_IMPORTED_MODULE_1__.argId
     }), value]);
   }).join("\n");
 };
@@ -1498,10 +1494,12 @@ var BattleProcessing = function BattleProcessing(_ref) {
     ifWin = _ref.ifWin,
     ifEscape = _ref.ifEscape,
     ifLose = _ref.ifLose;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("BattleProcessing", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(id, function (v, t) {
-    if (typeof v === "string") return t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.BATTLE_TROOP);
-    if (t.isVariableId(v)) return t.markVariableId(v);
-    return t.validId(v);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("BattleProcessing", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(id, {
+    string: function string(x) {
+      return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(x, _constants__WEBPACK_IMPORTED_MODULE_0__.BATTLE_TROOP);
+    },
+    variableId: _validate__WEBPACK_IMPORTED_MODULE_1__.argVariableId,
+    number: _validate__WEBPACK_IMPORTED_MODULE_1__.argId
   })]), ifWin ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("IfWin"), ifWin]) : undefined, ifEscape ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("IfEscape"), ifEscape]) : undefined, ifLose ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("IfLose"), ifLose]) : undefined, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("End")]);
 };
 var ShopProcessing = function ShopProcessing(_ref2) {
@@ -1565,18 +1563,13 @@ var FadeIn = function FadeIn() {
 var TintScreen = function TintScreen(_ref) {
   var color = _ref.color,
     time = _ref.time;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("TintScreen", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)(null, [color && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(color, function (v, t) {
-    if (typeof v === "string") return t.markPreset(v, _constants__WEBPACK_IMPORTED_MODULE_0__.COLOR_TONE);
-    return t.markColorTone(v);
-  }), time])]);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("TintScreen", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)(null, [color && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argColorTone)(color), time])]);
 };
 var FlashScreen = function FlashScreen(_ref2) {
   var color = _ref2.color,
     time = _ref2.time,
     wait = _ref2.wait;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("FlashScreen", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(color, function (v, t) {
-    return t.markColorArgs(v);
-  }), time, wait]);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("FlashScreen", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argsColor)(color), time, wait]);
 };
 var ShakeScreen = function ShakeScreen(_ref3) {
   var velocity = _ref3.velocity,
@@ -1619,9 +1612,7 @@ __webpack_require__.r(__webpack_exports__);
 var ChangeVehicleBgm = function ChangeVehicleBgm(_ref) {
   var vehicle = _ref.vehicle,
     sound = _ref.sound;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeVehicleBgm", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(vehicle, _constants__WEBPACK_IMPORTED_MODULE_0__.VEHICLE), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(sound, function (v, t) {
-    return t.markSoundArgs(v);
-  })]);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeVehicleBgm", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(vehicle, _constants__WEBPACK_IMPORTED_MODULE_0__.VEHICLE), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argsSound)(sound)]);
 };
 var commonChange = function commonChange(name) {
   var component = function component(_ref2) {
@@ -1636,9 +1627,7 @@ var ChangeEncounter = commonChange("ChangeEncounter");
 var ChangeFormationAccess = commonChange("ChangeFormationAccess");
 var ChangeWindowColor = function ChangeWindowColor(_ref3) {
   var color = _ref3.color;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeWindowColor", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.arg)(color, function (v, t) {
-    return t.markColorArgs(v);
-  })]);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeWindowColor", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argsColor)(color)]);
 };
 var ChangeActorImages = function ChangeActorImages(_ref4) {
   var id = _ref4.id,
@@ -1691,25 +1680,28 @@ var ev = function ev() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   arg: () => (/* binding */ arg),
-/* harmony export */   argActorIdWithPreset: () => (/* binding */ argActorIdWithPreset),
-/* harmony export */   argCharacterIdWithPreset: () => (/* binding */ argCharacterIdWithPreset),
+/* harmony export */   argColorTone: () => (/* binding */ argColorTone),
 /* harmony export */   argEnemyIndex: () => (/* binding */ argEnemyIndex),
-/* harmony export */   argEnemyIndexWithPreset: () => (/* binding */ argEnemyIndexWithPreset),
-/* harmony export */   argEnemyIndexWithPresetAndVariableId: () => (/* binding */ argEnemyIndexWithPresetAndVariableId),
+/* harmony export */   argFromTo: () => (/* binding */ argFromTo),
 /* harmony export */   argId: () => (/* binding */ argId),
 /* harmony export */   argInt: () => (/* binding */ argInt),
 /* harmony export */   argIntOrVariableId: () => (/* binding */ argIntOrVariableId),
-/* harmony export */   argNumberPreset: () => (/* binding */ argNumberPreset),
+/* harmony export */   argMapPosition: () => (/* binding */ argMapPosition),
 /* harmony export */   argPreset: () => (/* binding */ argPreset),
 /* harmony export */   argRange: () => (/* binding */ argRange),
+/* harmony export */   argSwitchId: () => (/* binding */ argSwitchId),
+/* harmony export */   argVariableId: () => (/* binding */ argVariableId),
+/* harmony export */   argsColor: () => (/* binding */ argsColor),
+/* harmony export */   argsSound: () => (/* binding */ argsSound),
 /* harmony export */   createPresetArg: () => (/* binding */ createPresetArg),
 /* harmony export */   createPresetArgWithVariableId: () => (/* binding */ createPresetArgWithVariableId),
 /* harmony export */   joinKeep: () => (/* binding */ joinKeep),
 /* harmony export */   joinSkip: () => (/* binding */ joinSkip),
-/* harmony export */   tag: () => (/* binding */ tag)
+/* harmony export */   tag: () => (/* binding */ tag),
+/* harmony export */   typeCase: () => (/* binding */ typeCase)
 /* harmony export */ });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./src/constants.ts");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -1717,82 +1709,6 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
-var arg = function arg(value, converter) {
-  var validInt = function validInt(v) {
-    if (v % 1 !== 0) {
-      throw new Error("\u5024\u306F\u6574\u6570\u3067\u3042\u308B\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059\u3002");
-    }
-    return v;
-  };
-  var range = function range(v, min, max) {
-    if (!(min <= v && v <= max)) {
-      throw new Error("\u5024\u306F ".concat(min, " \uFF5E ").concat(max, " \u306E\u9593\u306E\u5024\u3067\u3042\u308B\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059\u3002"));
-    }
-    return v;
-  };
-  var validOne = function validOne(v) {
-    return range(validInt(v), 1, Infinity);
-  };
-  return "".concat(converter(value, {
-    markVariableId: function markVariableId(v) {
-      return "V[".concat(v.variableId, "]");
-    },
-    markSwitchId: function markSwitchId(v) {
-      return "SW[".concat(v.switchId, "]");
-    },
-    markFromTo: function markFromTo(v) {
-      return "".concat(v.from, "-").concat(v.to);
-    },
-    markPreset: function markPreset(v, p) {
-      return p[v];
-    },
-    markMapPosition: function markMapPosition(v, mode) {
-      return "".concat(mode === "DIRECT" ? "Direct" : "WithVariables", "[").concat(v.id, "][").concat(v.x, "][").concat(v.y, "]");
-    },
-    markSoundArgs: function markSoundArgs(v) {
-      var _v$name;
-      return joinKeep(null, [(_v$name = v.name) !== null && _v$name !== void 0 ? _v$name : "None", v.volume, v.pitch, v.pan]);
-    },
-    markColorTone: function markColorTone(v) {
-      return "ColorTone[".concat(v.r, "][").concat(v.g, "][").concat(v.b, "]").concat(v !== null && v !== void 0 && v.x ? "[".concat(v.x, "]") : "");
-    },
-    markColorArgs: function markColorArgs(v) {
-      return joinSkip(null, [v.r, v.g, v.b, v === null || v === void 0 ? void 0 : v.x]);
-    },
-    //
-    validInt: validInt,
-    validRange: function validRange(v, min, max) {
-      return range(validInt(v), min, max);
-    },
-    validOne: validOne,
-    validId: validOne,
-    //
-    isVariableId: function isVariableId(v) {
-      if (typeof v === "number") return false;
-      return !!(v !== null && v !== void 0 && v.variableId);
-    },
-    isSwitchId: function isSwitchId(v) {
-      if (typeof v === "number") return false;
-      return !!(v !== null && v !== void 0 && v.switchId);
-    },
-    isFromTo: function isFromTo(v) {
-      if (typeof v === "number") return false;
-      return !!(v !== null && v !== void 0 && v.from) && !!(v !== null && v !== void 0 && v.to);
-    },
-    isMapPosition: function isMapPosition(v) {
-      if (typeof v === "number") return false;
-      return !!(v !== null && v !== void 0 && v.id) && !!(v !== null && v !== void 0 && v.x) && !!(v !== null && v !== void 0 && v.y);
-    },
-    isSound: function isSound(v) {
-      if (typeof v === "number") return false;
-      return !!(v !== null && v !== void 0 && v.name) && !!(v !== null && v !== void 0 && v.volume) && !!(v !== null && v !== void 0 && v.pitch) && !!(v !== null && v !== void 0 && v.pan);
-    },
-    isColor: function isColor(v) {
-      if (typeof v === "number") return false;
-      return !!(v !== null && v !== void 0 && v.r) && !!(v !== null && v !== void 0 && v.g) && !!(v !== null && v !== void 0 && v.b);
-    }
-  }));
-};
 var joinKeep = function joinKeep(delim, arr) {
   return arr.join(delim !== null && delim !== void 0 ? delim : ", ");
 };
@@ -1805,68 +1721,99 @@ var tag = function tag(name, arg, textChildren) {
   var args = joinKeep(null, arg !== null && arg !== void 0 ? arg : []);
   return joinSkip("\n", [args !== "" ? "<".concat(name, ": ").concat(args, ">") : "<".concat(name, ">")].concat(_toConsumableArray(textChildren ? [textChildren, "</".concat(name, ">")] : [])));
 };
+var typeCase = function typeCase(v, cases) {
+  var e = function e() {
+    return new Error("サポートされていない型です");
+  };
+  if (typeof v === "number" && cases.number) return cases.number(v, e);
+  if (typeof v === "string" && cases.string) return cases.string(v, e);
+  if (_typeof(v) === "object") {
+    if (cases.object) return cases.object(v, e);
+    if ("variableId" in v && cases.variableId) return cases.variableId(v, e);
+    if ("switchId" in v && cases.switchId) return cases.switchId(v, e);
+    if ("from" in v && "to" in v && cases.fromTo) return cases.fromTo(v, e);
+    if ("id" in v && "x" in v && "y" in v && cases.mapPosition) return cases.mapPosition(v, e);
+    if ("name" in v && "volume" in v && "pitch" in v && "pan" in v && cases.sound) return cases.sound(v, e);
+    if ("r" in v && "g" in v && "b" in v && cases.color) return cases.color(v, e);
+  }
+  throw e();
+};
 var argInt = function argInt(v) {
-  return arg(v, function (v, t) {
-    return t.validInt(v);
-  });
+  if (v % 1 !== 0) {
+    throw new Error("\u5024\u306F\u6574\u6570\u3067\u3042\u308B\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059\u3002");
+  }
+  return v;
+};
+var argRange = function argRange(v, range) {
+  argInt(v);
+  if (!(range.from <= v && v <= range.to)) {
+    throw new Error("\u5024\u306F ".concat(range.from, " \uFF5E ").concat(range.to, " \u306E\u9593\u306E\u5024\u3067\u3042\u308B\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059\u3002"));
+  }
+  return v;
 };
 var argId = function argId(v) {
-  return arg(v, function (v, t) {
-    return t.validOne(v);
+  return argRange(v, {
+    from: 1,
+    to: Infinity
   });
 };
 var argEnemyIndex = function argEnemyIndex(v) {
-  return arg(v, function (v, t) {
-    return t.validRange(v, 1, 8);
+  return argRange(v, {
+    from: 1,
+    to: 8
   });
 };
 var argPreset = function argPreset(v, preset) {
-  return arg(v, function (v, t) {
-    return t.markPreset(v, preset);
-  });
+  return preset[v];
 };
-var argNumberPreset = function argNumberPreset(v, preset, isId) {
-  return arg(v, function (v, t) {
-    return typeof v === "number" ? isId ? t.validId(v) : t.validInt(v) : t.markPreset(v, preset);
-  });
+var argSwitchId = function argSwitchId(value) {
+  return "SW[".concat(value.switchId, "]");
 };
-var argRange = function argRange(v, range) {
-  return arg(v, function (v, t) {
-    return t.validRange(v, range.from, range.to);
+var argVariableId = function argVariableId(value) {
+  return "V[".concat(value.variableId, "]");
+};
+var argFromTo = function argFromTo(value) {
+  return "".concat(value.from, "-").concat(value.to);
+};
+var argsColor = function argsColor(color) {
+  return "ColorTone[".concat(color.r, "][").concat(color.g, "][").concat(color.b, "]").concat(color !== null && color !== void 0 && color.x ? "[".concat(color.x, "]") : "");
+};
+var argsSound = function argsSound(sound) {
+  var _sound$name;
+  return joinKeep(null, [(_sound$name = sound.name) !== null && _sound$name !== void 0 ? _sound$name : "None", sound.volume, sound.pitch, sound.pan]);
+};
+var argMapPosition = function argMapPosition(mapos, mode) {
+  return "".concat(mode === "DIRECT" ? "Direct" : "WithVariables", "[").concat(mapos.id, "][").concat(mapos.x, "][").concat(mapos.y, "]");
+};
+var argColorTone = function argColorTone(value) {
+  return _typeof(value) === "object" ? "ColorTone[".concat(value.r, "][").concat(value.g, "][").concat(value.b, "][").concat(value.x, "]") : argPreset(value, _constants__WEBPACK_IMPORTED_MODULE_0__.COLOR_TONE);
+};
+var argIntOrVariableId = function argIntOrVariableId(v) {
+  return typeCase(v, {
+    variableId: argVariableId,
+    number: function number(x) {
+      return x;
+    }
   });
 };
 var createPresetArg = function createPresetArg(preset) {
   return function (v) {
-    return arg(v, function (v, t) {
-      return typeof v === "number" ? t.validId(v) : t.markPreset(v, preset);
-    });
+    return typeof v === "string" ? argPreset(v, preset) : argId(v);
   };
 };
 var createPresetArgWithVariableId = function createPresetArgWithVariableId(preset, range) {
   return function (v) {
-    return arg(v, function (v, t) {
-      if (typeof v === "string") return t.markPreset(v, preset);
-      if (t.isVariableId(v)) return t.markVariableId(v);
-      if (typeof v === "number") {
-        if (range) t.validRange(v, range.from, range.to);
-        return t.validId(v);
+    return typeCase(v, {
+      string: function string(x) {
+        return argPreset(x, preset);
+      },
+      variableId: argVariableId,
+      number: function number(x) {
+        return range ? argRange(x, range) : argId(x);
       }
-      throw new Error("対応していない型が指定されました");
     });
   };
 };
-var argCharacterIdWithPreset = createPresetArg(_constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER);
-var argIntOrVariableId = function argIntOrVariableId(v) {
-  return arg(v, function (v, t) {
-    return t.isVariableId(v) ? t.markVariableId(v) : v;
-  });
-};
-var argActorIdWithPreset = createPresetArgWithVariableId(_constants__WEBPACK_IMPORTED_MODULE_0__.ACTOR_MEMBER);
-var argEnemyIndexWithPreset = createPresetArgWithVariableId(_constants__WEBPACK_IMPORTED_MODULE_0__.ENEMY_MEMBER);
-var argEnemyIndexWithPresetAndVariableId = createPresetArgWithVariableId(_constants__WEBPACK_IMPORTED_MODULE_0__.ENEMY_MEMBER, {
-  from: 1,
-  to: 8
-});
 
 /***/ })
 

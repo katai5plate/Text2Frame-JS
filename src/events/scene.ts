@@ -1,13 +1,14 @@
 import { BATTLE_TROOP, SHOP_ITEM } from "../constants";
 import { C, VariableId } from "../type";
 import {
-  arg,
   argId,
   argInt,
   argPreset,
   argRange,
+  argVariableId,
   joinSkip,
   tag,
+  typeCase,
 } from "../validate";
 
 export const BattleProcessing: C<{
@@ -18,10 +19,10 @@ export const BattleProcessing: C<{
 }> = ({ id, ifWin, ifEscape, ifLose }) => {
   return joinSkip("\n", [
     tag("BattleProcessing", [
-      arg(id, (v, t) => {
-        if (typeof v === "string") return t.markPreset(v, BATTLE_TROOP);
-        if (t.isVariableId(v)) return t.markVariableId(v);
-        return t.validId(v);
+      typeCase(id, {
+        string: (x) => argPreset(x, BATTLE_TROOP),
+        variableId: argVariableId,
+        number: argId,
       }),
     ]),
     ifWin ? joinSkip("\n", [tag("IfWin"), ifWin]) : undefined,

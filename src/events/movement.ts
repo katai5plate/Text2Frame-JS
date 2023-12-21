@@ -14,7 +14,24 @@ import {
   VEHICLE,
 } from "../constants";
 import { C, MapPosition, DirectOrVariables, Sound, SwitchId } from "../type";
-import { arg, argInt, argPreset, argRange, joinSkip, tag } from "../validate";
+import {
+  argId,
+  argInt,
+  argMapPosition,
+  argPreset,
+  argRange,
+  argSwitchId,
+  argsSound,
+  joinSkip,
+  tag,
+  typeCase,
+} from "../validate";
+
+const argIdOrPreset = <P extends Record<string, string>>(
+  value: keyof P | number,
+  preset: P
+) =>
+  typeof value === "number" ? argId(value) : argPreset(value as string, preset);
 
 export const TransferPlayer: C<{
   mode: DirectOrVariables;
@@ -23,9 +40,9 @@ export const TransferPlayer: C<{
   fade: keyof typeof FADE;
 }> = ({ mode, position, direction, fade }) =>
   tag("TransferPlayer", [
-    arg(position, (v, t) => t.markMapPosition(v, mode)),
-    arg(direction, (v, t) => t.markPreset(v, DIRECTION_RETAIN)),
-    arg(fade, (v, t) => t.markPreset(v, FADE)),
+    argMapPosition(position, mode),
+    argPreset(direction, DIRECTION_RETAIN),
+    argPreset(fade, FADE),
   ]);
 
 export const SetVehicleLocation: C<{
@@ -34,8 +51,8 @@ export const SetVehicleLocation: C<{
   position: MapPosition;
 }> = ({ mode, vehicle, position }) =>
   tag("SetVehicleLocation", [
-    arg(vehicle, (v, t) => t.markPreset(v, VEHICLE)),
-    arg(position, (v, t) => t.markMapPosition(v, mode)),
+    argPreset(vehicle, VEHICLE),
+    argMapPosition(position, mode),
   ]);
 
 export const SetEventLocation: C<{
@@ -45,21 +62,16 @@ export const SetEventLocation: C<{
   direction: keyof typeof DIRECTION_RETAIN;
 }> = ({ mode, id, position, direction }) =>
   tag("SetEventLocation", [
-    arg(id, (v, t) =>
-      typeof v === "number" ? t.validId(v) : t.markPreset(v, EVENT)
-    ),
+    argIdOrPreset(id, EVENT),
     mode === "EXCHANGE"
-      ? arg(position, (v, t) => {
-          const exchange = (x: string | number) => `Exchange[${x}]`;
-          if (typeof v === "string") return exchange(t.markPreset(v, EVENT));
-          if (typeof v === "number") return exchange(t.validId(v));
-          throw new Error("不正なマップ位置指定です");
+      ? typeCase(position, {
+          string: (x) => `Exchange[${argPreset(x, EVENT)}]`,
+          number: (x) => `Exchange[${argId(x)}]`,
         })
-      : arg(position, (v, t) => {
-          if (t.isMapPosition(v)) return t.markMapPosition(v, mode);
-          throw new Error("不正なマップ位置指定です");
+      : typeCase(position, {
+          mapPosition: (x) => argMapPosition(x, mode),
         }),
-    arg(direction, (v, t) => t.markPreset(v, DIRECTION_RETAIN)),
+    argPreset(direction, DIRECTION_RETAIN),
   ]);
 
 export const ScrollMap: C<{
@@ -69,13 +81,13 @@ export const ScrollMap: C<{
   wait?: boolean;
 }> = ({ direction, step, speed, wait }) =>
   tag("SetVehicleLocation", [
-    arg(direction, (v, t) => t.markPreset(v, DIRECTION)),
+    argPreset(direction, DIRECTION),
     argInt(step),
-    arg(speed, (v, t) => t.markPreset(v, CHARACTER_SPEED)),
+    argPreset(speed, CHARACTER_SPEED),
     wait,
   ]);
 
-type RouteCode = { name: string; args: string[] };
+type RouteCode = { name: string; args: (number | string)[] };
 interface Route {
   jump: (x: number, y: number) => RouteCode;
   wait: (v: number) => RouteCode;
@@ -113,14 +125,7 @@ export const SetMovementRoute: C<{
   routes: (route: Route) => RouteCode[];
 }> = ({ id, repeat, skip, wait, routes }) =>
   joinSkip("\n", [
-    tag("SetMovementRoute", [
-      arg(id, (v, t) =>
-        typeof v === "number" ? t.validId(v) : t.markPreset(v, CHARACTER)
-      ),
-      repeat,
-      skip,
-      wait,
-    ]),
+    tag("SetMovementRoute", [argIdOrPreset(id, CHARACTER), repeat, skip, wait]),
     ...routes({
       jump: (x: number, y: number) => {
         return { name: "Jump", args: [argInt(x), argInt(y)] };
@@ -131,7 +136,7 @@ export const SetMovementRoute: C<{
       changeSwitch: (id: SwitchId, to: boolean) => {
         return {
           name: `Switch${to ? "On" : "Off"}`,
-          args: [arg(id, (v, t) => t.markSwitchId(v))],
+          args: [argSwitchId(id)],
         };
       },
       changeSpeed: (speed: keyof typeof CHARACTER_SPEED) => {
@@ -164,7 +169,7 @@ export const SetMovementRoute: C<{
       playSe: (sound: Sound) => {
         return {
           name: "McPlaySe",
-          args: [arg(sound, (v, t) => t.markSoundArgs(v))],
+          args: [argsSound(sound)],
         };
       },
       script: (code: string) => {

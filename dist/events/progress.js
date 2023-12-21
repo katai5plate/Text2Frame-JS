@@ -3,8 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Timer = exports.SelfSwitch = exports.Variable = exports.Switch = void 0;
 const constants_1 = require("../constants");
 const validate_1 = require("../validate");
+const argCharacterIdWithPreset = (0, validate_1.createPresetArg)(constants_1.CHARACTER);
 const Switch = ({ id, toBe }) => (0, validate_1.tag)("Switch", [
-    (0, validate_1.arg)(id, (v, t) => (t.isSwitchId(v) ? t.markSwitchId(v) : t.markFromTo(v))),
+    (0, validate_1.typeCase)(id, {
+        switchId: validate_1.argSwitchId,
+        fromTo: validate_1.argFromTo,
+    }),
     toBe,
 ]);
 exports.Switch = Switch;
@@ -73,11 +77,11 @@ const Variable = ({ id, calc }) => {
                 TP: (index) => `GameData[Enemy][TP][${(0, validate_1.argEnemyIndex)(index)}]`,
             },
             character: {
-                mapX: (characterId) => `GameData[Character][${(0, validate_1.argCharacterIdWithPreset)(characterId)}][MapX]`,
-                mapY: (characterId) => `GameData[Character][${(0, validate_1.argCharacterIdWithPreset)(characterId)}][MapY]`,
-                direction: (characterId) => `GameData[Character][${(0, validate_1.argCharacterIdWithPreset)(characterId)}][Direction]`,
-                screenX: (characterId) => `GameData[Character][${(0, validate_1.argCharacterIdWithPreset)(characterId)}][ScreenX]`,
-                screenY: (characterId) => `GameData[Character][${(0, validate_1.argCharacterIdWithPreset)(characterId)}][ScreenY]`,
+                mapX: (characterId) => `GameData[Character][${argCharacterIdWithPreset(characterId)}][MapX]`,
+                mapY: (characterId) => `GameData[Character][${argCharacterIdWithPreset(characterId)}][MapY]`,
+                direction: (characterId) => `GameData[Character][${argCharacterIdWithPreset(characterId)}][Direction]`,
+                screenX: (characterId) => `GameData[Character][${argCharacterIdWithPreset(characterId)}][ScreenX]`,
+                screenY: (characterId) => `GameData[Character][${argCharacterIdWithPreset(characterId)}][ScreenY]`,
             },
             last: {
                 usedSkillId: () => `GameData[Last][Used Skill ID]`,
@@ -103,7 +107,10 @@ const Variable = ({ id, calc }) => {
     });
     return list
         .map(({ op, value }) => (0, validate_1.tag)(constants_1.VARIABLE_OPERATOR[op], [
-        (0, validate_1.arg)(id, (v, t) => (t.isFromTo(v) ? t.markFromTo(v) : v)),
+        (0, validate_1.typeCase)(id, {
+            fromTo: validate_1.argFromTo,
+            number: validate_1.argId,
+        }),
         value,
     ]))
         .join("\n");

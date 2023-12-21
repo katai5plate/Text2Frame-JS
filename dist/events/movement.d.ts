@@ -25,7 +25,7 @@ export declare const ScrollMap: C<{
 }>;
 type RouteCode = {
     name: string;
-    args: string[];
+    args: (number | string)[];
 };
 interface Route {
     jump: (x: number, y: number) => RouteCode;

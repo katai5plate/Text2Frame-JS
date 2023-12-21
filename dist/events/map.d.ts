@@ -16,15 +16,17 @@ export declare const ChangeParallax: C<{
         y?: number;
     };
 }>;
+type PositionType = {
+    x: number;
+    y: number;
+} | {
+    x: VariableId;
+    y: VariableId;
+};
 export declare const GetLocationInfo: C<{
     id: VariableId;
     layer: keyof typeof LOCATION;
-    position: {
-        x: number;
-        y: number;
-    } | {
-        x: VariableId;
-        y: VariableId;
-    } | keyof typeof CHARACTER | number;
+    position: PositionType | keyof typeof CHARACTER | number;
 }>;
+export {};
 //# sourceMappingURL=map.d.ts.map

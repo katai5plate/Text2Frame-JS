@@ -1,6 +1,13 @@
 import { CHARACTER, LOCATION } from "../constants";
 import { C, VariableId } from "../type";
-import { arg, argId, argPreset, argRange, tag } from "../validate";
+import {
+  argId,
+  argPreset,
+  argRange,
+  argVariableId,
+  tag,
+  typeCase,
+} from "../validate";
 
 export const ChangeMapNameDisplay: C<{
   allow: boolean;
@@ -25,24 +32,23 @@ export const ChangeParallax: C<{
     scroll.y && `LoopVertically[${argRange(scroll.y, { from: -32, to: 32 })}]`,
   ]);
 
+type PositionType = { x: number; y: number } | { x: VariableId; y: VariableId };
 export const GetLocationInfo: C<{
   id: VariableId;
   layer: keyof typeof LOCATION;
-  position:
-    | { x: number; y: number }
-    | { x: VariableId; y: VariableId }
-    | keyof typeof CHARACTER
-    | number;
+  position: PositionType | keyof typeof CHARACTER | number;
 }> = ({ id, layer, position }) =>
   tag("GetLocationInfo", [
-    arg(id, (v, t) => t.isVariableId(v)),
+    argVariableId(id),
     argPreset(layer, LOCATION),
-    arg(position, (v, t) => {
-      if (typeof v === "object")
-        return `${t.isVariableId(v.x) ? "WithVariables" : "Direct"}[${v.x}][${
-          v.y
-        }]`;
-      if (typeof v === "string") return t.markPreset(v, CHARACTER);
-      return v;
+    typeCase(position, {
+      object: (value, e) => {
+        const v = value as PositionType;
+        if ("x" in v && "y" in v) {
+          if (typeof v.x === "number") return `Direct[${v.x}][${v.y}]`;
+          if (v.x.variableId) return `WithVariables[${v.x}][${v.y}]`;
+        }
+        throw e();
+      },
     }),
   ]);

@@ -1,6 +1,41 @@
 import { BLEND_MODE, COLOR_TONE, EASING, PICTURE_ORIGIN } from "../constants";
 import { C, Color4, DirectOrVariables } from "../type";
-import { arg, argPreset, argRange, joinSkip, tag } from "../validate";
+import {
+  argColorTone,
+  argInt,
+  argPreset,
+  argRange,
+  argVariableId,
+  joinSkip,
+  tag,
+} from "../validate";
+
+const argPicturePosition = (position: {
+  mode: DirectOrVariables;
+  origin: keyof typeof PICTURE_ORIGIN;
+  x: number;
+  y: number;
+}) => {
+  const parse =
+    position.mode === "DIRECT"
+      ? argInt
+      : (variableId: number) => argVariableId({ variableId });
+  return `Position[${argPreset(position.origin, PICTURE_ORIGIN)}][${parse(
+    position.x
+  )}][${parse(position.y)}]`;
+};
+const argPictureScale = (size: { width: number; height: number }) =>
+  `Scale[${argInt(size.width)}][${argInt(size.height)}]`;
+const argPictureBlend = (blend: {
+  opacity: number;
+  mode: keyof typeof BLEND_MODE;
+}) =>
+  `Blend[${argRange(blend.opacity, { from: 0, to: 255 })}][${argPreset(
+    blend.mode,
+    BLEND_MODE
+  )}]`;
+const argPictureDuration = (duration: { time: number; wait: boolean }) =>
+  `Duration[${argInt(duration.time)}][${duration.wait ? "Wait" : ""}]`;
 
 export const ShowPicture: C<{
   id: number;
@@ -18,30 +53,9 @@ export const ShowPicture: C<{
     argRange(id, { from: 1, to: 100 }),
     name,
     joinSkip(null, [
-      position &&
-        arg(position, (v, t) => {
-          const parse =
-            v.mode === "DIRECT"
-              ? t.validInt
-              : (x: number) => t.markVariableId({ variableId: x });
-          return `Position[${t.markPreset(v.origin, PICTURE_ORIGIN)}][${parse(
-            position.x
-          )}][${parse(position.y)}]`;
-        }),
-      scale &&
-        arg(
-          scale,
-          (v, t) => `Scale[${t.validInt(v.width)}][${t.validInt(v.height)}]`
-        ),
-      blend &&
-        arg(
-          blend,
-          (v, t) =>
-            `Blend[${t.validRange(v.opacity, 0, 255)}][${t.markPreset(
-              v.mode,
-              BLEND_MODE
-            )}]`
-        ),
+      position && argPicturePosition(position),
+      scale && argPictureScale(scale),
+      blend && argPictureBlend(blend),
     ]),
   ]);
 
@@ -61,35 +75,10 @@ export const MovePicture: C<{
   tag("MovePicture", [
     argRange(id, { from: 1, to: 100 }),
     joinSkip(null, [
-      position &&
-        arg(position, (v, t) => {
-          const parse =
-            v.mode === "DIRECT"
-              ? t.validInt
-              : (x: number) => t.markVariableId({ variableId: x });
-          return `Position[${t.markPreset(v.origin, PICTURE_ORIGIN)}][${parse(
-            position.x
-          )}][${parse(position.y)}]`;
-        }),
-      scale &&
-        arg(
-          scale,
-          (v, t) => `Scale[${t.validInt(v.width)}][${t.validInt(v.height)}]`
-        ),
-      blend &&
-        arg(
-          blend,
-          (v, t) =>
-            `Blend[${t.validRange(v.opacity, 0, 255)}][${t.markPreset(
-              v.mode,
-              BLEND_MODE
-            )}]`
-        ),
-      duration &&
-        arg(
-          duration,
-          (v, t) => `Duration[${t.validInt(v.time)}][${v.wait ? "Wait" : ""}]`
-        ),
+      position && argPicturePosition(position),
+      scale && argPictureScale(scale),
+      blend && argPictureBlend(blend),
+      duration && argPictureDuration(duration),
       easing && argPreset(easing, EASING),
     ]),
   ]);
@@ -110,14 +99,7 @@ export const TintPicture: C<{
 }> = ({ id, color, time }) =>
   tag("TintPicture", [
     argRange(id, { from: 1, to: 100 }),
-    joinSkip(null, [
-      color &&
-        arg(color, (v, t) => {
-          if (typeof v === "string") return t.markPreset(v, COLOR_TONE);
-          return t.markColorTone(v);
-        }),
-      time,
-    ]),
+    joinSkip(null, [color && argColorTone(color), time]),
   ]);
 
 export const ErasePicture: C<{ id: number }> = ({ id }) =>

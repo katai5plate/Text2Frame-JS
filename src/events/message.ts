@@ -7,7 +7,15 @@ import {
   WINDOW_POSITION_VERTICAL,
 } from "../constants";
 import { C, VariableId } from "../type";
-import { arg, argPreset, joinSkip, tag } from "../validate";
+import { argPreset, argRange, argVariableId, joinSkip, tag } from "../validate";
+
+const argChoices = <P extends Record<string, string>>(
+  value: keyof P | number,
+  preset: P
+) =>
+  typeof value === "number"
+    ? argRange(value, { from: 1, to: 6 })
+    : argPreset(value as string, preset);
 
 export const Window: C<{
   background?: keyof typeof WINDOW_BACKGROUND;
@@ -20,7 +28,7 @@ export const Window: C<{
     position && tag("WindowPosition", [position]),
     face &&
       tag("Face", [
-        `${face.name}(${arg(face.index, (v, t) => t.validRange(v, 0, 15))})`,
+        `${face.name}(${argRange(face.index, { from: 0, to: 15 })})`,
       ]),
     name && tag("Name", [name]),
   ]);
@@ -41,18 +49,8 @@ export const ShowChoices: C<{
     tag("ShowChoices", [
       background && argPreset(background, WINDOW_BACKGROUND),
       position && argPreset(position, WINDOW_POSITION_HORIZONTAL),
-      init &&
-        arg(init, (v, t) =>
-          typeof v === "number"
-            ? t.validRange(v, 1, 6)
-            : t.markPreset(v, CHOICES_INIT)
-        ),
-      cancel &&
-        arg(cancel, (v, t) =>
-          typeof v === "number"
-            ? t.validRange(v, 1, 6)
-            : t.markPreset(v, CHOICES_CANCEL)
-        ),
+      init && argChoices(init, CHOICES_INIT),
+      cancel && argChoices(cancel, CHOICES_CANCEL),
     ]),
     joinSkip(
       "\n",
@@ -73,19 +71,13 @@ export const InputNumber: C<{
   id: VariableId;
   digit: number;
 }> = ({ id, digit }) =>
-  tag("InputNumber", [
-    arg(id, (v, t) => t.markVariableId(v)),
-    arg(digit, (v, t) => t.validRange(digit, 1, 8)),
-  ]);
+  tag("InputNumber", [argVariableId(id), argRange(digit, { from: 1, to: 8 })]);
 
 export const SelectItem: C<{
   id: VariableId;
   itemType: keyof typeof ITEM_TYPE;
 }> = ({ id, itemType }) =>
-  tag("SelectItem", [
-    arg(id, (v, t) => t.markVariableId(v)),
-    arg(itemType, (v, t) => t.markPreset(v, ITEM_TYPE)),
-  ]);
+  tag("SelectItem", [argVariableId(id), argPreset(itemType, ITEM_TYPE)]);
 
 export const ScrollingText: C<{
   speed?: number;

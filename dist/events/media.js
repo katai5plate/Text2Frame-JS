@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlayMovie = exports.StopSE = exports.StopME = exports.StopBGS = exports.ReplayBGM = exports.StopBGM = exports.SaveBGM = exports.FadeoutBGS = exports.FadeoutBGM = exports.ChangeDefeatMe = exports.ChangeVictoryMe = exports.ChangeBattleBGM = exports.PlaySE = exports.PlayME = exports.PlayBGS = exports.PlayBGM = void 0;
 const validate_1 = require("../validate");
 const commonSound = (name) => {
-    const component = ({ sound }) => (0, validate_1.tag)(name, [(0, validate_1.arg)(sound, (v, t) => t.markSoundArgs(v))]);
+    const component = ({ sound }) => (0, validate_1.tag)(name, [(0, validate_1.argsSound)(sound)]);
     return component;
 };
 exports.PlayBGM = commonSound("PlayBGM");

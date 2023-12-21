@@ -3,50 +3,40 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetOnOffVehicle = exports.SetMovementRoute = exports.ScrollMap = exports.SetEventLocation = exports.SetVehicleLocation = exports.TransferPlayer = void 0;
 const constants_1 = require("../constants");
 const validate_1 = require("../validate");
+const argIdOrPreset = (value, preset) => typeof value === "number" ? (0, validate_1.argId)(value) : (0, validate_1.argPreset)(value, preset);
 const TransferPlayer = ({ mode, position, direction, fade }) => (0, validate_1.tag)("TransferPlayer", [
-    (0, validate_1.arg)(position, (v, t) => t.markMapPosition(v, mode)),
-    (0, validate_1.arg)(direction, (v, t) => t.markPreset(v, constants_1.DIRECTION_RETAIN)),
-    (0, validate_1.arg)(fade, (v, t) => t.markPreset(v, constants_1.FADE)),
+    (0, validate_1.argMapPosition)(position, mode),
+    (0, validate_1.argPreset)(direction, constants_1.DIRECTION_RETAIN),
+    (0, validate_1.argPreset)(fade, constants_1.FADE),
 ]);
 exports.TransferPlayer = TransferPlayer;
 const SetVehicleLocation = ({ mode, vehicle, position }) => (0, validate_1.tag)("SetVehicleLocation", [
-    (0, validate_1.arg)(vehicle, (v, t) => t.markPreset(v, constants_1.VEHICLE)),
-    (0, validate_1.arg)(position, (v, t) => t.markMapPosition(v, mode)),
+    (0, validate_1.argPreset)(vehicle, constants_1.VEHICLE),
+    (0, validate_1.argMapPosition)(position, mode),
 ]);
 exports.SetVehicleLocation = SetVehicleLocation;
 const SetEventLocation = ({ mode, id, position, direction }) => (0, validate_1.tag)("SetEventLocation", [
-    (0, validate_1.arg)(id, (v, t) => typeof v === "number" ? t.validId(v) : t.markPreset(v, constants_1.EVENT)),
+    argIdOrPreset(id, constants_1.EVENT),
     mode === "EXCHANGE"
-        ? (0, validate_1.arg)(position, (v, t) => {
-            const exchange = (x) => `Exchange[${x}]`;
-            if (typeof v === "string")
-                return exchange(t.markPreset(v, constants_1.EVENT));
-            if (typeof v === "number")
-                return exchange(t.validId(v));
-            throw new Error("不正なマップ位置指定です");
+        ? (0, validate_1.typeCase)(position, {
+            string: (x) => `Exchange[${(0, validate_1.argPreset)(x, constants_1.EVENT)}]`,
+            number: (x) => `Exchange[${(0, validate_1.argId)(x)}]`,
         })
-        : (0, validate_1.arg)(position, (v, t) => {
-            if (t.isMapPosition(v))
-                return t.markMapPosition(v, mode);
-            throw new Error("不正なマップ位置指定です");
+        : (0, validate_1.typeCase)(position, {
+            mapPosition: (x) => (0, validate_1.argMapPosition)(x, mode),
         }),
-    (0, validate_1.arg)(direction, (v, t) => t.markPreset(v, constants_1.DIRECTION_RETAIN)),
+    (0, validate_1.argPreset)(direction, constants_1.DIRECTION_RETAIN),
 ]);
 exports.SetEventLocation = SetEventLocation;
 const ScrollMap = ({ direction, step, speed, wait }) => (0, validate_1.tag)("SetVehicleLocation", [
-    (0, validate_1.arg)(direction, (v, t) => t.markPreset(v, constants_1.DIRECTION)),
+    (0, validate_1.argPreset)(direction, constants_1.DIRECTION),
     (0, validate_1.argInt)(step),
-    (0, validate_1.arg)(speed, (v, t) => t.markPreset(v, constants_1.CHARACTER_SPEED)),
+    (0, validate_1.argPreset)(speed, constants_1.CHARACTER_SPEED),
     wait,
 ]);
 exports.ScrollMap = ScrollMap;
 const SetMovementRoute = ({ id, repeat, skip, wait, routes }) => (0, validate_1.joinSkip)("\n", [
-    (0, validate_1.tag)("SetMovementRoute", [
-        (0, validate_1.arg)(id, (v, t) => typeof v === "number" ? t.validId(v) : t.markPreset(v, constants_1.CHARACTER)),
-        repeat,
-        skip,
-        wait,
-    ]),
+    (0, validate_1.tag)("SetMovementRoute", [argIdOrPreset(id, constants_1.CHARACTER), repeat, skip, wait]),
     ...routes({
         jump: (x, y) => {
             return { name: "Jump", args: [(0, validate_1.argInt)(x), (0, validate_1.argInt)(y)] };
@@ -57,7 +47,7 @@ const SetMovementRoute = ({ id, repeat, skip, wait, routes }) => (0, validate_1.
         changeSwitch: (id, to) => {
             return {
                 name: `Switch${to ? "On" : "Off"}`,
-                args: [(0, validate_1.arg)(id, (v, t) => t.markSwitchId(v))],
+                args: [(0, validate_1.argSwitchId)(id)],
             };
         },
         changeSpeed: (speed) => {
@@ -90,7 +80,7 @@ const SetMovementRoute = ({ id, repeat, skip, wait, routes }) => (0, validate_1.
         playSe: (sound) => {
             return {
                 name: "McPlaySe",
-                args: [(0, validate_1.arg)(sound, (v, t) => t.markSoundArgs(v))],
+                args: [(0, validate_1.argsSound)(sound)],
             };
         },
         script: (code) => {

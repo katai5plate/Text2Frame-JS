@@ -1,9 +1,9 @@
 import { C, Sound } from "../type";
-import { arg, argInt, tag } from "../validate";
+import { argInt, argsSound, tag } from "../validate";
 
 const commonSound = (name: string) => {
   const component: C<{ sound: Sound }> = ({ sound }) =>
-    tag(name, [arg(sound, (v, t) => t.markSoundArgs(v))]);
+    tag(name, [argsSound(sound)]);
   return component;
 };
 export const PlayBGM = commonSound("PlayBGM");

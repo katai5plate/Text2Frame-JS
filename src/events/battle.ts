@@ -1,14 +1,21 @@
 import { ACTION_TARGET, ENEMY_MEMBER } from "../constants";
 import { C, CreaseOperator, VariableId } from "../type";
 import {
-  arg,
   argEnemyIndex,
-  argEnemyIndexWithPreset,
-  argEnemyIndexWithPresetAndVariableId,
   argId,
   argIntOrVariableId,
+  argPreset,
+  argRange,
+  createPresetArgWithVariableId,
   tag,
+  typeCase,
 } from "../validate";
+
+const argEnemyIndexWithPreset = createPresetArgWithVariableId(ENEMY_MEMBER);
+const argEnemyIndexWithPresetAndVariableId = createPresetArgWithVariableId(
+  ENEMY_MEMBER,
+  { from: 1, to: 8 }
+);
 
 export const ChangeEnemyHp: C<{
   index: keyof typeof ENEMY_MEMBER | number | VariableId;
@@ -66,13 +73,13 @@ export const ForceAction: C<{
   target: keyof typeof ACTION_TARGET | number;
 }> = ({ mode, index, id, target }) =>
   tag("ForceAction", [
-    arg(index, (v, t) => {
-      if (mode === "ACTOR") return `Actor[${t.validId(v)}]`;
-      return argEnemyIndex(v);
+    typeCase(index, {
+      number: (x) =>
+        mode === "ACTOR" ? `Actor[${argId(x)}]` : argEnemyIndex(x),
     }),
     argId(id),
-    arg(target, (v, t) => {
-      if (typeof v === "string") return t.markPreset(v, ACTION_TARGET);
-      return `Index ${t.validRange(v, 1, 8)}`;
+    typeCase(target, {
+      string: (x) => argPreset(x, ACTION_TARGET),
+      number: (x) => `Index ${argRange(x, { from: 1, to: 8 })}`,
     }),
   ]);

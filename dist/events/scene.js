@@ -6,12 +6,10 @@ const validate_1 = require("../validate");
 const BattleProcessing = ({ id, ifWin, ifEscape, ifLose }) => {
     return (0, validate_1.joinSkip)("\n", [
         (0, validate_1.tag)("BattleProcessing", [
-            (0, validate_1.arg)(id, (v, t) => {
-                if (typeof v === "string")
-                    return t.markPreset(v, constants_1.BATTLE_TROOP);
-                if (t.isVariableId(v))
-                    return t.markVariableId(v);
-                return t.validId(v);
+            (0, validate_1.typeCase)(id, {
+                string: (x) => (0, validate_1.argPreset)(x, constants_1.BATTLE_TROOP),
+                variableId: validate_1.argVariableId,
+                number: validate_1.argId,
             }),
         ]),
         ifWin ? (0, validate_1.joinSkip)("\n", [(0, validate_1.tag)("IfWin"), ifWin]) : undefined,

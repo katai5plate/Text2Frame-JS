@@ -1,15 +1,19 @@
 import { VEHICLE } from "../constants";
 import { C, Color3, Sound } from "../type";
-import { arg, argId, argPreset, argRange, tag } from "../validate";
+import {
+  argId,
+  argPreset,
+  argRange,
+  argsColor,
+  argsSound,
+  tag,
+} from "../validate";
 
 export const ChangeVehicleBgm: C<{
   vehicle: keyof typeof VEHICLE;
   sound: Sound;
 }> = ({ vehicle, sound }) =>
-  tag("ChangeVehicleBgm", [
-    argPreset(vehicle, VEHICLE),
-    arg(sound, (v, t) => t.markSoundArgs(v)),
-  ]);
+  tag("ChangeVehicleBgm", [argPreset(vehicle, VEHICLE), argsSound(sound)]);
 
 const commonChange = (name: string) => {
   const component: C<{ allow: boolean }> = ({ allow }) => tag(name, [allow]);
@@ -22,8 +26,7 @@ export const ChangeFormationAccess = commonChange("ChangeFormationAccess");
 
 export const ChangeWindowColor: C<{
   color: Color3;
-}> = ({ color }) =>
-  tag("ChangeWindowColor", [arg(color, (v, t) => t.markColorArgs(v))]);
+}> = ({ color }) => tag("ChangeWindowColor", [argsColor(color)]);
 
 export const ChangeActorImages: C<{
   id: number;

@@ -17,14 +17,19 @@ const ChangeParallax = ({ name, scroll }) => (0, validate_1.tag)("ChangeParallax
 ]);
 exports.ChangeParallax = ChangeParallax;
 const GetLocationInfo = ({ id, layer, position }) => (0, validate_1.tag)("GetLocationInfo", [
-    (0, validate_1.arg)(id, (v, t) => t.isVariableId(v)),
+    (0, validate_1.argVariableId)(id),
     (0, validate_1.argPreset)(layer, constants_1.LOCATION),
-    (0, validate_1.arg)(position, (v, t) => {
-        if (typeof v === "object")
-            return `${t.isVariableId(v.x) ? "WithVariables" : "Direct"}[${v.x}][${v.y}]`;
-        if (typeof v === "string")
-            return t.markPreset(v, constants_1.CHARACTER);
-        return v;
+    (0, validate_1.typeCase)(position, {
+        object: (value, e) => {
+            const v = value;
+            if ("x" in v && "y" in v) {
+                if (typeof v.x === "number")
+                    return `Direct[${v.x}][${v.y}]`;
+                if (v.x.variableId)
+                    return `WithVariables[${v.x}][${v.y}]`;
+            }
+            throw e();
+        },
     }),
 ]);
 exports.GetLocationInfo = GetLocationInfo;

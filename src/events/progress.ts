@@ -1,20 +1,27 @@
 import { CHARACTER, TIMER_MODE, VARIABLE_OPERATOR } from "../constants";
 import { C, FromTo, SelfSwitchName, SwitchId } from "../type";
 import {
-  arg,
-  argCharacterIdWithPreset,
   argEnemyIndex,
+  argFromTo,
   argId,
   argInt,
+  argSwitchId,
+  createPresetArg,
   tag,
+  typeCase,
 } from "../validate";
+
+const argCharacterIdWithPreset = createPresetArg(CHARACTER);
 
 export const Switch: C<{
   id: SwitchId | FromTo;
   toBe: boolean;
 }> = ({ id, toBe }) =>
   tag("Switch", [
-    arg(id, (v, t) => (t.isSwitchId(v) ? t.markSwitchId(v) : t.markFromTo(v))),
+    typeCase(id, {
+      switchId: argSwitchId,
+      fromTo: argFromTo,
+    }),
     toBe,
   ]);
 
@@ -222,7 +229,10 @@ export const Variable: C<{
   return list
     .map(({ op, value }) =>
       tag(VARIABLE_OPERATOR[op as keyof typeof VARIABLE_OPERATOR], [
-        arg(id, (v, t) => (t.isFromTo(v) ? t.markFromTo(v) : v)),
+        typeCase(id, {
+          fromTo: argFromTo,
+          number: argId,
+        }),
         value,
       ])
     )

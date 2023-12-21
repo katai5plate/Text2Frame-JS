@@ -1,12 +1,14 @@
 import { ACTER_PARAMETER, ACTOR_MEMBER } from "../constants";
 import { C, CreaseOperator, VariableId } from "../type";
 import {
-  arg,
-  argActorIdWithPreset,
   argId,
   argIntOrVariableId,
+  argPreset,
+  createPresetArgWithVariableId,
   tag,
 } from "../validate";
+
+const argActorIdWithPreset = createPresetArgWithVariableId(ACTOR_MEMBER);
 
 export const ChangeHp: C<{
   id: keyof typeof ACTOR_MEMBER | number | VariableId;
@@ -65,7 +67,7 @@ export const ChangeParameter: C<{
 }> = ({ id, parameter, op, value }) =>
   tag("ChangeParameter", [
     argActorIdWithPreset(id),
-    arg(parameter, (v, t) => t.markPreset(v, ACTER_PARAMETER)),
+    argPreset(parameter, ACTER_PARAMETER),
     op,
     argIntOrVariableId(value),
   ]);
