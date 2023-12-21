@@ -20,23 +20,21 @@ npm i -D @babel/core @babel/node @babel/preset-env
 ### example.js
 
 ```js
-/** @type {import("Text2Frame-MV/Text2Frame.mjs")} */
-const TF = require("Text2Frame-MV");
 //@ts-check
-import { parse as ev, events } from "Text2Frame-JS";
+/** @type {import("Text2Frame-MV/Text2Frame.mjs")} */
+//@ts-ignore
+const TF = require("Text2Frame-MV");
+import { parse as ev, events } from "../dist";
 
 const text = ev(
   events.message.Window({ name: "アレックス" }),
   "暇だなー",
   events.message.Window({ name: "ブライアン" }),
   "そうだな",
-  events.flow.Check({
-    condition: "$gameSwitches.value(10)",
-    then: ev(
-      events.message.Window({ name: "ぬくりあ" }),
-      "めでてえｗｗｗｗｗｗｗ"
-    ),
-  })
+  events.flow.Check(
+    "$gameSwitches.value(10)",
+    ev(events.message.Window({ name: "ぬくりあ" }), "めでてえｗｗｗｗｗｗｗ")
+  )
 );
 
 console.log(text);

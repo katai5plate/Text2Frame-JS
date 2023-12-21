@@ -1,20 +1,8 @@
-import { C } from "../type";
-export declare const Wait: C<{
-    time: number;
-}>;
-export declare const Script: C<{
-    code: string;
-}>;
-export declare const PluginCommandMV: C<{
-    command: string;
-}>;
-export declare const PluginCommandMZ: C<{
+export declare const Wait: (time: number) => string;
+export declare const Script: (code: string) => string;
+export declare const PluginCommandMV: (command: string) => string;
+export declare const PluginCommandMZ: (name: string, method: string, command: string, args: {
     name: string;
-    method: string;
-    command: string;
-    args: {
-        name: string;
-        value: any;
-    }[];
-}>;
+    value: any;
+}[]) => string;
 //# sourceMappingURL=interpreter.d.ts.map

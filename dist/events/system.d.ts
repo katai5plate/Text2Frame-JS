@@ -1,41 +1,20 @@
 import { VEHICLE } from "../constants";
-import { C, Color3, Sound } from "../type";
-export declare const ChangeVehicleBgm: C<{
-    vehicle: keyof typeof VEHICLE;
-    sound: Sound;
-}>;
-export declare const ChangeSaveAccess: C<{
-    allow: boolean;
-}>;
-export declare const ChangeMenuAccess: C<{
-    allow: boolean;
-}>;
-export declare const ChangeEncounter: C<{
-    allow: boolean;
-}>;
-export declare const ChangeFormationAccess: C<{
-    allow: boolean;
-}>;
-export declare const ChangeWindowColor: C<{
-    color: Color3;
-}>;
-export declare const ChangeActorImages: C<{
-    id: number;
-    face: {
-        name: string;
-        index: number;
-    };
-    character: {
-        name: string;
-        index: number;
-    };
-    battler: string;
-}>;
-export declare const ChangeVehicleImage: C<{
-    vehicle: keyof typeof VEHICLE;
-    image: {
-        name: string;
-        index: number;
-    };
-}>;
+import { Color3, Sound } from "../type";
+export declare const ChangeVehicleBgm: (vehicle: keyof typeof VEHICLE, sound: Sound) => string;
+export declare const ChangeSaveAccess: (allow: boolean) => string;
+export declare const ChangeMenuAccess: (allow: boolean) => string;
+export declare const ChangeEncounter: (allow: boolean) => string;
+export declare const ChangeFormationAccess: (allow: boolean) => string;
+export declare const ChangeWindowColor: (color: Color3) => string;
+export declare const ChangeActorImages: (id: number, face: {
+    name: string;
+    index: number;
+}, character: {
+    name: string;
+    index: number;
+}, battler: string) => string;
+export declare const ChangeVehicleImage: (vehicle: keyof typeof VEHICLE, image: {
+    name: string;
+    index: number;
+}) => string;
 //# sourceMappingURL=system.d.ts.map

@@ -1,21 +1,12 @@
 import { CHARACTER, LOCATION } from "../constants";
-import { C, VariableId } from "../type";
-export declare const ChangeMapNameDisplay: C<{
-    allow: boolean;
-}>;
-export declare const ChangeTileset: C<{
-    id: number;
-}>;
-export declare const ChangeBattleBackGround: C<{
-    images: [string?, string?];
-}>;
-export declare const ChangeParallax: C<{
-    name: string;
-    scroll: {
-        x?: number;
-        y?: number;
-    };
-}>;
+import { VariableId } from "../type";
+export declare const ChangeMapNameDisplay: (allow: boolean) => string;
+export declare const ChangeTileset: (id: number) => string;
+export declare const ChangeBattleBackGround: (images: [string?, string?]) => string;
+export declare const ChangeParallax: (name: string, scroll: {
+    x?: number;
+    y?: number;
+}) => string;
 type PositionType = {
     x: number;
     y: number;
@@ -23,10 +14,6 @@ type PositionType = {
     x: VariableId;
     y: VariableId;
 };
-export declare const GetLocationInfo: C<{
-    id: VariableId;
-    layer: keyof typeof LOCATION;
-    position: PositionType | keyof typeof CHARACTER | number;
-}>;
+export declare const GetLocationInfo: (id: VariableId, layer: keyof typeof LOCATION, position: PositionType | keyof typeof CHARACTER | number) => string;
 export {};
 //# sourceMappingURL=map.d.ts.map

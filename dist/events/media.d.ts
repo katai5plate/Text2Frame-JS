@@ -1,38 +1,18 @@
-import { C, Sound } from "../type";
-export declare const PlayBGM: C<{
-    sound: Sound;
-}>;
-export declare const PlayBGS: C<{
-    sound: Sound;
-}>;
-export declare const PlayME: C<{
-    sound: Sound;
-}>;
-export declare const PlaySE: C<{
-    sound: Sound;
-}>;
-export declare const ChangeBattleBGM: C<{
-    sound: Sound;
-}>;
-export declare const ChangeVictoryMe: C<{
-    sound: Sound;
-}>;
-export declare const ChangeDefeatMe: C<{
-    sound: Sound;
-}>;
-export declare const FadeoutBGM: C<{
-    time: number;
-}>;
-export declare const FadeoutBGS: C<{
-    time: number;
-}>;
-export declare const SaveBGM: C;
-export declare const StopBGM: C;
-export declare const ReplayBGM: C;
-export declare const StopBGS: C;
-export declare const StopME: C;
-export declare const StopSE: C;
-export declare const PlayMovie: C<{
-    name: string;
-}>;
+import { Sound } from "../type";
+export declare const PlayBGM: (sound: Sound) => string;
+export declare const PlayBGS: (sound: Sound) => string;
+export declare const PlayME: (sound: Sound) => string;
+export declare const PlaySE: (sound: Sound) => string;
+export declare const ChangeBattleBGM: (sound: Sound) => string;
+export declare const ChangeVictoryMe: (sound: Sound) => string;
+export declare const ChangeDefeatMe: (sound: Sound) => string;
+export declare const FadeoutBGM: (time: number) => string;
+export declare const FadeoutBGS: (time: number) => string;
+export declare const SaveBGM: () => string;
+export declare const StopBGM: () => string;
+export declare const ReplayBGM: () => string;
+export declare const StopBGS: () => string;
+export declare const StopME: () => string;
+export declare const StopSE: () => string;
+export declare const PlayMovie: (name: string) => string;
 //# sourceMappingURL=media.d.ts.map

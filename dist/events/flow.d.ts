@@ -1,28 +1,9 @@
-import { C } from "../type";
-export declare const Check: C<{
-    condition: string;
-    then: string;
-    otherwise?: string;
-}>;
-export declare const Loop: C<{
-    content: string;
-}>;
-export declare const LoopBreak: C;
-export declare const BreakLoop: C;
-export declare const ExitEventProcessing: C;
-export declare const CommonEvent: C<{
-    id: number;
-}>;
-export declare const Label: C<{
-    name: string;
-}>;
-export declare const Goto: C<{
-    name: string;
-}>;
-export declare const JumpToLabel: C<{
-    name: string;
-}>;
-export declare const Comment: C<{
-    text: string;
-}>;
+export declare const Check: (condition: string, then: string, otherwise?: string) => string;
+export declare const Loop: (content: string) => string;
+export declare const LoopBreak: () => string;
+export declare const ExitEventProcessing: () => string;
+export declare const CommonEvent: (id: number) => string;
+export declare const Label: (name: string) => string;
+export declare const Goto: (name: string) => string;
+export declare const Comment: (text: string) => string;
 //# sourceMappingURL=flow.d.ts.map

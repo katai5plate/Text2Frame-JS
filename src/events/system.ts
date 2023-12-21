@@ -1,5 +1,5 @@
 import { VEHICLE } from "../constants";
-import { C, Color3, Sound } from "../type";
+import { Color3, Sound } from "../type";
 import {
   argId,
   argPreset,
@@ -9,14 +9,11 @@ import {
   tag,
 } from "../validate";
 
-export const ChangeVehicleBgm: C<{
-  vehicle: keyof typeof VEHICLE;
-  sound: Sound;
-}> = ({ vehicle, sound }) =>
+export const ChangeVehicleBgm = (vehicle: keyof typeof VEHICLE, sound: Sound) =>
   tag("ChangeVehicleBgm", [argPreset(vehicle, VEHICLE), argsSound(sound)]);
 
 const commonChange = (name: string) => {
-  const component: C<{ allow: boolean }> = ({ allow }) => tag(name, [allow]);
+  const component = (allow: boolean) => tag(name, [allow]);
   return component;
 };
 export const ChangeSaveAccess = commonChange("ChangeSaveAccess");
@@ -24,16 +21,15 @@ export const ChangeMenuAccess = commonChange("ChangeMenuAccess");
 export const ChangeEncounter = commonChange("ChangeEncounter");
 export const ChangeFormationAccess = commonChange("ChangeFormationAccess");
 
-export const ChangeWindowColor: C<{
-  color: Color3;
-}> = ({ color }) => tag("ChangeWindowColor", [argsColor(color)]);
+export const ChangeWindowColor = (color: Color3) =>
+  tag("ChangeWindowColor", [argsColor(color)]);
 
-export const ChangeActorImages: C<{
-  id: number;
-  face: { name: string; index: number };
-  character: { name: string; index: number };
-  battler: string;
-}> = ({ id, face, character, battler }) =>
+export const ChangeActorImages = (
+  id: number,
+  face: { name: string; index: number },
+  character: { name: string; index: number },
+  battler: string
+) =>
   tag("ChangeActorImages", [
     argId(id),
     face.name,
@@ -43,10 +39,10 @@ export const ChangeActorImages: C<{
     battler,
   ]);
 
-export const ChangeVehicleImage: C<{
-  vehicle: keyof typeof VEHICLE;
-  image: { name: string; index: number };
-}> = ({ vehicle, image }) =>
+export const ChangeVehicleImage = (
+  vehicle: keyof typeof VEHICLE,
+  image: { name: string; index: number }
+) =>
   tag("ChangeActorImages", [
     argPreset(vehicle, VEHICLE),
     image.name,

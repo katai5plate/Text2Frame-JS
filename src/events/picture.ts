@@ -1,5 +1,5 @@
 import { BLEND_MODE, COLOR_TONE, EASING, PICTURE_ORIGIN } from "../constants";
-import { C, Color4, DirectOrVariables } from "../type";
+import { Color4, DirectOrVariables } from "../type";
 import {
   argColorTone,
   argInt,
@@ -37,18 +37,24 @@ const argPictureBlend = (blend: {
 const argPictureDuration = (duration: { time: number; wait: boolean }) =>
   `Duration[${argInt(duration.time)}][${duration.wait ? "Wait" : ""}]`;
 
-export const ShowPicture: C<{
-  id: number;
-  name: string;
-  position?: {
-    mode: DirectOrVariables;
-    origin: keyof typeof PICTURE_ORIGIN;
-    x: number;
-    y: number;
-  };
-  scale?: { width: number; height: number };
-  blend?: { mode: keyof typeof BLEND_MODE; opacity: number };
-}> = ({ id, name, position, scale, blend }) =>
+export const ShowPicture = (
+  id: number,
+  name: string,
+  {
+    position,
+    scale,
+    blend,
+  }: {
+    position?: {
+      mode: DirectOrVariables;
+      origin: keyof typeof PICTURE_ORIGIN;
+      x: number;
+      y: number;
+    };
+    scale?: { width: number; height: number };
+    blend?: { mode: keyof typeof BLEND_MODE; opacity: number };
+  }
+) =>
   tag("ShowPicture", [
     argRange(id, { from: 1, to: 100 }),
     name,
@@ -59,19 +65,27 @@ export const ShowPicture: C<{
     ]),
   ]);
 
-export const MovePicture: C<{
-  id: number;
-  position?: {
-    mode: DirectOrVariables;
-    origin: keyof typeof PICTURE_ORIGIN;
-    x: number;
-    y: number;
-  };
-  scale?: { width: number; height: number };
-  blend?: { mode: keyof typeof BLEND_MODE; opacity: number };
-  duration?: { time: number; wait: boolean };
-  easing?: keyof typeof EASING;
-}> = ({ id, position, scale, blend, duration, easing }) =>
+export const MovePicture = (
+  id: number,
+  {
+    position,
+    scale,
+    blend,
+    duration,
+    easing,
+  }: {
+    position?: {
+      mode: DirectOrVariables;
+      origin: keyof typeof PICTURE_ORIGIN;
+      x: number;
+      y: number;
+    };
+    scale?: { width: number; height: number };
+    blend?: { mode: keyof typeof BLEND_MODE; opacity: number };
+    duration?: { time: number; wait: boolean };
+    easing?: keyof typeof EASING;
+  }
+) =>
   tag("MovePicture", [
     argRange(id, { from: 1, to: 100 }),
     joinSkip(null, [
@@ -83,24 +97,21 @@ export const MovePicture: C<{
     ]),
   ]);
 
-export const RotatePicture: C<{
-  id: number;
-  speed: number;
-}> = ({ id, speed }) =>
+export const RotatePicture = (id: number, speed: number) =>
   tag("RotatePicture", [
     argRange(id, { from: 1, to: 100 }),
     argRange(speed, { from: -90, to: 90 }),
   ]);
 
-export const TintPicture: C<{
-  id: number;
-  color?: keyof typeof COLOR_TONE | Color4;
-  time?: number;
-}> = ({ id, color, time }) =>
+export const TintPicture = (
+  id: number,
+  color?: keyof typeof COLOR_TONE | Color4,
+  time?: number
+) =>
   tag("TintPicture", [
     argRange(id, { from: 1, to: 100 }),
     joinSkip(null, [color && argColorTone(color), time]),
   ]);
 
-export const ErasePicture: C<{ id: number }> = ({ id }) =>
+export const ErasePicture = (id: number) =>
   tag("ErasePicture", [argRange(id, { from: 1, to: 100 })]);

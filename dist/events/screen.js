@@ -7,13 +7,13 @@ const FadeOut = () => (0, validate_1.tag)("FadeOut");
 exports.FadeOut = FadeOut;
 const FadeIn = () => (0, validate_1.tag)("FadeIn");
 exports.FadeIn = FadeIn;
-const TintScreen = ({ color, time }) => (0, validate_1.tag)("TintScreen", [(0, validate_1.joinSkip)(null, [color && (0, validate_1.argColorTone)(color), time])]);
+const TintScreen = (color, time) => (0, validate_1.tag)("TintScreen", [(0, validate_1.joinSkip)(null, [color && (0, validate_1.argColorTone)(color), time])]);
 exports.TintScreen = TintScreen;
-const FlashScreen = ({ color, time, wait }) => (0, validate_1.tag)("FlashScreen", [(0, validate_1.argsColor)(color), time, wait]);
+const FlashScreen = (color, time, wait) => (0, validate_1.tag)("FlashScreen", [(0, validate_1.argsColor)(color), time, wait]);
 exports.FlashScreen = FlashScreen;
-const ShakeScreen = ({ velocity, speed, time, wait }) => (0, validate_1.tag)("ShakeScreen", [(0, validate_1.argInt)(velocity), (0, validate_1.argInt)(speed), (0, validate_1.argInt)(time), wait]);
+const ShakeScreen = (velocity, speed, time, wait) => (0, validate_1.tag)("ShakeScreen", [(0, validate_1.argInt)(velocity), (0, validate_1.argInt)(speed), (0, validate_1.argInt)(time), wait]);
 exports.ShakeScreen = ShakeScreen;
-const SetWeatherEffect = ({ weather, velocity, time, wait }) => (0, validate_1.tag)("SetWeatherEffect", [
+const SetWeatherEffect = (weather, velocity, time, wait) => (0, validate_1.tag)("SetWeatherEffect", [
     (0, validate_1.argPreset)(weather, constants_1.WEATHER),
     (0, validate_1.argInt)(velocity),
     (0, validate_1.argInt)(time),

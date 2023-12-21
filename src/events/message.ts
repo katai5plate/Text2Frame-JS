@@ -6,7 +6,7 @@ import {
   WINDOW_POSITION_HORIZONTAL,
   WINDOW_POSITION_VERTICAL,
 } from "../constants";
-import { C, VariableId } from "../type";
+import { VariableId } from "../type";
 import { argPreset, argRange, argVariableId, joinSkip, tag } from "../validate";
 
 const argChoices = <P extends Record<string, string>>(
@@ -17,12 +17,17 @@ const argChoices = <P extends Record<string, string>>(
     ? argRange(value, { from: 1, to: 6 })
     : argPreset(value as string, preset);
 
-export const Window: C<{
+export const Window = ({
+  face,
+  position,
+  background,
+  name,
+}: {
   background?: keyof typeof WINDOW_BACKGROUND;
   position?: keyof typeof WINDOW_POSITION_VERTICAL;
   face?: { name: string; index: number };
   name?: string;
-}> = ({ face, position, background, name }) =>
+}) =>
   joinSkip("\n", [
     background && tag("Background", [background]),
     position && tag("WindowPosition", [position]),
@@ -33,16 +38,23 @@ export const Window: C<{
     name && tag("Name", [name]),
   ]);
 
-export const ShowChoices: C<{
-  background?: keyof typeof WINDOW_BACKGROUND;
-  position?: keyof typeof WINDOW_POSITION_HORIZONTAL;
-  init?: keyof typeof CHOICES_INIT | number;
-  cancel?: keyof typeof CHOICES_CANCEL | number;
+export const ShowChoices = (
   cases: {
     name: string | null;
     then: string;
-  }[];
-}> = ({ background, position, init, cancel, cases }) => {
+  }[],
+  {
+    background,
+    position,
+    init,
+    cancel,
+  }: {
+    background?: keyof typeof WINDOW_BACKGROUND;
+    position?: keyof typeof WINDOW_POSITION_HORIZONTAL;
+    init?: keyof typeof CHOICES_INIT | number;
+    cancel?: keyof typeof CHOICES_CANCEL | number;
+  }
+) => {
   if (cases.filter((caseItem) => caseItem.name === null).length >= 2)
     throw new Error("キャンセル扱いとなる name=null は複数設定できません");
   return joinSkip("\n", [
@@ -67,21 +79,13 @@ export const ShowChoices: C<{
   ]);
 };
 
-export const InputNumber: C<{
-  id: VariableId;
-  digit: number;
-}> = ({ id, digit }) =>
+export const InputNumber = (id: VariableId, digit: number) =>
   tag("InputNumber", [argVariableId(id), argRange(digit, { from: 1, to: 8 })]);
 
-export const SelectItem: C<{
-  id: VariableId;
-  itemType: keyof typeof ITEM_TYPE;
-}> = ({ id, itemType }) =>
+export const SelectItem = (id: VariableId, itemType: keyof typeof ITEM_TYPE) =>
   tag("SelectItem", [argVariableId(id), argPreset(itemType, ITEM_TYPE)]);
 
-export const ScrollingText: C<{
-  speed?: number;
-  noSkip?: boolean;
-  text: string;
-}> = ({ speed = 2, noSkip, text }) =>
-  tag("ScrollingText", [speed, noSkip], text);
+export const ScrollingText = (
+  text: string,
+  { speed = 2, noSkip }: { speed?: number; noSkip?: boolean }
+) => tag("ScrollingText", [speed, noSkip], text);

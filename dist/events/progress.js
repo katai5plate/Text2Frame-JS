@@ -4,7 +4,7 @@ exports.Timer = exports.SelfSwitch = exports.Variable = exports.Switch = void 0;
 const constants_1 = require("../constants");
 const validate_1 = require("../validate");
 const argCharacterIdWithPreset = (0, validate_1.createPresetArg)(constants_1.CHARACTER);
-const Switch = ({ id, toBe }) => (0, validate_1.tag)("Switch", [
+const Switch = (id, toBe) => (0, validate_1.tag)("Switch", [
     (0, validate_1.typeCase)(id, {
         switchId: validate_1.argSwitchId,
         fromTo: validate_1.argFromTo,
@@ -12,7 +12,7 @@ const Switch = ({ id, toBe }) => (0, validate_1.tag)("Switch", [
     toBe,
 ]);
 exports.Switch = Switch;
-const Variable = ({ id, calc }) => {
+const Variable = (id, calc) => {
     const list = calc({
         set: (value) => ({
             op: "SET",
@@ -116,9 +116,9 @@ const Variable = ({ id, calc }) => {
         .join("\n");
 };
 exports.Variable = Variable;
-const SelfSwitch = ({ id, toBe }) => (0, validate_1.tag)("SelfSwitch", [id, toBe]);
+const SelfSwitch = (id, toBe) => (0, validate_1.tag)("SelfSwitch", [id, toBe]);
 exports.SelfSwitch = SelfSwitch;
-const Timer = ({ mode, time }) => {
+const Timer = (mode, time) => {
     if (typeof time === "string") {
         const [isValid, min, sec] = time.match(/^(\d{1,}):(\d{1,})$/) ?? [];
         if (isValid) {

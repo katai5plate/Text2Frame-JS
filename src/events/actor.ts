@@ -1,5 +1,5 @@
 import { ACTER_PARAMETER, ACTOR_MEMBER } from "../constants";
-import { C, CreaseOperator, VariableId } from "../type";
+import { CreaseOperator, VariableId } from "../type";
 import {
   argId,
   argIntOrVariableId,
@@ -10,12 +10,12 @@ import {
 
 const argActorIdWithPreset = createPresetArgWithVariableId(ACTOR_MEMBER);
 
-export const ChangeHp: C<{
-  id: keyof typeof ACTOR_MEMBER | number | VariableId;
-  op: CreaseOperator;
-  value: number | VariableId;
-  allowKnockout?: boolean;
-}> = ({ id, op, value, allowKnockout }) =>
+export const ChangeHp = (
+  id: keyof typeof ACTOR_MEMBER | number | VariableId,
+  op: CreaseOperator,
+  value: number | VariableId,
+  allowKnockout?: boolean
+) =>
   tag("ChangeHp", [
     argActorIdWithPreset(id),
     op,
@@ -24,12 +24,11 @@ export const ChangeHp: C<{
   ]);
 
 const commonChange = (name: string) => {
-  const component: C<{
-    id: keyof typeof ACTOR_MEMBER | number | VariableId;
-    op: CreaseOperator;
-    value: number | VariableId;
-  }> = ({ id, op, value }) =>
-    tag(name, [argActorIdWithPreset(id), op, argIntOrVariableId(value)]);
+  const component = (
+    id: keyof typeof ACTOR_MEMBER | number | VariableId,
+    op: CreaseOperator,
+    value: number | VariableId
+  ) => tag(name, [argActorIdWithPreset(id), op, argIntOrVariableId(value)]);
   return component;
 };
 export const ChangeMp = commonChange("ChangeMp");
@@ -37,17 +36,17 @@ export const ChangeTp = commonChange("ChangeTp");
 export const ChangeState = commonChange("ChangeState");
 export const ChangeSkill = commonChange("ChangeSkill");
 
-export const RecoverAll: C<{
-  id: keyof typeof ACTOR_MEMBER | number | VariableId;
-}> = ({ id }) => tag("RecoverAll", [argActorIdWithPreset(id)]);
+export const RecoverAll = (
+  id: keyof typeof ACTOR_MEMBER | number | VariableId
+) => tag("RecoverAll", [argActorIdWithPreset(id)]);
 
 const commonLevelUp = (name: string) => {
-  const component: C<{
-    id: keyof typeof ACTOR_MEMBER | number | VariableId;
-    op: CreaseOperator;
-    value: number | VariableId;
-    allowLevelUp?: boolean;
-  }> = ({ id, op, value, allowLevelUp }) =>
+  const component = (
+    id: keyof typeof ACTOR_MEMBER | number | VariableId,
+    op: CreaseOperator,
+    value: number | VariableId,
+    allowLevelUp?: boolean
+  ) =>
     tag(name, [
       argActorIdWithPreset(id),
       op,
@@ -59,12 +58,12 @@ const commonLevelUp = (name: string) => {
 export const ChangeExp = commonLevelUp("ChangeExp");
 export const ChangeLevel = commonLevelUp("ChangeLevel");
 
-export const ChangeParameter: C<{
-  id: keyof typeof ACTOR_MEMBER | number | VariableId;
-  parameter: keyof typeof ACTER_PARAMETER;
-  op: CreaseOperator;
-  value: number | VariableId;
-}> = ({ id, parameter, op, value }) =>
+export const ChangeParameter = (
+  id: keyof typeof ACTOR_MEMBER | number | VariableId,
+  parameter: keyof typeof ACTER_PARAMETER,
+  op: CreaseOperator,
+  value: number | VariableId
+) =>
   tag("ChangeParameter", [
     argActorIdWithPreset(id),
     argPreset(parameter, ACTER_PARAMETER),
@@ -72,35 +71,28 @@ export const ChangeParameter: C<{
     argIntOrVariableId(value),
   ]);
 
-export const ChangeEquipment: C<{
-  id: number;
-  equipType: number;
-  equipId?: number;
-}> = ({ id, equipType, equipId }) =>
+export const ChangeEquipment = (
+  id: number,
+  equipType: number,
+  equipId?: number
+) =>
   tag("ChangeEquipment", [
     argId(id),
     argId(equipType),
     equipId && argId(equipId),
   ]);
 
-export const ChangeName: C<{
-  id: number;
-  name: string;
-}> = ({ id, name }) => tag("ChangeName", [argId(id), name]);
+export const ChangeName = (id: number, name: string) =>
+  tag("ChangeName", [argId(id), name]);
 
-export const ChangeClass: C<{
-  id: number;
-  classId: number;
-  saveLevelAndExp?: boolean;
-}> = ({ id, classId, saveLevelAndExp }) =>
-  tag("ChangeClass", [argId(id), argId(classId), saveLevelAndExp]);
+export const ChangeClass = (
+  id: number,
+  classId: number,
+  saveLevelAndExp?: boolean
+) => tag("ChangeClass", [argId(id), argId(classId), saveLevelAndExp]);
 
-export const ChangeNickname: C<{
-  id: number;
-  name: string;
-}> = ({ id, name }) => tag("ChangeNickname", [argId(id), name]);
+export const ChangeNickname = (id: number, name: string) =>
+  tag("ChangeNickname", [argId(id), name]);
 
-export const ChangeProfile: C<{
-  id: number;
-  profile: [string, string];
-}> = ({ id, profile: [l1, l2] }) => tag("ChangeProfile", [argId(id), l1, l2]);
+export const ChangeProfile = (id: number, profile: [string, string]) =>
+  tag("ChangeProfile", [argId(id), profile[0], profile[1]]);

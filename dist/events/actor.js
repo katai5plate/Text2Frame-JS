@@ -4,7 +4,7 @@ exports.ChangeProfile = exports.ChangeNickname = exports.ChangeClass = exports.C
 const constants_1 = require("../constants");
 const validate_1 = require("../validate");
 const argActorIdWithPreset = (0, validate_1.createPresetArgWithVariableId)(constants_1.ACTOR_MEMBER);
-const ChangeHp = ({ id, op, value, allowKnockout }) => (0, validate_1.tag)("ChangeHp", [
+const ChangeHp = (id, op, value, allowKnockout) => (0, validate_1.tag)("ChangeHp", [
     argActorIdWithPreset(id),
     op,
     (0, validate_1.argIntOrVariableId)(value),
@@ -12,17 +12,17 @@ const ChangeHp = ({ id, op, value, allowKnockout }) => (0, validate_1.tag)("Chan
 ]);
 exports.ChangeHp = ChangeHp;
 const commonChange = (name) => {
-    const component = ({ id, op, value }) => (0, validate_1.tag)(name, [argActorIdWithPreset(id), op, (0, validate_1.argIntOrVariableId)(value)]);
+    const component = (id, op, value) => (0, validate_1.tag)(name, [argActorIdWithPreset(id), op, (0, validate_1.argIntOrVariableId)(value)]);
     return component;
 };
 exports.ChangeMp = commonChange("ChangeMp");
 exports.ChangeTp = commonChange("ChangeTp");
 exports.ChangeState = commonChange("ChangeState");
 exports.ChangeSkill = commonChange("ChangeSkill");
-const RecoverAll = ({ id }) => (0, validate_1.tag)("RecoverAll", [argActorIdWithPreset(id)]);
+const RecoverAll = (id) => (0, validate_1.tag)("RecoverAll", [argActorIdWithPreset(id)]);
 exports.RecoverAll = RecoverAll;
 const commonLevelUp = (name) => {
-    const component = ({ id, op, value, allowLevelUp }) => (0, validate_1.tag)(name, [
+    const component = (id, op, value, allowLevelUp) => (0, validate_1.tag)(name, [
         argActorIdWithPreset(id),
         op,
         (0, validate_1.argIntOrVariableId)(value),
@@ -32,24 +32,24 @@ const commonLevelUp = (name) => {
 };
 exports.ChangeExp = commonLevelUp("ChangeExp");
 exports.ChangeLevel = commonLevelUp("ChangeLevel");
-const ChangeParameter = ({ id, parameter, op, value }) => (0, validate_1.tag)("ChangeParameter", [
+const ChangeParameter = (id, parameter, op, value) => (0, validate_1.tag)("ChangeParameter", [
     argActorIdWithPreset(id),
     (0, validate_1.argPreset)(parameter, constants_1.ACTER_PARAMETER),
     op,
     (0, validate_1.argIntOrVariableId)(value),
 ]);
 exports.ChangeParameter = ChangeParameter;
-const ChangeEquipment = ({ id, equipType, equipId }) => (0, validate_1.tag)("ChangeEquipment", [
+const ChangeEquipment = (id, equipType, equipId) => (0, validate_1.tag)("ChangeEquipment", [
     (0, validate_1.argId)(id),
     (0, validate_1.argId)(equipType),
     equipId && (0, validate_1.argId)(equipId),
 ]);
 exports.ChangeEquipment = ChangeEquipment;
-const ChangeName = ({ id, name }) => (0, validate_1.tag)("ChangeName", [(0, validate_1.argId)(id), name]);
+const ChangeName = (id, name) => (0, validate_1.tag)("ChangeName", [(0, validate_1.argId)(id), name]);
 exports.ChangeName = ChangeName;
-const ChangeClass = ({ id, classId, saveLevelAndExp }) => (0, validate_1.tag)("ChangeClass", [(0, validate_1.argId)(id), (0, validate_1.argId)(classId), saveLevelAndExp]);
+const ChangeClass = (id, classId, saveLevelAndExp) => (0, validate_1.tag)("ChangeClass", [(0, validate_1.argId)(id), (0, validate_1.argId)(classId), saveLevelAndExp]);
 exports.ChangeClass = ChangeClass;
-const ChangeNickname = ({ id, name }) => (0, validate_1.tag)("ChangeNickname", [(0, validate_1.argId)(id), name]);
+const ChangeNickname = (id, name) => (0, validate_1.tag)("ChangeNickname", [(0, validate_1.argId)(id), name]);
 exports.ChangeNickname = ChangeNickname;
-const ChangeProfile = ({ id, profile: [l1, l2] }) => (0, validate_1.tag)("ChangeProfile", [(0, validate_1.argId)(id), l1, l2]);
+const ChangeProfile = (id, profile) => (0, validate_1.tag)("ChangeProfile", [(0, validate_1.argId)(id), profile[0], profile[1]]);
 exports.ChangeProfile = ChangeProfile;

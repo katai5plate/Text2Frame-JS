@@ -1,13 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createPresetArgWithVariableId = exports.createPresetArg = exports.argIntOrVariableId = exports.argColorTone = exports.argMapPosition = exports.argsSound = exports.argsColor = exports.argFromTo = exports.argVariableId = exports.argSwitchId = exports.argPreset = exports.argEnemyIndex = exports.argId = exports.argRange = exports.argInt = exports.typeCase = exports.tag = exports.joinSkip = exports.joinKeep = void 0;
+exports.createPresetArgWithVariableId = exports.createPresetArg = exports.argIntOrVariableId = exports.argColorTone = exports.argMapPosition = exports.argsSound = exports.argsColor = exports.argFromTo = exports.argVariableId = exports.argSwitchId = exports.argPreset = exports.argEnemyIndex = exports.argId = exports.argRange = exports.argInt = exports.typeCase = exports.tag = exports.joinSkip = void 0;
 const constants_1 = require("./constants");
 const joinKeep = (delim, arr) => arr.join(delim ?? ", ");
-exports.joinKeep = joinKeep;
 const joinSkip = (delim, arr) => arr.filter((x) => x !== undefined).join(delim ?? ", ");
 exports.joinSkip = joinSkip;
 const tag = (name, arg, textChildren) => {
-    const args = (0, exports.joinKeep)(null, arg ?? []);
+    const args = joinKeep(null, arg ?? []);
     return (0, exports.joinSkip)("\n", [
         args !== "" ? `<${name}: ${args}>` : `<${name}>`,
         ...(textChildren ? [textChildren, `</${name}>`] : []),
@@ -72,7 +71,7 @@ const argFromTo = (value) => `${value.from}-${value.to}`;
 exports.argFromTo = argFromTo;
 const argsColor = (color) => `ColorTone[${color.r}][${color.g}][${color.b}]${color?.x ? `[${color.x}]` : ""}`;
 exports.argsColor = argsColor;
-const argsSound = (sound) => (0, exports.joinKeep)(null, [sound.name ?? "None", sound.volume, sound.pitch, sound.pan]);
+const argsSound = (sound) => joinKeep(null, [sound.name ?? "None", sound.volume, sound.pitch, sound.pan]);
 exports.argsSound = argsSound;
 const argMapPosition = (mapos, mode) => `${mode === "DIRECT" ? "Direct" : "WithVariables"}[${mapos.id}][${mapos.x}][${mapos.y}]`;
 exports.argMapPosition = argMapPosition;

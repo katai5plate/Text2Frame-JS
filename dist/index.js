@@ -285,27 +285,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./src/constants.ts");
 /* harmony import */ var _validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../validate */ "./src/validate.ts");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var argActorIdWithPreset = (0,_validate__WEBPACK_IMPORTED_MODULE_1__.createPresetArgWithVariableId)(_constants__WEBPACK_IMPORTED_MODULE_0__.ACTOR_MEMBER);
-var ChangeHp = function ChangeHp(_ref) {
-  var id = _ref.id,
-    op = _ref.op,
-    value = _ref.value,
-    allowKnockout = _ref.allowKnockout;
+var ChangeHp = function ChangeHp(id, op, value, allowKnockout) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeHp", [argActorIdWithPreset(id), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value), allowKnockout]);
 };
 var commonChange = function commonChange(name) {
-  var component = function component(_ref2) {
-    var id = _ref2.id,
-      op = _ref2.op,
-      value = _ref2.value;
+  var component = function component(id, op, value) {
     return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)(name, [argActorIdWithPreset(id), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value)]);
   };
   return component;
@@ -314,57 +301,34 @@ var ChangeMp = commonChange("ChangeMp");
 var ChangeTp = commonChange("ChangeTp");
 var ChangeState = commonChange("ChangeState");
 var ChangeSkill = commonChange("ChangeSkill");
-var RecoverAll = function RecoverAll(_ref3) {
-  var id = _ref3.id;
+var RecoverAll = function RecoverAll(id) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("RecoverAll", [argActorIdWithPreset(id)]);
 };
 var commonLevelUp = function commonLevelUp(name) {
-  var component = function component(_ref4) {
-    var id = _ref4.id,
-      op = _ref4.op,
-      value = _ref4.value,
-      allowLevelUp = _ref4.allowLevelUp;
+  var component = function component(id, op, value, allowLevelUp) {
     return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)(name, [argActorIdWithPreset(id), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value), allowLevelUp]);
   };
   return component;
 };
 var ChangeExp = commonLevelUp("ChangeExp");
 var ChangeLevel = commonLevelUp("ChangeLevel");
-var ChangeParameter = function ChangeParameter(_ref5) {
-  var id = _ref5.id,
-    parameter = _ref5.parameter,
-    op = _ref5.op,
-    value = _ref5.value;
+var ChangeParameter = function ChangeParameter(id, parameter, op, value) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeParameter", [argActorIdWithPreset(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(parameter, _constants__WEBPACK_IMPORTED_MODULE_0__.ACTER_PARAMETER), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value)]);
 };
-var ChangeEquipment = function ChangeEquipment(_ref6) {
-  var id = _ref6.id,
-    equipType = _ref6.equipType,
-    equipId = _ref6.equipId;
+var ChangeEquipment = function ChangeEquipment(id, equipType, equipId) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeEquipment", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(equipType), equipId && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(equipId)]);
 };
-var ChangeName = function ChangeName(_ref7) {
-  var id = _ref7.id,
-    name = _ref7.name;
+var ChangeName = function ChangeName(id, name) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeName", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(id), name]);
 };
-var ChangeClass = function ChangeClass(_ref8) {
-  var id = _ref8.id,
-    classId = _ref8.classId,
-    saveLevelAndExp = _ref8.saveLevelAndExp;
+var ChangeClass = function ChangeClass(id, classId, saveLevelAndExp) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeClass", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(classId), saveLevelAndExp]);
 };
-var ChangeNickname = function ChangeNickname(_ref9) {
-  var id = _ref9.id,
-    name = _ref9.name;
+var ChangeNickname = function ChangeNickname(id, name) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeNickname", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(id), name]);
 };
-var ChangeProfile = function ChangeProfile(_ref10) {
-  var id = _ref10.id,
-    _ref10$profile = _slicedToArray(_ref10.profile, 2),
-    l1 = _ref10$profile[0],
-    l2 = _ref10$profile[1];
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeProfile", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(id), l1, l2]);
+var ChangeProfile = function ChangeProfile(id, profile) {
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeProfile", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(id), profile[0], profile[1]]);
 };
 
 /***/ }),
@@ -396,18 +360,11 @@ var argEnemyIndexWithPresetAndVariableId = (0,_validate__WEBPACK_IMPORTED_MODULE
   from: 1,
   to: 8
 });
-var ChangeEnemyHp = function ChangeEnemyHp(_ref) {
-  var index = _ref.index,
-    op = _ref.op,
-    value = _ref.value,
-    allowKnockout = _ref.allowKnockout;
+var ChangeEnemyHp = function ChangeEnemyHp(index, op, value, allowKnockout) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeEnemyHp", [argEnemyIndexWithPresetAndVariableId(index), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value), allowKnockout]);
 };
 var commonChange = function commonChange(name) {
-  var component = function component(_ref2) {
-    var index = _ref2.index,
-      op = _ref2.op,
-      value = _ref2.value;
+  var component = function component(index, op, value) {
     return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)(name, [argEnemyIndexWithPresetAndVariableId(index), op, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argIntOrVariableId)(value)]);
   };
   return component;
@@ -415,29 +372,21 @@ var commonChange = function commonChange(name) {
 var ChangeEnemyMp = commonChange("ChangeEnemyMp");
 var ChangeEnemyTp = commonChange("ChangeEnemyTp");
 var ChangeEnemyState = commonChange("ChangeEnemyState");
-var EnemyRecoverAll = function EnemyRecoverAll(_ref3) {
-  var index = _ref3.index;
+var EnemyRecoverAll = function EnemyRecoverAll(index) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("EnemyRecoverAll", [argEnemyIndexWithPresetAndVariableId(index)]);
 };
-var EnemyAppear = function EnemyAppear(_ref4) {
-  var index = _ref4.index;
+var EnemyAppear = function EnemyAppear(index) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("EnemyAppear", [argEnemyIndexWithPreset(index)]);
 };
 var commonIndexAndEnemyId = function commonIndexAndEnemyId(name) {
-  var component = function component(_ref5) {
-    var index = _ref5.index,
-      id = _ref5.id;
+  var component = function component(index, id) {
     return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)(name, [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argEnemyIndex)(index), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(id)]);
   };
   return component;
 };
 var EnemyTransform = commonIndexAndEnemyId("EnemyTransform");
 var ShowBattleAnimation = commonIndexAndEnemyId("ShowBattleAnimation");
-var ForceAction = function ForceAction(_ref6) {
-  var mode = _ref6.mode,
-    index = _ref6.index,
-    id = _ref6.id,
-    target = _ref6.target;
+var ForceAction = function ForceAction(mode, index, id, target) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ForceAction", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(index, {
     number: function number(x) {
       return mode === "ACTOR" ? "Actor[".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(x), "]") : (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argEnemyIndex)(x);
@@ -476,19 +425,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../validate */ "./src/validate.ts");
 
 
-var argNumberPreset = function argNumberPreset(v, preset, isId) {
+var argNumberPreset = function argNumberPreset(v, preset) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(v, {
     string: function string(x) {
       return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(x, preset);
     },
-    number: function number(x) {
-      return isId ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(x) : (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(x);
-    }
+    number: _validate__WEBPACK_IMPORTED_MODULE_1__.argId
   });
 };
 var commonChange = function commonChange(name) {
-  var component = function component(_ref) {
-    var active = _ref.active;
+  var component = function component(active) {
     return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)(name, [active]);
   };
   return component;
@@ -498,17 +444,11 @@ var ChangePlayerFollowers = commonChange("ChangePlayerFollowers");
 var GatherFollowers = function GatherFollowers() {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("GatherFollowers");
 };
-var ShowAnimation = function ShowAnimation(_ref2) {
-  var id = _ref2.id,
-    animationId = _ref2.animationId,
-    wait = _ref2.wait;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ShowAnimation", [argNumberPreset(id, _constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER, true), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(animationId), wait]);
+var ShowAnimation = function ShowAnimation(id, animationId, wait) {
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ShowAnimation", [argNumberPreset(id, _constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(animationId), wait]);
 };
-var ShowBalloonIcon = function ShowBalloonIcon(_ref3) {
-  var id = _ref3.id,
-    balloon = _ref3.balloon,
-    wait = _ref3.wait;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ShowBalloonIcon", [argNumberPreset(id, _constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER, true), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(balloon, _constants__WEBPACK_IMPORTED_MODULE_0__.BALLOON), wait]);
+var ShowBalloonIcon = function ShowBalloonIcon(id, balloon, wait) {
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ShowBalloonIcon", [argNumberPreset(id, _constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(balloon, _constants__WEBPACK_IMPORTED_MODULE_0__.BALLOON), wait]);
 };
 var EraseEvent = function EraseEvent() {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("EraseEvent");
@@ -524,13 +464,11 @@ var EraseEvent = function EraseEvent() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   BreakLoop: () => (/* binding */ BreakLoop),
 /* harmony export */   Check: () => (/* binding */ Check),
 /* harmony export */   Comment: () => (/* binding */ Comment),
 /* harmony export */   CommonEvent: () => (/* binding */ CommonEvent),
 /* harmony export */   ExitEventProcessing: () => (/* binding */ ExitEventProcessing),
 /* harmony export */   Goto: () => (/* binding */ Goto),
-/* harmony export */   JumpToLabel: () => (/* binding */ JumpToLabel),
 /* harmony export */   Label: () => (/* binding */ Label),
 /* harmony export */   Loop: () => (/* binding */ Loop),
 /* harmony export */   LoopBreak: () => (/* binding */ LoopBreak)
@@ -543,38 +481,28 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
-var Check = function Check(_ref) {
-  var condition = _ref.condition,
-    then = _ref.then,
-    otherwise = _ref.otherwise;
+var Check = function Check(condition, then, otherwise) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("If", ["Script", condition]), then].concat(_toConsumableArray(otherwise ? (0,_validate__WEBPACK_IMPORTED_MODULE_0__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("Else"), otherwise]) : []), [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("End")]));
 };
-var Loop = function Loop(_ref2) {
-  var content = _ref2.content;
+var Loop = function Loop(content) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("Loop"), content, (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("RepeatAbove")]);
 };
 var LoopBreak = function LoopBreak() {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("BreakLoop");
 };
-var BreakLoop = LoopBreak;
 var ExitEventProcessing = function ExitEventProcessing() {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("ExitEventProcessing");
 };
-var CommonEvent = function CommonEvent(_ref3) {
-  var id = _ref3.id;
+var CommonEvent = function CommonEvent(id) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("CommonEvent", [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.argId)(id)]);
 };
-var Label = function Label(_ref4) {
-  var name = _ref4.name;
+var Label = function Label(name) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("Label", [name]);
 };
-var Goto = function Goto(_ref5) {
-  var name = _ref5.name;
+var Goto = function Goto(name) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("JumpToLabel", [name]);
 };
-var JumpToLabel = Goto;
-var Comment = function Comment(_ref6) {
-  var text = _ref6.text;
+var Comment = function Comment(text) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("Comment", undefined, text);
 };
 
@@ -601,23 +529,16 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
-var Wait = function Wait(_ref) {
-  var time = _ref.time;
+var Wait = function Wait(time) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("Wait", [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.argInt)(time)]);
 };
-var Script = function Script(_ref2) {
-  var code = _ref2.code;
+var Script = function Script(code) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("Script", undefined, code);
 };
-var PluginCommandMV = function PluginCommandMV(_ref3) {
-  var command = _ref3.command;
+var PluginCommandMV = function PluginCommandMV(command) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("PluginCommand", [command]);
 };
-var PluginCommandMZ = function PluginCommandMZ(_ref4) {
-  var name = _ref4.name,
-    method = _ref4.method,
-    command = _ref4.command,
-    args = _ref4.args;
+var PluginCommandMZ = function PluginCommandMZ(name, method, command, args) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("PluginCommandMZ", [name, method, command].concat(_toConsumableArray(args.map(function (x) {
     return "".concat(x.name, "[").concat(x.value, "]");
   }))));
@@ -643,22 +564,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../validate */ "./src/validate.ts");
 
 
-var ChangeMapNameDisplay = function ChangeMapNameDisplay(_ref) {
-  var allow = _ref.allow;
+var ChangeMapNameDisplay = function ChangeMapNameDisplay(allow) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeMapNameDisplay", [allow]);
 };
-var ChangeTileset = function ChangeTileset(_ref2) {
-  var id = _ref2.id;
+var ChangeTileset = function ChangeTileset(id) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeTileset", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(id)]);
 };
-var ChangeBattleBackGround = function ChangeBattleBackGround(_ref3) {
+var ChangeBattleBackGround = function ChangeBattleBackGround(images) {
   var _images$, _images$2;
-  var images = _ref3.images;
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeBattleBackGround", [(_images$ = images[0]) !== null && _images$ !== void 0 ? _images$ : "None", (_images$2 = images[1]) !== null && _images$2 !== void 0 ? _images$2 : "None"]);
 };
-var ChangeParallax = function ChangeParallax(_ref4) {
-  var name = _ref4.name,
-    scroll = _ref4.scroll;
+var ChangeParallax = function ChangeParallax(name, scroll) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeParallax", [name, scroll.x && "LoopHorizontally[".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(scroll.x, {
     from: -32,
     to: 32
@@ -667,10 +583,7 @@ var ChangeParallax = function ChangeParallax(_ref4) {
     to: 32
   }), "]")]);
 };
-var GetLocationInfo = function GetLocationInfo(_ref5) {
-  var id = _ref5.id,
-    layer = _ref5.layer,
-    position = _ref5.position;
+var GetLocationInfo = function GetLocationInfo(id, layer, position) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("GetLocationInfo", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argVariableId)(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(layer, _constants__WEBPACK_IMPORTED_MODULE_0__.LOCATION), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(position, {
     object: function object(value, e) {
       var v = value;
@@ -713,8 +626,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _validate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../validate */ "./src/validate.ts");
 
 var commonSound = function commonSound(name) {
-  var component = function component(_ref) {
-    var sound = _ref.sound;
+  var component = function component(sound) {
     return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)(name, [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.argsSound)(sound)]);
   };
   return component;
@@ -727,8 +639,7 @@ var ChangeBattleBGM = commonSound("ChangeBattleBGM");
 var ChangeVictoryMe = commonSound("ChangeVictoryMe");
 var ChangeDefeatMe = commonSound("ChangeDefeatMe");
 var commonFadeout = function commonFadeout(name) {
-  var component = function component(_ref2) {
-    var time = _ref2.time;
+  var component = function component(time) {
     return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)(name, [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.argInt)(time)]);
   };
   return component;
@@ -753,8 +664,7 @@ var StopME = function StopME() {
 var StopSE = function StopSE() {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("StopSE");
 };
-var PlayMovie = function PlayMovie(_ref3) {
-  var name = _ref3.name;
+var PlayMovie = function PlayMovie(name) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("PlayMovie", [name]);
 };
 
@@ -794,12 +704,11 @@ var Window = function Window(_ref) {
     to: 15
   }), ")")]), name && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("Name", [name])]);
 };
-var ShowChoices = function ShowChoices(_ref2) {
+var ShowChoices = function ShowChoices(cases, _ref2) {
   var background = _ref2.background,
     position = _ref2.position,
     init = _ref2.init,
-    cancel = _ref2.cancel,
-    cases = _ref2.cases;
+    cancel = _ref2.cancel;
   if (cases.filter(function (caseItem) {
     return caseItem.name === null;
   }).length >= 2) throw new Error("キャンセル扱いとなる name=null は複数設定できません");
@@ -809,24 +718,19 @@ var ShowChoices = function ShowChoices(_ref2) {
     return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [name ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("When", [name]) : (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("WhenCancel"), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [then])])]);
   })), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("End")]);
 };
-var InputNumber = function InputNumber(_ref4) {
-  var id = _ref4.id,
-    digit = _ref4.digit;
+var InputNumber = function InputNumber(id, digit) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("InputNumber", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argVariableId)(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(digit, {
     from: 1,
     to: 8
   })]);
 };
-var SelectItem = function SelectItem(_ref5) {
-  var id = _ref5.id,
-    itemType = _ref5.itemType;
+var SelectItem = function SelectItem(id, itemType) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SelectItem", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argVariableId)(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(itemType, _constants__WEBPACK_IMPORTED_MODULE_0__.ITEM_TYPE)]);
 };
-var ScrollingText = function ScrollingText(_ref6) {
-  var _ref6$speed = _ref6.speed,
-    speed = _ref6$speed === void 0 ? 2 : _ref6$speed,
-    noSkip = _ref6.noSkip,
-    text = _ref6.text;
+var ScrollingText = function ScrollingText(text, _ref4) {
+  var _ref4$speed = _ref4.speed,
+    speed = _ref4$speed === void 0 ? 2 : _ref4$speed,
+    noSkip = _ref4.noSkip;
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ScrollingText", [speed, noSkip], text);
 };
 
@@ -866,24 +770,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 var argIdOrPreset = function argIdOrPreset(value, preset) {
   return typeof value === "number" ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(value) : (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(value, preset);
 };
-var TransferPlayer = function TransferPlayer(_ref) {
-  var mode = _ref.mode,
-    position = _ref.position,
-    direction = _ref.direction,
-    fade = _ref.fade;
+var TransferPlayer = function TransferPlayer(mode, position, direction, fade) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("TransferPlayer", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argMapPosition)(position, mode), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(direction, _constants__WEBPACK_IMPORTED_MODULE_0__.DIRECTION_RETAIN), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(fade, _constants__WEBPACK_IMPORTED_MODULE_0__.FADE)]);
 };
-var SetVehicleLocation = function SetVehicleLocation(_ref2) {
-  var mode = _ref2.mode,
-    vehicle = _ref2.vehicle,
-    position = _ref2.position;
+var SetVehicleLocation = function SetVehicleLocation(mode, vehicle, position) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SetVehicleLocation", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(vehicle, _constants__WEBPACK_IMPORTED_MODULE_0__.VEHICLE), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argMapPosition)(position, mode)]);
 };
-var SetEventLocation = function SetEventLocation(_ref3) {
-  var mode = _ref3.mode,
-    id = _ref3.id,
-    position = _ref3.position,
-    direction = _ref3.direction;
+var SetEventLocation = function SetEventLocation(mode, id, position, direction) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SetEventLocation", [argIdOrPreset(id, _constants__WEBPACK_IMPORTED_MODULE_0__.EVENT), mode === "EXCHANGE" ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(position, {
     string: function string(x) {
       return "Exchange[".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(x, _constants__WEBPACK_IMPORTED_MODULE_0__.EVENT), "]");
@@ -897,19 +790,17 @@ var SetEventLocation = function SetEventLocation(_ref3) {
     }
   }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(direction, _constants__WEBPACK_IMPORTED_MODULE_0__.DIRECTION_RETAIN)]);
 };
-var ScrollMap = function ScrollMap(_ref4) {
-  var direction = _ref4.direction,
-    step = _ref4.step,
-    speed = _ref4.speed,
-    wait = _ref4.wait;
+var ScrollMap = function ScrollMap(direction, step, speed, wait) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SetVehicleLocation", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(direction, _constants__WEBPACK_IMPORTED_MODULE_0__.DIRECTION), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(step), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(speed, _constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER_SPEED), wait]);
 };
-var SetMovementRoute = function SetMovementRoute(_ref5) {
-  var id = _ref5.id,
-    repeat = _ref5.repeat,
-    skip = _ref5.skip,
-    wait = _ref5.wait,
-    routes = _ref5.routes;
+var SetMovementRoute = function SetMovementRoute(id, routes) {
+  var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+    _ref$repeat = _ref.repeat,
+    repeat = _ref$repeat === void 0 ? false : _ref$repeat,
+    _ref$skip = _ref.skip,
+    skip = _ref$skip === void 0 ? false : _ref$skip,
+    _ref$wait = _ref.wait,
+    wait = _ref$wait === void 0 ? true : _ref$wait;
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SetMovementRoute", [argIdOrPreset(id, _constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER), repeat, skip, wait])].concat(_toConsumableArray(routes({
     jump: function jump(x, y) {
       return {
@@ -1029,9 +920,9 @@ var SetMovementRoute = function SetMovementRoute(_ref5) {
         args: []
       };
     }
-  }).map(function (_ref6) {
-    var name = _ref6.name,
-      args = _ref6.args;
+  }).map(function (_ref2) {
+    var name = _ref2.name,
+      args = _ref2.args;
     return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)(name, args);
   }))));
 };
@@ -1057,36 +948,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _validate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../validate */ "./src/validate.ts");
 
-var ChangeGold = function ChangeGold(_ref) {
-  var op = _ref.op,
-    value = _ref.value;
+var ChangeGold = function ChangeGold(op, value) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("ChangeGold", [op, (0,_validate__WEBPACK_IMPORTED_MODULE_0__.argIntOrVariableId)(value)]);
 };
-var ChangeItems = function ChangeItems(_ref2) {
-  var id = _ref2.id,
-    op = _ref2.op,
-    value = _ref2.value;
+var ChangeItems = function ChangeItems(id, op, value) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("ChangeItems", [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.argId)(id), op, (0,_validate__WEBPACK_IMPORTED_MODULE_0__.argIntOrVariableId)(value)]);
 };
-var ChangeWeapons = function ChangeWeapons(_ref3) {
-  var id = _ref3.id,
-    op = _ref3.op,
-    value = _ref3.value,
-    includeEquipment = _ref3.includeEquipment;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("ChangeWeapons", [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.argId)(id), op, (0,_validate__WEBPACK_IMPORTED_MODULE_0__.argIntOrVariableId)(value), includeEquipment]);
+var commonChange = function commonChange(name) {
+  var component = function component(id, op, value, includeEquipment) {
+    return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)(name, [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.argId)(id), op, (0,_validate__WEBPACK_IMPORTED_MODULE_0__.argIntOrVariableId)(value), includeEquipment]);
+  };
+  return component;
 };
-var ChangeArmors = function ChangeArmors(_ref4) {
-  var id = _ref4.id,
-    op = _ref4.op,
-    value = _ref4.value,
-    includeEquipment = _ref4.includeEquipment;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("ChangeArmors", [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.argId)(id), op, (0,_validate__WEBPACK_IMPORTED_MODULE_0__.argIntOrVariableId)(value), includeEquipment]);
-};
-var ChangePartyMember = function ChangePartyMember(_ref5) {
-  var id = _ref5.id,
-    op = _ref5.op,
-    value = _ref5.value,
-    initialize = _ref5.initialize;
+var ChangeWeapons = commonChange("ChangeWeapons");
+var ChangeArmors = commonChange("ChangeArmors");
+var ChangePartyMember = function ChangePartyMember(id, op, value, initialize) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("ChangeItems", [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.argId)(id), op, (0,_validate__WEBPACK_IMPORTED_MODULE_0__.argIntOrVariableId)(value), initialize]);
 };
 
@@ -1130,10 +1006,8 @@ var argPictureBlend = function argPictureBlend(blend) {
 var argPictureDuration = function argPictureDuration(duration) {
   return "Duration[".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(duration.time), "][").concat(duration.wait ? "Wait" : "", "]");
 };
-var ShowPicture = function ShowPicture(_ref) {
-  var id = _ref.id,
-    name = _ref.name,
-    position = _ref.position,
+var ShowPicture = function ShowPicture(id, name, _ref) {
+  var position = _ref.position,
     scale = _ref.scale,
     blend = _ref.blend;
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ShowPicture", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(id, {
@@ -1141,9 +1015,8 @@ var ShowPicture = function ShowPicture(_ref) {
     to: 100
   }), name, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)(null, [position && argPicturePosition(position), scale && argPictureScale(scale), blend && argPictureBlend(blend)])]);
 };
-var MovePicture = function MovePicture(_ref2) {
-  var id = _ref2.id,
-    position = _ref2.position,
+var MovePicture = function MovePicture(id, _ref2) {
+  var position = _ref2.position,
     scale = _ref2.scale,
     blend = _ref2.blend,
     duration = _ref2.duration,
@@ -1153,9 +1026,7 @@ var MovePicture = function MovePicture(_ref2) {
     to: 100
   }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)(null, [position && argPicturePosition(position), scale && argPictureScale(scale), blend && argPictureBlend(blend), duration && argPictureDuration(duration), easing && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(easing, _constants__WEBPACK_IMPORTED_MODULE_0__.EASING)])]);
 };
-var RotatePicture = function RotatePicture(_ref3) {
-  var id = _ref3.id,
-    speed = _ref3.speed;
+var RotatePicture = function RotatePicture(id, speed) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("RotatePicture", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(id, {
     from: 1,
     to: 100
@@ -1164,17 +1035,13 @@ var RotatePicture = function RotatePicture(_ref3) {
     to: 90
   })]);
 };
-var TintPicture = function TintPicture(_ref4) {
-  var id = _ref4.id,
-    color = _ref4.color,
-    time = _ref4.time;
+var TintPicture = function TintPicture(id, color, time) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("TintPicture", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(id, {
     from: 1,
     to: 100
   }), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)(null, [color && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argColorTone)(color), time])]);
 };
-var ErasePicture = function ErasePicture(_ref5) {
-  var id = _ref5.id;
+var ErasePicture = function ErasePicture(id) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ErasePicture", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(id, {
     from: 1,
     to: 100
@@ -1207,17 +1074,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var argCharacterIdWithPreset = (0,_validate__WEBPACK_IMPORTED_MODULE_1__.createPresetArg)(_constants__WEBPACK_IMPORTED_MODULE_0__.CHARACTER);
-var Switch = function Switch(_ref) {
-  var id = _ref.id,
-    toBe = _ref.toBe;
+var Switch = function Switch(id, toBe) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("Switch", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(id, {
     switchId: _validate__WEBPACK_IMPORTED_MODULE_1__.argSwitchId,
     fromTo: _validate__WEBPACK_IMPORTED_MODULE_1__.argFromTo
   }), toBe]);
 };
-var Variable = function Variable(_ref2) {
-  var id = _ref2.id,
-    calc = _ref2.calc;
+var Variable = function Variable(id, calc) {
   var list = calc({
     set: function set(value) {
       return {
@@ -1259,9 +1122,9 @@ var Variable = function Variable(_ref2) {
     variable: function variable(id) {
       return "V[".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(id), "]");
     },
-    random: function random(_ref3) {
-      var from = _ref3.from,
-        to = _ref3.to;
+    random: function random(_ref) {
+      var from = _ref.from,
+        to = _ref.to;
       return "Random[".concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(from), "][").concat((0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(to), "]");
     },
     script: function script(js) {
@@ -1426,30 +1289,26 @@ var Variable = function Variable(_ref2) {
       }
     }
   });
-  return list.map(function (_ref4) {
-    var op = _ref4.op,
-      value = _ref4.value;
+  return list.map(function (_ref2) {
+    var op = _ref2.op,
+      value = _ref2.value;
     return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)(_constants__WEBPACK_IMPORTED_MODULE_0__.VARIABLE_OPERATOR[op], [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(id, {
       fromTo: _validate__WEBPACK_IMPORTED_MODULE_1__.argFromTo,
       number: _validate__WEBPACK_IMPORTED_MODULE_1__.argId
     }), value]);
   }).join("\n");
 };
-var SelfSwitch = function SelfSwitch(_ref5) {
-  var id = _ref5.id,
-    toBe = _ref5.toBe;
+var SelfSwitch = function SelfSwitch(id, toBe) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SelfSwitch", [id, toBe]);
 };
-var Timer = function Timer(_ref6) {
-  var mode = _ref6.mode,
-    time = _ref6.time;
+var Timer = function Timer(mode, time) {
   if (typeof time === "string") {
     var _time$match;
-    var _ref7 = (_time$match = time.match(/^(\d{1,}):(\d{1,})$/)) !== null && _time$match !== void 0 ? _time$match : [],
-      _ref8 = _slicedToArray(_ref7, 3),
-      isValid = _ref8[0],
-      _min = _ref8[1],
-      _sec = _ref8[2];
+    var _ref3 = (_time$match = time.match(/^(\d{1,}):(\d{1,})$/)) !== null && _time$match !== void 0 ? _time$match : [],
+      _ref4 = _slicedToArray(_ref3, 3),
+      isValid = _ref4[0],
+      _min = _ref4[1],
+      _sec = _ref4[2];
     if (isValid) {
       return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("Timer", [_constants__WEBPACK_IMPORTED_MODULE_0__.TIMER_MODE[mode], _min, _sec]);
     } else {
@@ -1489,9 +1348,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 
-var BattleProcessing = function BattleProcessing(_ref) {
-  var id = _ref.id,
-    ifWin = _ref.ifWin,
+var BattleProcessing = function BattleProcessing(id, _ref) {
+  var ifWin = _ref.ifWin,
     ifEscape = _ref.ifEscape,
     ifLose = _ref.ifLose;
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("BattleProcessing", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.typeCase)(id, {
@@ -1502,19 +1360,15 @@ var BattleProcessing = function BattleProcessing(_ref) {
     number: _validate__WEBPACK_IMPORTED_MODULE_1__.argId
   })]), ifWin ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("IfWin"), ifWin]) : undefined, ifEscape ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("IfEscape"), ifEscape]) : undefined, ifLose ? (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("IfLose"), ifLose]) : undefined, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("End")]);
 };
-var ShopProcessing = function ShopProcessing(_ref2) {
-  var items = _ref2.items,
-    purchaseOnly = _ref2.purchaseOnly;
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ShopProcessing", [purchaseOnly])].concat(_toConsumableArray(items.map(function (_ref3) {
-    var type = _ref3.type,
-      id = _ref3.id,
-      price = _ref3.price;
+var ShopProcessing = function ShopProcessing(items, purchaseOnly) {
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)("\n", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ShopProcessing", [purchaseOnly])].concat(_toConsumableArray(items.map(function (_ref2) {
+    var type = _ref2.type,
+      id = _ref2.id,
+      price = _ref2.price;
     return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("Merchandise", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(type, _constants__WEBPACK_IMPORTED_MODULE_0__.SHOP_ITEM), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(price)]);
   }))));
 };
-var NameInputProcessing = function NameInputProcessing(_ref4) {
-  var id = _ref4.id,
-    length = _ref4.length;
+var NameInputProcessing = function NameInputProcessing(id, length) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("NameInputProcessing", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(id), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(length, {
     from: 1,
     to: 8
@@ -1560,29 +1414,16 @@ var FadeOut = function FadeOut() {
 var FadeIn = function FadeIn() {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("FadeIn");
 };
-var TintScreen = function TintScreen(_ref) {
-  var color = _ref.color,
-    time = _ref.time;
+var TintScreen = function TintScreen(color, time) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("TintScreen", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.joinSkip)(null, [color && (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argColorTone)(color), time])]);
 };
-var FlashScreen = function FlashScreen(_ref2) {
-  var color = _ref2.color,
-    time = _ref2.time,
-    wait = _ref2.wait;
+var FlashScreen = function FlashScreen(color, time, wait) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("FlashScreen", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argsColor)(color), time, wait]);
 };
-var ShakeScreen = function ShakeScreen(_ref3) {
-  var velocity = _ref3.velocity,
-    speed = _ref3.speed,
-    time = _ref3.time,
-    wait = _ref3.wait;
+var ShakeScreen = function ShakeScreen(velocity, speed, time, wait) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ShakeScreen", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(velocity), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(speed), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(time), wait]);
 };
-var SetWeatherEffect = function SetWeatherEffect(_ref4) {
-  var weather = _ref4.weather,
-    velocity = _ref4.velocity,
-    time = _ref4.time,
-    wait = _ref4.wait;
+var SetWeatherEffect = function SetWeatherEffect(weather, velocity, time, wait) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("SetWeatherEffect", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(weather, _constants__WEBPACK_IMPORTED_MODULE_0__.WEATHER), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(velocity), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argInt)(time), wait]);
 };
 
@@ -1609,14 +1450,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../validate */ "./src/validate.ts");
 
 
-var ChangeVehicleBgm = function ChangeVehicleBgm(_ref) {
-  var vehicle = _ref.vehicle,
-    sound = _ref.sound;
+var ChangeVehicleBgm = function ChangeVehicleBgm(vehicle, sound) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeVehicleBgm", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(vehicle, _constants__WEBPACK_IMPORTED_MODULE_0__.VEHICLE), (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argsSound)(sound)]);
 };
 var commonChange = function commonChange(name) {
-  var component = function component(_ref2) {
-    var allow = _ref2.allow;
+  var component = function component(allow) {
     return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)(name, [allow]);
   };
   return component;
@@ -1625,15 +1463,10 @@ var ChangeSaveAccess = commonChange("ChangeSaveAccess");
 var ChangeMenuAccess = commonChange("ChangeMenuAccess");
 var ChangeEncounter = commonChange("ChangeEncounter");
 var ChangeFormationAccess = commonChange("ChangeFormationAccess");
-var ChangeWindowColor = function ChangeWindowColor(_ref3) {
-  var color = _ref3.color;
+var ChangeWindowColor = function ChangeWindowColor(color) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeWindowColor", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argsColor)(color)]);
 };
-var ChangeActorImages = function ChangeActorImages(_ref4) {
-  var id = _ref4.id,
-    face = _ref4.face,
-    character = _ref4.character,
-    battler = _ref4.battler;
+var ChangeActorImages = function ChangeActorImages(id, face, character, battler) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeActorImages", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argId)(id), face.name, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(face.index, {
     from: 0,
     to: 15
@@ -1642,9 +1475,7 @@ var ChangeActorImages = function ChangeActorImages(_ref4) {
     to: 7
   }), battler]);
 };
-var ChangeVehicleImage = function ChangeVehicleImage(_ref5) {
-  var vehicle = _ref5.vehicle,
-    image = _ref5.image;
+var ChangeVehicleImage = function ChangeVehicleImage(vehicle, image) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_1__.tag)("ChangeActorImages", [(0,_validate__WEBPACK_IMPORTED_MODULE_1__.argPreset)(vehicle, _constants__WEBPACK_IMPORTED_MODULE_0__.VEHICLE), image.name, (0,_validate__WEBPACK_IMPORTED_MODULE_1__.argRange)(image.index, {
     from: 0,
     to: 7
@@ -1695,7 +1526,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   argsSound: () => (/* binding */ argsSound),
 /* harmony export */   createPresetArg: () => (/* binding */ createPresetArg),
 /* harmony export */   createPresetArgWithVariableId: () => (/* binding */ createPresetArgWithVariableId),
-/* harmony export */   joinKeep: () => (/* binding */ joinKeep),
 /* harmony export */   joinSkip: () => (/* binding */ joinSkip),
 /* harmony export */   tag: () => (/* binding */ tag),
 /* harmony export */   typeCase: () => (/* binding */ typeCase)

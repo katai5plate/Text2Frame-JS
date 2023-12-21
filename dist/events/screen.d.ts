@@ -1,26 +1,9 @@
 import { COLOR_TONE, WEATHER } from "../constants";
-import { C, Color4 } from "../type";
-export declare const FadeOut: C;
-export declare const FadeIn: C;
-export declare const TintScreen: C<{
-    color?: keyof typeof COLOR_TONE | Color4;
-    time?: number;
-}>;
-export declare const FlashScreen: C<{
-    color: Color4;
-    time: number;
-    wait?: boolean;
-}>;
-export declare const ShakeScreen: C<{
-    velocity: number;
-    speed: number;
-    time: number;
-    wait?: boolean;
-}>;
-export declare const SetWeatherEffect: C<{
-    weather: keyof typeof WEATHER;
-    velocity: number;
-    time: number;
-    wait?: boolean;
-}>;
+import { Color4 } from "../type";
+export declare const FadeOut: () => string;
+export declare const FadeIn: () => string;
+export declare const TintScreen: (color?: keyof typeof COLOR_TONE | Color4, time?: number) => string;
+export declare const FlashScreen: (color: Color4, time: number, wait?: boolean) => string;
+export declare const ShakeScreen: (velocity: number, speed: number, time: number, wait?: boolean) => string;
+export declare const SetWeatherEffect: (weather: keyof typeof WEATHER, velocity: number, time: number, wait?: boolean) => string;
 //# sourceMappingURL=screen.d.ts.map

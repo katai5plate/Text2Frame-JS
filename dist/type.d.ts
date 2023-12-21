@@ -1,4 +1,3 @@
-export type C<P = {}> = (props: P) => string;
 export type Text = string | number | boolean;
 export type SelfSwitchName = "A" | "B" | "C" | "D";
 export type CreaseOperator = "+" | "-";

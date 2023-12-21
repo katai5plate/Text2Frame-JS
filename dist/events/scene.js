@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReturnToTitleScreen = exports.GameOver = exports.OpenSaveScreen = exports.OpenMenuScreen = exports.NameInputProcessing = exports.ShopProcessing = exports.BattleProcessing = void 0;
 const constants_1 = require("../constants");
 const validate_1 = require("../validate");
-const BattleProcessing = ({ id, ifWin, ifEscape, ifLose }) => {
+const BattleProcessing = (id, { ifWin, ifEscape, ifLose, }) => {
     return (0, validate_1.joinSkip)("\n", [
         (0, validate_1.tag)("BattleProcessing", [
             (0, validate_1.typeCase)(id, {
@@ -19,12 +19,12 @@ const BattleProcessing = ({ id, ifWin, ifEscape, ifLose }) => {
     ]);
 };
 exports.BattleProcessing = BattleProcessing;
-const ShopProcessing = ({ items, purchaseOnly }) => (0, validate_1.joinSkip)("\n", [
+const ShopProcessing = (items, purchaseOnly) => (0, validate_1.joinSkip)("\n", [
     (0, validate_1.tag)("ShopProcessing", [purchaseOnly]),
     ...items.map(({ type, id, price }) => (0, validate_1.tag)("Merchandise", [(0, validate_1.argPreset)(type, constants_1.SHOP_ITEM), (0, validate_1.argId)(id), (0, validate_1.argInt)(price)])),
 ]);
 exports.ShopProcessing = ShopProcessing;
-const NameInputProcessing = ({ id, length }) => (0, validate_1.tag)("NameInputProcessing", [(0, validate_1.argId)(id), (0, validate_1.argRange)(length, { from: 1, to: 8 })]);
+const NameInputProcessing = (id, length) => (0, validate_1.tag)("NameInputProcessing", [(0, validate_1.argId)(id), (0, validate_1.argRange)(length, { from: 1, to: 8 })]);
 exports.NameInputProcessing = NameInputProcessing;
 const OpenMenuScreen = () => (0, validate_1.tag)("OpenMenuScreen");
 exports.OpenMenuScreen = OpenMenuScreen;

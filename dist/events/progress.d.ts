@@ -1,9 +1,6 @@
 import { CHARACTER, TIMER_MODE } from "../constants";
-import { C, FromTo, SelfSwitchName, SwitchId } from "../type";
-export declare const Switch: C<{
-    id: SwitchId | FromTo;
-    toBe: boolean;
-}>;
+import { FromTo, SelfSwitchName, SwitchId } from "../type";
+export declare const Switch: (id: SwitchId | FromTo, toBe: boolean) => string;
 interface Operations {
     set: (value: number | string) => {
         op: string;
@@ -100,23 +97,14 @@ interface Data {
         };
     };
 }
-export declare const Variable: C<{
-    id: number | FromTo;
-    calc: (op: Operations, data: Data) => {
-        op: string;
-        value: number | string;
-    }[];
-}>;
-export declare const SelfSwitch: C<{
-    id: SelfSwitchName;
-    toBe: boolean;
-}>;
-export declare const Timer: C<{
-    mode: keyof typeof TIMER_MODE;
-    time: {
-        min: number;
-        sec: number;
-    } | `${number}:${number}`;
-}>;
+export declare const Variable: (id: number | FromTo, calc: (op: Operations, data: Data) => {
+    op: string;
+    value: number | string;
+}[]) => string;
+export declare const SelfSwitch: (id: SelfSwitchName, toBe: boolean) => string;
+export declare const Timer: (mode: keyof typeof TIMER_MODE, time: {
+    min: number;
+    sec: number;
+} | `${number}:${number}`) => string;
 export {};
 //# sourceMappingURL=progress.d.ts.map

@@ -1,11 +1,6 @@
-import { C } from "../type";
 import { argId, joinSkip, tag } from "../validate";
 
-export const Check: C<{
-  condition: string;
-  then: string;
-  otherwise?: string;
-}> = ({ condition, then, otherwise }) =>
+export const Check = (condition: string, then: string, otherwise?: string) =>
   joinSkip("\n", [
     tag("If", ["Script", condition]),
     then,
@@ -13,20 +8,15 @@ export const Check: C<{
     tag("End"),
   ]);
 
-export const Loop: C<{ content: string }> = ({ content }) =>
+export const Loop = (content: string) =>
   joinSkip("\n", [tag("Loop"), content, tag("RepeatAbove")]);
-export const LoopBreak: C = () => tag("BreakLoop");
-export const BreakLoop = LoopBreak;
+export const LoopBreak = () => tag("BreakLoop");
 
-export const ExitEventProcessing: C = () => tag("ExitEventProcessing");
+export const ExitEventProcessing = () => tag("ExitEventProcessing");
 
-export const CommonEvent: C<{ id: number }> = ({ id }) =>
-  tag("CommonEvent", [argId(id)]);
+export const CommonEvent = (id: number) => tag("CommonEvent", [argId(id)]);
 
-export const Label: C<{ name: string }> = ({ name }) => tag("Label", [name]);
-export const Goto: C<{ name: string }> = ({ name }) =>
-  tag("JumpToLabel", [name]);
-export const JumpToLabel = Goto;
+export const Label = (name: string) => tag("Label", [name]);
+export const Goto = (name: string) => tag("JumpToLabel", [name]);
 
-export const Comment: C<{ text: string }> = ({ text }) =>
-  tag("Comment", undefined, text);
+export const Comment = (text: string) => tag("Comment", undefined, text);

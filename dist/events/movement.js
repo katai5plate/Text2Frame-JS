@@ -4,18 +4,18 @@ exports.GetOnOffVehicle = exports.SetMovementRoute = exports.ScrollMap = exports
 const constants_1 = require("../constants");
 const validate_1 = require("../validate");
 const argIdOrPreset = (value, preset) => typeof value === "number" ? (0, validate_1.argId)(value) : (0, validate_1.argPreset)(value, preset);
-const TransferPlayer = ({ mode, position, direction, fade }) => (0, validate_1.tag)("TransferPlayer", [
+const TransferPlayer = (mode, position, direction, fade) => (0, validate_1.tag)("TransferPlayer", [
     (0, validate_1.argMapPosition)(position, mode),
     (0, validate_1.argPreset)(direction, constants_1.DIRECTION_RETAIN),
     (0, validate_1.argPreset)(fade, constants_1.FADE),
 ]);
 exports.TransferPlayer = TransferPlayer;
-const SetVehicleLocation = ({ mode, vehicle, position }) => (0, validate_1.tag)("SetVehicleLocation", [
+const SetVehicleLocation = (mode, vehicle, position) => (0, validate_1.tag)("SetVehicleLocation", [
     (0, validate_1.argPreset)(vehicle, constants_1.VEHICLE),
     (0, validate_1.argMapPosition)(position, mode),
 ]);
 exports.SetVehicleLocation = SetVehicleLocation;
-const SetEventLocation = ({ mode, id, position, direction }) => (0, validate_1.tag)("SetEventLocation", [
+const SetEventLocation = (mode, id, position, direction) => (0, validate_1.tag)("SetEventLocation", [
     argIdOrPreset(id, constants_1.EVENT),
     mode === "EXCHANGE"
         ? (0, validate_1.typeCase)(position, {
@@ -28,14 +28,14 @@ const SetEventLocation = ({ mode, id, position, direction }) => (0, validate_1.t
     (0, validate_1.argPreset)(direction, constants_1.DIRECTION_RETAIN),
 ]);
 exports.SetEventLocation = SetEventLocation;
-const ScrollMap = ({ direction, step, speed, wait }) => (0, validate_1.tag)("SetVehicleLocation", [
+const ScrollMap = (direction, step, speed, wait) => (0, validate_1.tag)("SetVehicleLocation", [
     (0, validate_1.argPreset)(direction, constants_1.DIRECTION),
     (0, validate_1.argInt)(step),
     (0, validate_1.argPreset)(speed, constants_1.CHARACTER_SPEED),
     wait,
 ]);
 exports.ScrollMap = ScrollMap;
-const SetMovementRoute = ({ id, repeat, skip, wait, routes }) => (0, validate_1.joinSkip)("\n", [
+const SetMovementRoute = (id, routes, { repeat = false, skip = false, wait = true } = {}) => (0, validate_1.joinSkip)("\n", [
     (0, validate_1.tag)("SetMovementRoute", [argIdOrPreset(id, constants_1.CHARACTER), repeat, skip, wait]),
     ...routes({
         jump: (x, y) => {

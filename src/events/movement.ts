@@ -13,7 +13,7 @@ import {
   FADE,
   VEHICLE,
 } from "../constants";
-import { C, MapPosition, DirectOrVariables, Sound, SwitchId } from "../type";
+import { MapPosition, DirectOrVariables, Sound, SwitchId } from "../type";
 import {
   argId,
   argInt,
@@ -33,34 +33,34 @@ const argIdOrPreset = <P extends Record<string, string>>(
 ) =>
   typeof value === "number" ? argId(value) : argPreset(value as string, preset);
 
-export const TransferPlayer: C<{
-  mode: DirectOrVariables;
-  position: MapPosition;
-  direction: keyof typeof DIRECTION_RETAIN;
-  fade: keyof typeof FADE;
-}> = ({ mode, position, direction, fade }) =>
+export const TransferPlayer = (
+  mode: DirectOrVariables,
+  position: MapPosition,
+  direction: keyof typeof DIRECTION_RETAIN,
+  fade: keyof typeof FADE
+) =>
   tag("TransferPlayer", [
     argMapPosition(position, mode),
     argPreset(direction, DIRECTION_RETAIN),
     argPreset(fade, FADE),
   ]);
 
-export const SetVehicleLocation: C<{
-  mode: DirectOrVariables;
-  vehicle: keyof typeof VEHICLE;
-  position: MapPosition;
-}> = ({ mode, vehicle, position }) =>
+export const SetVehicleLocation = (
+  mode: DirectOrVariables,
+  vehicle: keyof typeof VEHICLE,
+  position: MapPosition
+) =>
   tag("SetVehicleLocation", [
     argPreset(vehicle, VEHICLE),
     argMapPosition(position, mode),
   ]);
 
-export const SetEventLocation: C<{
-  mode: DirectOrVariables | "EXCHANGE";
-  id: keyof typeof EVENT | number;
-  position: MapPosition | keyof typeof EVENT | number;
-  direction: keyof typeof DIRECTION_RETAIN;
-}> = ({ mode, id, position, direction }) =>
+export const SetEventLocation = (
+  mode: DirectOrVariables | "EXCHANGE",
+  id: keyof typeof EVENT | number,
+  position: MapPosition | keyof typeof EVENT | number,
+  direction: keyof typeof DIRECTION_RETAIN
+) =>
   tag("SetEventLocation", [
     argIdOrPreset(id, EVENT),
     mode === "EXCHANGE"
@@ -74,12 +74,12 @@ export const SetEventLocation: C<{
     argPreset(direction, DIRECTION_RETAIN),
   ]);
 
-export const ScrollMap: C<{
-  direction: keyof typeof DIRECTION;
-  step: number;
-  speed: keyof typeof CHARACTER_SPEED;
-  wait?: boolean;
-}> = ({ direction, step, speed, wait }) =>
+export const ScrollMap = (
+  direction: keyof typeof DIRECTION,
+  step: number,
+  speed: keyof typeof CHARACTER_SPEED,
+  wait?: boolean
+) =>
   tag("SetVehicleLocation", [
     argPreset(direction, DIRECTION),
     argInt(step),
@@ -117,13 +117,11 @@ interface Route {
   changeNoClip: (active: boolean) => RouteCode;
   changeTransparent: (active: boolean) => RouteCode;
 }
-export const SetMovementRoute: C<{
-  id: keyof typeof CHARACTER | number;
-  repeat: boolean;
-  skip: boolean;
-  wait: boolean;
-  routes: (route: Route) => RouteCode[];
-}> = ({ id, repeat, skip, wait, routes }) =>
+export const SetMovementRoute = (
+  id: keyof typeof CHARACTER | number,
+  routes: (route: Route) => RouteCode[],
+  { repeat = false, skip = false, wait = true } = {}
+) =>
   joinSkip("\n", [
     tag("SetMovementRoute", [argIdOrPreset(id, CHARACTER), repeat, skip, wait]),
     ...routes({
@@ -217,4 +215,4 @@ export const SetMovementRoute: C<{
     }).map(({ name, args }) => tag(name, args)),
   ]);
 
-export const GetOnOffVehicle: C = () => tag("GetOnOffVehicle");
+export const GetOnOffVehicle = () => tag("GetOnOffVehicle");

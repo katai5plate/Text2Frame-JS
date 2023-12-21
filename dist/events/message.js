@@ -6,7 +6,7 @@ const validate_1 = require("../validate");
 const argChoices = (value, preset) => typeof value === "number"
     ? (0, validate_1.argRange)(value, { from: 1, to: 6 })
     : (0, validate_1.argPreset)(value, preset);
-const Window = ({ face, position, background, name }) => (0, validate_1.joinSkip)("\n", [
+const Window = ({ face, position, background, name, }) => (0, validate_1.joinSkip)("\n", [
     background && (0, validate_1.tag)("Background", [background]),
     position && (0, validate_1.tag)("WindowPosition", [position]),
     face &&
@@ -16,7 +16,7 @@ const Window = ({ face, position, background, name }) => (0, validate_1.joinSkip
     name && (0, validate_1.tag)("Name", [name]),
 ]);
 exports.Window = Window;
-const ShowChoices = ({ background, position, init, cancel, cases }) => {
+const ShowChoices = (cases, { background, position, init, cancel, }) => {
     if (cases.filter((caseItem) => caseItem.name === null).length >= 2)
         throw new Error("キャンセル扱いとなる name=null は複数設定できません");
     return (0, validate_1.joinSkip)("\n", [
@@ -36,9 +36,9 @@ const ShowChoices = ({ background, position, init, cancel, cases }) => {
     ]);
 };
 exports.ShowChoices = ShowChoices;
-const InputNumber = ({ id, digit }) => (0, validate_1.tag)("InputNumber", [(0, validate_1.argVariableId)(id), (0, validate_1.argRange)(digit, { from: 1, to: 8 })]);
+const InputNumber = (id, digit) => (0, validate_1.tag)("InputNumber", [(0, validate_1.argVariableId)(id), (0, validate_1.argRange)(digit, { from: 1, to: 8 })]);
 exports.InputNumber = InputNumber;
-const SelectItem = ({ id, itemType }) => (0, validate_1.tag)("SelectItem", [(0, validate_1.argVariableId)(id), (0, validate_1.argPreset)(itemType, constants_1.ITEM_TYPE)]);
+const SelectItem = (id, itemType) => (0, validate_1.tag)("SelectItem", [(0, validate_1.argVariableId)(id), (0, validate_1.argPreset)(itemType, constants_1.ITEM_TYPE)]);
 exports.SelectItem = SelectItem;
-const ScrollingText = ({ speed = 2, noSkip, text }) => (0, validate_1.tag)("ScrollingText", [speed, noSkip], text);
+const ScrollingText = (text, { speed = 2, noSkip }) => (0, validate_1.tag)("ScrollingText", [speed, noSkip], text);
 exports.ScrollingText = ScrollingText;

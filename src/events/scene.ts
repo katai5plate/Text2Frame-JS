@@ -1,5 +1,5 @@
 import { BATTLE_TROOP, SHOP_ITEM } from "../constants";
-import { C, VariableId } from "../type";
+import { VariableId } from "../type";
 import {
   argId,
   argInt,
@@ -11,12 +11,18 @@ import {
   typeCase,
 } from "../validate";
 
-export const BattleProcessing: C<{
-  id: keyof typeof BATTLE_TROOP | VariableId | number;
-  ifWin?: string;
-  ifEscape?: string;
-  ifLose?: string;
-}> = ({ id, ifWin, ifEscape, ifLose }) => {
+export const BattleProcessing = (
+  id: keyof typeof BATTLE_TROOP | VariableId | number,
+  {
+    ifWin,
+    ifEscape,
+    ifLose,
+  }: {
+    ifWin?: string;
+    ifEscape?: string;
+    ifLose?: string;
+  }
+) => {
   return joinSkip("\n", [
     tag("BattleProcessing", [
       typeCase(id, {
@@ -32,14 +38,14 @@ export const BattleProcessing: C<{
   ]);
 };
 
-export const ShopProcessing: C<{
+export const ShopProcessing = (
   items: {
     type: keyof typeof SHOP_ITEM;
     id: number;
     price: number;
-  }[];
-  purchaseOnly?: boolean;
-}> = ({ items, purchaseOnly }) =>
+  }[],
+  purchaseOnly?: boolean
+) =>
   joinSkip("\n", [
     tag("ShopProcessing", [purchaseOnly]),
     ...items.map(({ type, id, price }) =>
@@ -47,13 +53,10 @@ export const ShopProcessing: C<{
     ),
   ]);
 
-export const NameInputProcessing: C<{
-  id: number;
-  length: number;
-}> = ({ id, length }) =>
+export const NameInputProcessing = (id: number, length: number) =>
   tag("NameInputProcessing", [argId(id), argRange(length, { from: 1, to: 8 })]);
 
-export const OpenMenuScreen: C = () => tag("OpenMenuScreen");
-export const OpenSaveScreen: C = () => tag("OpenSaveScreen");
-export const GameOver: C = () => tag("GameOver");
-export const ReturnToTitleScreen: C = () => tag("ReturnToTitleScreen");
+export const OpenMenuScreen = () => tag("OpenMenuScreen");
+export const OpenSaveScreen = () => tag("OpenSaveScreen");
+export const GameOver = () => tag("GameOver");
+export const ReturnToTitleScreen = () => tag("ReturnToTitleScreen");

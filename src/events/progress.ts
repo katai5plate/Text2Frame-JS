@@ -1,5 +1,5 @@
 import { CHARACTER, TIMER_MODE, VARIABLE_OPERATOR } from "../constants";
-import { C, FromTo, SelfSwitchName, SwitchId } from "../type";
+import { FromTo, SelfSwitchName, SwitchId } from "../type";
 import {
   argEnemyIndex,
   argFromTo,
@@ -13,10 +13,7 @@ import {
 
 const argCharacterIdWithPreset = createPresetArg(CHARACTER);
 
-export const Switch: C<{
-  id: SwitchId | FromTo;
-  toBe: boolean;
-}> = ({ id, toBe }) =>
+export const Switch = (id: SwitchId | FromTo, toBe: boolean) =>
   tag("Switch", [
     typeCase(id, {
       switchId: argSwitchId,
@@ -100,13 +97,10 @@ interface Data {
     };
   };
 }
-export const Variable: C<{
-  id: number | FromTo;
-  calc: (
-    op: Operations,
-    data: Data
-  ) => { op: string; value: number | string }[];
-}> = ({ id, calc }) => {
+export const Variable = (
+  id: number | FromTo,
+  calc: (op: Operations, data: Data) => { op: string; value: number | string }[]
+) => {
   const list = calc(
     {
       set: (value: number | string) => ({
@@ -239,15 +233,13 @@ export const Variable: C<{
     .join("\n");
 };
 
-export const SelfSwitch: C<{
-  id: SelfSwitchName;
-  toBe: boolean;
-}> = ({ id, toBe }) => tag("SelfSwitch", [id, toBe]);
+export const SelfSwitch = (id: SelfSwitchName, toBe: boolean) =>
+  tag("SelfSwitch", [id, toBe]);
 
-export const Timer: C<{
-  mode: keyof typeof TIMER_MODE;
-  time: { min: number; sec: number } | `${number}:${number}`;
-}> = ({ mode, time }) => {
+export const Timer = (
+  mode: keyof typeof TIMER_MODE,
+  time: { min: number; sec: number } | `${number}:${number}`
+) => {
   if (typeof time === "string") {
     const [isValid, min, sec] = time.match(/^(\d{1,}):(\d{1,})$/) ?? [];
     if (isValid) {

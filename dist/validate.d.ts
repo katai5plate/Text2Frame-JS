@@ -1,5 +1,4 @@
 import { ArgValue, Color3, Color4, DirectOrVariables, FromTo, MapPosition, Sound, SwitchId, Text, VariableId } from "./type";
-export declare const joinKeep: (delim: string | null, arr: (Text | undefined)[]) => string;
 export declare const joinSkip: (delim: string | null, arr: (Text | undefined)[]) => string;
 export declare const tag: (name: string, arg?: (Text | undefined)[], textChildren?: string) => string;
 export declare const typeCase: (v: ArgValue, cases: Partial<{

@@ -1,23 +1,18 @@
-import { C } from "../type";
 import { argInt, tag } from "../validate";
 
-export const Wait: C<{ time: number }> = ({ time }) =>
-  tag("Wait", [argInt(time)]);
+export const Wait = (time: number) => tag("Wait", [argInt(time)]);
 
-export const Script: C<{
-  code: string;
-}> = ({ code }) => tag("Script", undefined, code);
+export const Script = (code: string) => tag("Script", undefined, code);
 
-export const PluginCommandMV: C<{
-  command: string;
-}> = ({ command }) => tag("PluginCommand", [command]);
+export const PluginCommandMV = (command: string) =>
+  tag("PluginCommand", [command]);
 
-export const PluginCommandMZ: C<{
-  name: string;
-  method: string;
-  command: string;
-  args: { name: string; value: any }[];
-}> = ({ name, method, command, args }) =>
+export const PluginCommandMZ = (
+  name: string,
+  method: string,
+  command: string,
+  args: { name: string; value: any }[]
+) =>
   tag("PluginCommandMZ", [
     name,
     method,

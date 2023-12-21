@@ -1,9 +1,8 @@
-import { C, Sound } from "../type";
+import { Sound } from "../type";
 import { argInt, argsSound, tag } from "../validate";
 
 const commonSound = (name: string) => {
-  const component: C<{ sound: Sound }> = ({ sound }) =>
-    tag(name, [argsSound(sound)]);
+  const component = (sound: Sound) => tag(name, [argsSound(sound)]);
   return component;
 };
 export const PlayBGM = commonSound("PlayBGM");
@@ -15,19 +14,17 @@ export const ChangeVictoryMe = commonSound("ChangeVictoryMe");
 export const ChangeDefeatMe = commonSound("ChangeDefeatMe");
 
 const commonFadeout = (name: string) => {
-  const component: C<{ time: number }> = ({ time }) =>
-    tag(name, [argInt(time)]);
+  const component = (time: number) => tag(name, [argInt(time)]);
   return component;
 };
 export const FadeoutBGM = commonFadeout("FadeoutBGM");
 export const FadeoutBGS = commonFadeout("FadeoutBGS");
 
-export const SaveBGM: C = () => tag("SaveBGM");
-export const StopBGM: C = () => tag("StopBGM");
-export const ReplayBGM: C = () => tag("ReplayBGM");
-export const StopBGS: C = () => tag("StopBGS");
-export const StopME: C = () => tag("StopME");
-export const StopSE: C = () => tag("StopSE");
+export const SaveBGM = () => tag("SaveBGM");
+export const StopBGM = () => tag("StopBGM");
+export const ReplayBGM = () => tag("ReplayBGM");
+export const StopBGS = () => tag("StopBGS");
+export const StopME = () => tag("StopME");
+export const StopSE = () => tag("StopSE");
 
-export const PlayMovie: C<{ name: string }> = ({ name }) =>
-  tag("PlayMovie", [name]);
+export const PlayMovie = (name: string) => tag("PlayMovie", [name]);

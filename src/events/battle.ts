@@ -1,5 +1,5 @@
 import { ACTION_TARGET, ENEMY_MEMBER } from "../constants";
-import { C, CreaseOperator, VariableId } from "../type";
+import { CreaseOperator, VariableId } from "../type";
 import {
   argEnemyIndex,
   argId,
@@ -17,12 +17,12 @@ const argEnemyIndexWithPresetAndVariableId = createPresetArgWithVariableId(
   { from: 1, to: 8 }
 );
 
-export const ChangeEnemyHp: C<{
-  index: keyof typeof ENEMY_MEMBER | number | VariableId;
-  op: CreaseOperator;
-  value: number | VariableId;
-  allowKnockout?: boolean;
-}> = ({ index, op, value, allowKnockout }) =>
+export const ChangeEnemyHp = (
+  index: keyof typeof ENEMY_MEMBER | number | VariableId,
+  op: CreaseOperator,
+  value: number | VariableId,
+  allowKnockout?: boolean
+) =>
   tag("ChangeEnemyHp", [
     argEnemyIndexWithPresetAndVariableId(index),
     op,
@@ -31,11 +31,11 @@ export const ChangeEnemyHp: C<{
   ]);
 
 const commonChange = (name: string) => {
-  const component: C<{
-    index: keyof typeof ENEMY_MEMBER | number | VariableId;
-    op: CreaseOperator;
-    value: number | VariableId;
-  }> = ({ index, op, value }) =>
+  const component = (
+    index: keyof typeof ENEMY_MEMBER | number | VariableId,
+    op: CreaseOperator,
+    value: number | VariableId
+  ) =>
     tag(name, [
       argEnemyIndexWithPresetAndVariableId(index),
       op,
@@ -47,31 +47,27 @@ export const ChangeEnemyMp = commonChange("ChangeEnemyMp");
 export const ChangeEnemyTp = commonChange("ChangeEnemyTp");
 export const ChangeEnemyState = commonChange("ChangeEnemyState");
 
-export const EnemyRecoverAll: C<{
-  index: keyof typeof ENEMY_MEMBER | number | VariableId;
-}> = ({ index }) =>
-  tag("EnemyRecoverAll", [argEnemyIndexWithPresetAndVariableId(index)]);
+export const EnemyRecoverAll = (
+  index: keyof typeof ENEMY_MEMBER | number | VariableId
+) => tag("EnemyRecoverAll", [argEnemyIndexWithPresetAndVariableId(index)]);
 
-export const EnemyAppear: C<{
-  index: keyof typeof ENEMY_MEMBER | number;
-}> = ({ index }) => tag("EnemyAppear", [argEnemyIndexWithPreset(index)]);
+export const EnemyAppear = (index: keyof typeof ENEMY_MEMBER | number) =>
+  tag("EnemyAppear", [argEnemyIndexWithPreset(index)]);
 
 const commonIndexAndEnemyId = (name: string) => {
-  const component: C<{
-    index: number;
-    id: number;
-  }> = ({ index, id }) => tag(name, [argEnemyIndex(index), argId(id)]);
+  const component = (index: number, id: number) =>
+    tag(name, [argEnemyIndex(index), argId(id)]);
   return component;
 };
 export const EnemyTransform = commonIndexAndEnemyId("EnemyTransform");
 export const ShowBattleAnimation = commonIndexAndEnemyId("ShowBattleAnimation");
 
-export const ForceAction: C<{
-  mode: "ENEMY" | "ACTOR";
-  index: number;
-  id: number;
-  target: keyof typeof ACTION_TARGET | number;
-}> = ({ mode, index, id, target }) =>
+export const ForceAction = (
+  mode: "ENEMY" | "ACTOR",
+  index: number,
+  id: number,
+  target: keyof typeof ACTION_TARGET | number
+) =>
   tag("ForceAction", [
     typeCase(index, {
       number: (x) =>

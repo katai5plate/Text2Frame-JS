@@ -1,48 +1,30 @@
-import { C, CreaseOperator, VariableId } from "../type";
+import { CreaseOperator, VariableId } from "../type";
 import { argId, argIntOrVariableId, tag } from "../validate";
 
-export const ChangeGold: C<{
-  op: CreaseOperator;
-  value: number | VariableId;
-}> = ({ op, value }) => tag("ChangeGold", [op, argIntOrVariableId(value)]);
+export const ChangeGold = (op: CreaseOperator, value: number | VariableId) =>
+  tag("ChangeGold", [op, argIntOrVariableId(value)]);
 
-export const ChangeItems: C<{
-  id: number;
-  op: CreaseOperator;
-  value: number | VariableId;
-}> = ({ id, op, value }) =>
-  tag("ChangeItems", [argId(id), op, argIntOrVariableId(value)]);
+export const ChangeItems = (
+  id: number,
+  op: CreaseOperator,
+  value: number | VariableId
+) => tag("ChangeItems", [argId(id), op, argIntOrVariableId(value)]);
 
-export const ChangeWeapons: C<{
-  id: number;
-  op: CreaseOperator;
-  value: number | VariableId;
-  includeEquipment?: boolean;
-}> = ({ id, op, value, includeEquipment }) =>
-  tag("ChangeWeapons", [
-    argId(id),
-    op,
-    argIntOrVariableId(value),
-    includeEquipment,
-  ]);
+const commonChange = (name: string) => {
+  const component = (
+    id: number,
+    op: CreaseOperator,
+    value: number | VariableId,
+    includeEquipment?: boolean
+  ) => tag(name, [argId(id), op, argIntOrVariableId(value), includeEquipment]);
+  return component;
+};
+export const ChangeWeapons = commonChange("ChangeWeapons");
+export const ChangeArmors = commonChange("ChangeArmors");
 
-export const ChangeArmors: C<{
-  id: number;
-  op: CreaseOperator;
-  value: number | VariableId;
-  includeEquipment?: boolean;
-}> = ({ id, op, value, includeEquipment }) =>
-  tag("ChangeArmors", [
-    argId(id),
-    op,
-    argIntOrVariableId(value),
-    includeEquipment,
-  ]);
-
-export const ChangePartyMember: C<{
-  id: number;
-  op: CreaseOperator;
-  value: number | VariableId;
-  initialize?: boolean;
-}> = ({ id, op, value, initialize }) =>
-  tag("ChangeItems", [argId(id), op, argIntOrVariableId(value), initialize]);
+export const ChangePartyMember = (
+  id: number,
+  op: CreaseOperator,
+  value: number | VariableId,
+  initialize?: boolean
+) => tag("ChangeItems", [argId(id), op, argIntOrVariableId(value), initialize]);

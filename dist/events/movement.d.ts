@@ -1,28 +1,9 @@
 import { BLEND_MODE, CHARACTER, CHARACTER_FREQ, CHARACTER_SPEED, DIRECTION, DIRECTION_CAR, DIRECTION_METHOD, DIRECTION_RETAIN, DIRECTION_ROUTE8, DIRECTION_TURN_METHOD, EVENT, FADE, VEHICLE } from "../constants";
-import { C, MapPosition, DirectOrVariables, Sound, SwitchId } from "../type";
-export declare const TransferPlayer: C<{
-    mode: DirectOrVariables;
-    position: MapPosition;
-    direction: keyof typeof DIRECTION_RETAIN;
-    fade: keyof typeof FADE;
-}>;
-export declare const SetVehicleLocation: C<{
-    mode: DirectOrVariables;
-    vehicle: keyof typeof VEHICLE;
-    position: MapPosition;
-}>;
-export declare const SetEventLocation: C<{
-    mode: DirectOrVariables | "EXCHANGE";
-    id: keyof typeof EVENT | number;
-    position: MapPosition | keyof typeof EVENT | number;
-    direction: keyof typeof DIRECTION_RETAIN;
-}>;
-export declare const ScrollMap: C<{
-    direction: keyof typeof DIRECTION;
-    step: number;
-    speed: keyof typeof CHARACTER_SPEED;
-    wait?: boolean;
-}>;
+import { MapPosition, DirectOrVariables, Sound, SwitchId } from "../type";
+export declare const TransferPlayer: (mode: DirectOrVariables, position: MapPosition, direction: keyof typeof DIRECTION_RETAIN, fade: keyof typeof FADE) => string;
+export declare const SetVehicleLocation: (mode: DirectOrVariables, vehicle: keyof typeof VEHICLE, position: MapPosition) => string;
+export declare const SetEventLocation: (mode: DirectOrVariables | "EXCHANGE", id: keyof typeof EVENT | number, position: MapPosition | keyof typeof EVENT | number, direction: keyof typeof DIRECTION_RETAIN) => string;
+export declare const ScrollMap: (direction: keyof typeof DIRECTION, step: number, speed: keyof typeof CHARACTER_SPEED, wait?: boolean) => string;
 type RouteCode = {
     name: string;
     args: (number | string)[];
@@ -47,13 +28,11 @@ interface Route {
     changeNoClip: (active: boolean) => RouteCode;
     changeTransparent: (active: boolean) => RouteCode;
 }
-export declare const SetMovementRoute: C<{
-    id: keyof typeof CHARACTER | number;
-    repeat: boolean;
-    skip: boolean;
-    wait: boolean;
-    routes: (route: Route) => RouteCode[];
-}>;
-export declare const GetOnOffVehicle: C;
+export declare const SetMovementRoute: (id: keyof typeof CHARACTER | number, routes: (route: Route) => RouteCode[], { repeat, skip, wait }?: {
+    repeat?: boolean | undefined;
+    skip?: boolean | undefined;
+    wait?: boolean | undefined;
+}) => string;
+export declare const GetOnOffVehicle: () => string;
 export {};
 //# sourceMappingURL=movement.d.ts.map

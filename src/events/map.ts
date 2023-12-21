@@ -1,5 +1,5 @@
 import { CHARACTER, LOCATION } from "../constants";
-import { C, VariableId } from "../type";
+import { VariableId } from "../type";
 import {
   argId,
   argPreset,
@@ -9,22 +9,18 @@ import {
   typeCase,
 } from "../validate";
 
-export const ChangeMapNameDisplay: C<{
-  allow: boolean;
-}> = ({ allow }) => tag("ChangeMapNameDisplay", [allow]);
+export const ChangeMapNameDisplay = (allow: boolean) =>
+  tag("ChangeMapNameDisplay", [allow]);
 
-export const ChangeTileset: C<{
-  id: number;
-}> = ({ id }) => tag("ChangeTileset", [argId(id)]);
+export const ChangeTileset = (id: number) => tag("ChangeTileset", [argId(id)]);
 
-export const ChangeBattleBackGround: C<{ images: [string?, string?] }> = ({
-  images,
-}) => tag("ChangeBattleBackGround", [images[0] ?? "None", images[1] ?? "None"]);
+export const ChangeBattleBackGround = (images: [string?, string?]) =>
+  tag("ChangeBattleBackGround", [images[0] ?? "None", images[1] ?? "None"]);
 
-export const ChangeParallax: C<{
-  name: string;
-  scroll: { x?: number; y?: number };
-}> = ({ name, scroll }) =>
+export const ChangeParallax = (
+  name: string,
+  scroll: { x?: number; y?: number }
+) =>
   tag("ChangeParallax", [
     name,
     scroll.x &&
@@ -33,11 +29,11 @@ export const ChangeParallax: C<{
   ]);
 
 type PositionType = { x: number; y: number } | { x: VariableId; y: VariableId };
-export const GetLocationInfo: C<{
-  id: VariableId;
-  layer: keyof typeof LOCATION;
-  position: PositionType | keyof typeof CHARACTER | number;
-}> = ({ id, layer, position }) =>
+export const GetLocationInfo = (
+  id: VariableId,
+  layer: keyof typeof LOCATION,
+  position: PositionType | keyof typeof CHARACTER | number
+) =>
   tag("GetLocationInfo", [
     argVariableId(id),
     argPreset(layer, LOCATION),

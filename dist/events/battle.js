@@ -5,7 +5,7 @@ const constants_1 = require("../constants");
 const validate_1 = require("../validate");
 const argEnemyIndexWithPreset = (0, validate_1.createPresetArgWithVariableId)(constants_1.ENEMY_MEMBER);
 const argEnemyIndexWithPresetAndVariableId = (0, validate_1.createPresetArgWithVariableId)(constants_1.ENEMY_MEMBER, { from: 1, to: 8 });
-const ChangeEnemyHp = ({ index, op, value, allowKnockout }) => (0, validate_1.tag)("ChangeEnemyHp", [
+const ChangeEnemyHp = (index, op, value, allowKnockout) => (0, validate_1.tag)("ChangeEnemyHp", [
     argEnemyIndexWithPresetAndVariableId(index),
     op,
     (0, validate_1.argIntOrVariableId)(value),
@@ -13,7 +13,7 @@ const ChangeEnemyHp = ({ index, op, value, allowKnockout }) => (0, validate_1.ta
 ]);
 exports.ChangeEnemyHp = ChangeEnemyHp;
 const commonChange = (name) => {
-    const component = ({ index, op, value }) => (0, validate_1.tag)(name, [
+    const component = (index, op, value) => (0, validate_1.tag)(name, [
         argEnemyIndexWithPresetAndVariableId(index),
         op,
         (0, validate_1.argIntOrVariableId)(value),
@@ -23,17 +23,17 @@ const commonChange = (name) => {
 exports.ChangeEnemyMp = commonChange("ChangeEnemyMp");
 exports.ChangeEnemyTp = commonChange("ChangeEnemyTp");
 exports.ChangeEnemyState = commonChange("ChangeEnemyState");
-const EnemyRecoverAll = ({ index }) => (0, validate_1.tag)("EnemyRecoverAll", [argEnemyIndexWithPresetAndVariableId(index)]);
+const EnemyRecoverAll = (index) => (0, validate_1.tag)("EnemyRecoverAll", [argEnemyIndexWithPresetAndVariableId(index)]);
 exports.EnemyRecoverAll = EnemyRecoverAll;
-const EnemyAppear = ({ index }) => (0, validate_1.tag)("EnemyAppear", [argEnemyIndexWithPreset(index)]);
+const EnemyAppear = (index) => (0, validate_1.tag)("EnemyAppear", [argEnemyIndexWithPreset(index)]);
 exports.EnemyAppear = EnemyAppear;
 const commonIndexAndEnemyId = (name) => {
-    const component = ({ index, id }) => (0, validate_1.tag)(name, [(0, validate_1.argEnemyIndex)(index), (0, validate_1.argId)(id)]);
+    const component = (index, id) => (0, validate_1.tag)(name, [(0, validate_1.argEnemyIndex)(index), (0, validate_1.argId)(id)]);
     return component;
 };
 exports.EnemyTransform = commonIndexAndEnemyId("EnemyTransform");
 exports.ShowBattleAnimation = commonIndexAndEnemyId("ShowBattleAnimation");
-const ForceAction = ({ mode, index, id, target }) => (0, validate_1.tag)("ForceAction", [
+const ForceAction = (mode, index, id, target) => (0, validate_1.tag)("ForceAction", [
     (0, validate_1.typeCase)(index, {
         number: (x) => mode === "ACTOR" ? `Actor[${(0, validate_1.argId)(x)}]` : (0, validate_1.argEnemyIndex)(x),
     }),

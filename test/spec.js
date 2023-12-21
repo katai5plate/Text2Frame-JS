@@ -13,12 +13,8 @@ const test = (name, expect, to) => {
 test(
   "ShowChoices",
   ev(
-    c.message.ShowChoices({
-      background: "DIM",
-      position: "MIDDLE",
-      init: "NONE",
-      cancel: "BRANCH",
-      cases: [
+    c.message.ShowChoices(
+      [
         {
           name: "あいう",
           then: ev(
@@ -38,7 +34,13 @@ test(
           then: ev("キャンセルキャンセルキャンセルキャンセル"),
         },
       ],
-    })
+      {
+        background: "DIM",
+        position: "MIDDLE",
+        init: "NONE",
+        cancel: "BRANCH",
+      }
+    )
   ),
   `
 <ShowChoices: Dim, Middle, None, Branch>
@@ -56,9 +58,8 @@ test(
 test(
   "ScrollingText",
   ev(
-    c.message.ScrollingText({
-      noSkip: true,
-      text: ev(
+    c.message.ScrollingText(
+      ev(
         c.message.Window({ name: "名前" }),
         "てきすとてきすとてきすとてきすと",
         "あいうあいうあいうあいうあいう",
@@ -69,7 +70,10 @@ test(
         "えおかえおかえおかえおかえおか",
         "きくけきくけきくけきくけきくけ"
       ),
-    })
+      {
+        noSkip: true,
+      }
+    )
   ),
   `
 <ScrollingText: 2, true>
@@ -88,13 +92,10 @@ test(
 test(
   "Check",
   ev(
-    c.flow.Check({
-      condition: "$gameSwitches.value(10)",
-      then: ev(
-        c.message.Window({ name: "名前" }),
-        "てきすとてきすとてきすとてきすと"
-      ),
-    })
+    c.flow.Check(
+      "$gameSwitches.value(10)",
+      ev(c.message.Window({ name: "名前" }), "てきすとてきすとてきすとてきすと")
+    )
   ),
   `
 <If: Script, $gameSwitches.value(10)>
@@ -106,12 +107,9 @@ test(
 test(
   "Loop",
   ev(
-    c.flow.Loop({
-      content: ev(
-        c.message.Window({ name: "名前" }),
-        "てきすとてきすとてきすとてきすと"
-      ),
-    })
+    c.flow.Loop(
+      ev(c.message.Window({ name: "名前" }), "てきすとてきすとてきすとてきすと")
+    )
   ),
   `
 <Loop>
@@ -122,11 +120,7 @@ test(
 
 test(
   "Comment",
-  ev(
-    c.flow.Comment({
-      text: ev("てきすとてきすとてきすとてきすと"),
-    })
-  ),
+  ev(c.flow.Comment(ev("てきすとてきすとてきすとてきすと"))),
   `
 <Comment>
 てきすとてきすとてきすとてきすと
@@ -135,11 +129,7 @@ test(
 
 test(
   "Script",
-  ev(
-    c.interpreter.Script({
-      code: ev("てきすとてきすとてきすとてきすと"),
-    })
-  ),
+  ev(c.interpreter.Script(ev("てきすとてきすとてきすとてきすと"))),
   `
 <Script>
 てきすとてきすとてきすとてきすと
@@ -149,16 +139,18 @@ test(
 test(
   "BattleProcessing",
   ev(
-    c.scene.BattleProcessing({
-      id: { variableId: 123 },
-      ifWin: ev("よっしゃあかったぞ"),
-      ifLose: ev(
-        "ちょっとーーー",
-        "",
-        "つよすぎんよ",
-        c.flow.Loop({ content: ev("がめおヴぇｒ") })
-      ),
-    })
+    c.scene.BattleProcessing(
+      { variableId: 123 },
+      {
+        ifWin: ev("よっしゃあかったぞ"),
+        ifLose: ev(
+          "ちょっとーーー",
+          "",
+          "つよすぎんよ",
+          c.flow.Loop(ev("がめおヴぇｒ"))
+        ),
+      }
+    )
   ),
   `
 <BattleProcessing: V[123]>
@@ -177,12 +169,9 @@ test(
 test(
   "SetMovementRoute",
   ev(
-    c.movement.SetMovementRoute({
-      id: "THIS_EVENT",
-      repeat: false,
-      skip: false,
-      wait: true,
-      routes: (r) => [
+    c.movement.SetMovementRoute(
+      "THIS_EVENT",
+      (r) => [
         r.jump(1, 2),
         r.wait(60),
         r.changeSwitch({ switchId: 3 }, true),
@@ -205,7 +194,12 @@ test(
         r.changeNoClip(false),
         r.changeTransparent(true),
       ],
-    })
+      {
+        repeat: false,
+        skip: false,
+        wait: true,
+      }
+    )
   ),
   `
 <SetMovementRoute: ThisEvent, false, false, true>
