@@ -1,10 +1,6 @@
-//@ts-check
 /** @type {import("Text2Frame-MV/Text2Frame.mjs")} */
-//@ts-ignore
 const TF = require("Text2Frame-MV");
-
-// import { parse as ev, events } from "Text2Frame-JS";
-import { parse as ev, events } from "../dist";
+const { parse: ev, events } = require("../dist");
 
 const text = ev(
   events.message.Window({ name: "アレックス" }),

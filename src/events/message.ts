@@ -6,8 +6,14 @@ import {
   WINDOW_POSITION_HORIZONTAL,
   WINDOW_POSITION_VERTICAL,
 } from "../constants";
-import { VariableId } from "../type";
-import { argPreset, argRange, argVariableId, joinSkip, tag } from "../validate";
+import {
+  argId,
+  argPreset,
+  argRange,
+  argVariableId,
+  joinSkip,
+  tag,
+} from "../validate";
 
 const argChoices = <P extends Record<string, string>>(
   value: keyof P | number,
@@ -79,11 +85,13 @@ export const ShowChoices = (
   ]);
 };
 
-export const InputNumber = (id: VariableId, digit: number) =>
-  tag("InputNumber", [argVariableId(id), argRange(digit, { from: 1, to: 8 })]);
+export const InputNumber = (variableId: number, digit: number) =>
+  tag("InputNumber", [argId(variableId), argRange(digit, { from: 1, to: 8 })]);
 
-export const SelectItem = (id: VariableId, itemType: keyof typeof ITEM_TYPE) =>
-  tag("SelectItem", [argVariableId(id), argPreset(itemType, ITEM_TYPE)]);
+export const SelectItem = (
+  variableId: number,
+  itemType: keyof typeof ITEM_TYPE
+) => tag("SelectItem", [argId(variableId), argPreset(itemType, ITEM_TYPE)]);
 
 export const ScrollingText = (
   text: string,

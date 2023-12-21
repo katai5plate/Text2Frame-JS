@@ -30,12 +30,12 @@ export const ChangeParallax = (
 
 type PositionType = { x: number; y: number } | { x: VariableId; y: VariableId };
 export const GetLocationInfo = (
-  id: VariableId,
+  variableId: number,
   layer: keyof typeof LOCATION,
   position: PositionType | keyof typeof CHARACTER | number
 ) =>
   tag("GetLocationInfo", [
-    argVariableId(id),
+    argId(variableId),
     argPreset(layer, LOCATION),
     typeCase(position, {
       object: (value, e) => {

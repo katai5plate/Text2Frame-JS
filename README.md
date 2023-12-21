@@ -6,25 +6,14 @@
 
 ```
 npm i yktsr/Text2Frame-MV#117-forlib katai5plate/Text2Frame-JS
-npm i -D @babel/core @babel/node @babel/preset-env
-```
-
-### .babelrc
-
-```json
-{
-  "presets": ["@babel/preset-env"]
-}
 ```
 
 ### example.js
 
 ```js
-//@ts-check
 /** @type {import("Text2Frame-MV/Text2Frame.mjs")} */
-//@ts-ignore
 const TF = require("Text2Frame-MV");
-import { parse as ev, events } from "Text2Frame-JS";
+const { parse: ev, events } = require("Text2Frame-JS");
 
 const text = ev(
   events.message.Window({ name: "アレックス" }),

@@ -91,7 +91,7 @@ type RouteCode = { name: string; args: (number | string)[] };
 interface Route {
   jump: (x: number, y: number) => RouteCode;
   wait: (v: number) => RouteCode;
-  changeSwitch: (id: SwitchId, to: boolean) => RouteCode;
+  changeSwitch: (switchId: number, to: boolean) => RouteCode;
   changeSpeed: (speed: keyof typeof CHARACTER_SPEED) => RouteCode;
   changeFreq: (freq: keyof typeof CHARACTER_FREQ) => RouteCode;
   changeImage: (name: string, index: number) => RouteCode;
@@ -131,10 +131,10 @@ export const SetMovementRoute = (
       wait: (v: number) => {
         return { name: "McWait", args: [argInt(v)] };
       },
-      changeSwitch: (id: SwitchId, to: boolean) => {
+      changeSwitch: (switchId: number, to: boolean) => {
         return {
           name: `Switch${to ? "On" : "Off"}`,
-          args: [argSwitchId(id)],
+          args: [argId(switchId)],
         };
       },
       changeSpeed: (speed: keyof typeof CHARACTER_SPEED) => {
