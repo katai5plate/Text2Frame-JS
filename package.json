@@ -2,13 +2,13 @@
   "name": "Text2Frame-JS",
   "version": "1.0.0",
   "description": "入力補完付きの JS/TS でイベントコマンドを書きたい！",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/Text2Frame-JS.mjs",
+  "types": "dist/Text2Frame-JS.d.ts",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "build": "rimraf dist && tsc && webpack --mode development",
+    "build": "rimraf dist && vite build",
     "update-repos": "rimraf node_modules/Text2Frame-MV && rimraf node_modules/Text2Frame-JSX && rimraf node_modules/rpgmz-typescript && npm i",
     "dev": "npm run build && babel-node test/spec.js"
   },
@@ -32,10 +32,10 @@
     "rimraf": "^5.0.5",
     "Text2Frame-MV": "github:yktsr/Text2Frame-MV#117-forlib",
     "typescript": "^5.3.3",
+    "vite-plugin-dts": "^3.6.4",
     "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4"
-  },
-  "dependencies": {
-    "rpgmz-typescript": "github:katai5plate/rpgmz-typescript"
+    "webpack-cli": "^5.1.4",
+    "rpgmz-typescript": "github:katai5plate/rpgmz-typescript",
+    "vite": "^5.0.10"
   }
 }

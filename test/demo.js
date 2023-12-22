@@ -1,6 +1,7 @@
 /** @type {import("Text2Frame-MV/Text2Frame.mjs")} */
 const TF = require("Text2Frame-MV");
-const { parse: ev, events } = require("../dist");
+/** @type {import("../dist/Text2Frame-JS.d.ts")} */
+const { parse: ev, events } = require("../dist/Text2Frame-JS.js");
 
 const text = ev(
   events.message.Window({ name: "アレックス" }),
@@ -11,14 +12,9 @@ const text = ev(
     "$gameSwitches.value(10)",
     ev(events.message.Window({ name: "ぬくりあ" }), "めでてえｗｗｗｗｗｗｗ")
   ),
-  events.interpreter.Script(
-    (globalThis) => {
-      console.log(
-        globalThis.$gamePlayer._x,
-        globalThis.$gamePlayer._y,
-      )
-    }
-  )
+  events.interpreter.Script((globalThis) => {
+    console.log(globalThis.$gamePlayer._x, globalThis.$gamePlayer._y);
+  })
 );
 
 console.log(text);

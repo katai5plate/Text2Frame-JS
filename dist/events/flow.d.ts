@@ -1,9 +1,0 @@
-export declare const Check: (condition: string, then: string, otherwise?: string) => string;
-export declare const Loop: (content: string) => string;
-export declare const LoopBreak: () => string;
-export declare const ExitEventProcessing: () => string;
-export declare const CommonEvent: (id: number) => string;
-export declare const Label: (name: string) => string;
-export declare const Goto: (name: string) => string;
-export declare const Comment: (text: string) => string;
-//# sourceMappingURL=flow.d.ts.map
