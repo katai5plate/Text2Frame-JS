@@ -24,14 +24,9 @@ const text = ev(
     "$gameSwitches.value(10)",
     ev(events.message.Window({ name: "ぬくりあ" }), "めでてえｗｗｗｗｗｗｗ")
   ),
-  events.interpreter.Script(
-    (globalThis) => {
-      console.log(
-        globalThis.$gamePlayer._x,
-        globalThis.$gamePlayer._y,
-      )
-    }
-  )
+  events.interpreter.Script((globalThis) => {
+    console.log(globalThis.$gamePlayer._x, globalThis.$gamePlayer._y);
+  })
 );
 
 console.log(text);
@@ -44,10 +39,7 @@ console.log(text);
 // めでてえｗｗｗｗｗｗｗ
 // <End>
 // <Script>
-// console.log(
-//         globalThis.$gamePlayer._x,
-//         globalThis.$gamePlayer._y,
-//       )
+// console.log(globalThis.$gamePlayer._x, globalThis.$gamePlayer._y);
 // </Script>
 
 const list = TF.convert(text);
@@ -66,20 +58,14 @@ console.log(list);
 //   { code: 401, indent: 1, parameters: [ 'めでてえｗｗｗｗｗｗｗ' ] },
 //   { code: 0, indent: 1, parameters: [] },
 //   { code: 412, indent: 0, parameters: [] },
-//   { code: 355, indent: 0, parameters: [ 'console.log(' ] },
 //   {
-//     code: 655,
+//     code: 355,
 //     indent: 0,
-//     parameters: [ '        globalThis.$gamePlayer._x,' ]
-//   },
-//   {
-//     code: 655,
-//     indent: 0,
-//     parameters: [ '        globalThis.$gamePlayer._y,' ]
-//   },
-//   { code: 655, indent: 0, parameters: [ '      )' ] }
+//     parameters: [
+//       'console.log(globalThis.$gamePlayer._x, globalThis.$gamePlayer._y);'
+//     ]
+//   }
 // ]
-
 ```
 
 ### 実行
