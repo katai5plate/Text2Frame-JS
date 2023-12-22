@@ -533,7 +533,8 @@ var Wait = function Wait(time) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("Wait", [(0,_validate__WEBPACK_IMPORTED_MODULE_0__.argInt)(time)]);
 };
 var Script = function Script(code) {
-  return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("Script", undefined, code);
+  var match = code.toString().match(/\{([\s\S]*)\}/);
+  return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("Script", undefined, match ? match[1].trim() : "");
 };
 var PluginCommandMV = function PluginCommandMV(command) {
   return (0,_validate__WEBPACK_IMPORTED_MODULE_0__.tag)("PluginCommand", [command]);

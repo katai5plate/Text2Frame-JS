@@ -129,10 +129,14 @@ test(
 
 test(
   "Script",
-  ev(c.interpreter.Script(ev("てきすとてきすとてきすとてきすと"))),
+  ev(
+    c.interpreter.Script(() => {
+      console.log("あいうえお");
+    })
+  ),
   `
 <Script>
-てきすとてきすとてきすとてきすと
+console.log("あいうえお");
 </Script>`
 );
 

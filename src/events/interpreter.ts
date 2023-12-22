@@ -1,8 +1,12 @@
 import { argInt, tag } from "../validate";
+import rmmz from "rpgmz-typescript/types/index";
 
 export const Wait = (time: number) => tag("Wait", [argInt(time)]);
 
-export const Script = (code: string) => tag("Script", undefined, code);
+export const Script = (code: (globalThis: typeof rmmz) => unknown) => {
+  const match = code.toString().match(/\{([\s\S]*)\}/);
+  return tag("Script", undefined, match ? match[1].trim() : "");
+};
 
 export const PluginCommandMV = (command: string) =>
   tag("PluginCommand", [command]);

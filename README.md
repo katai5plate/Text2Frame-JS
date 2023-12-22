@@ -23,6 +23,14 @@ const text = ev(
   events.flow.Check(
     "$gameSwitches.value(10)",
     ev(events.message.Window({ name: "ぬくりあ" }), "めでてえｗｗｗｗｗｗｗ")
+  ),
+  events.interpreter.Script(
+    (globalThis) => {
+      console.log(
+        globalThis.$gamePlayer._x,
+        globalThis.$gamePlayer._y,
+      )
+    }
   )
 );
 
@@ -35,6 +43,12 @@ console.log(text);
 // <Name: ぬくりあ>
 // めでてえｗｗｗｗｗｗｗ
 // <End>
+// <Script>
+// console.log(
+//         globalThis.$gamePlayer._x,
+//         globalThis.$gamePlayer._y,
+//       )
+// </Script>
 
 const list = TF.convert(text);
 console.log(list);
@@ -51,12 +65,25 @@ console.log(list);
 //   { code: 101, indent: 1, parameters: [ '', 0, 0, 2, 'ぬくりあ' ] },
 //   { code: 401, indent: 1, parameters: [ 'めでてえｗｗｗｗｗｗｗ' ] },
 //   { code: 0, indent: 1, parameters: [] },
-//   { code: 412, indent: 0, parameters: [] }
+//   { code: 412, indent: 0, parameters: [] },
+//   { code: 355, indent: 0, parameters: [ 'console.log(' ] },
+//   {
+//     code: 655,
+//     indent: 0,
+//     parameters: [ '        globalThis.$gamePlayer._x,' ]
+//   },
+//   {
+//     code: 655,
+//     indent: 0,
+//     parameters: [ '        globalThis.$gamePlayer._y,' ]
+//   },
+//   { code: 655, indent: 0, parameters: [ '      )' ] }
 // ]
+
 ```
 
 ### 実行
 
 ```
-npx babel-node example.js
+node example.js
 ```

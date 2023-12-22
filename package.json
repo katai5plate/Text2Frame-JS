@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "rimraf dist && tsc && webpack --mode development",
-    "update-tf": "rimraf node_modules/Text2Frame-MV && rimraf node_modules/Text2Frame-JSX && npm i",
+    "update-repos": "rimraf node_modules/Text2Frame-MV && rimraf node_modules/Text2Frame-JSX && rimraf node_modules/rpgmz-typescript && npm i",
     "dev": "npm run build && babel-node test/spec.js"
   },
   "repository": {
@@ -30,9 +30,12 @@
     "@babel/preset-typescript": "^7.23.3",
     "babel-loader": "^9.1.3",
     "rimraf": "^5.0.5",
+    "Text2Frame-MV": "github:yktsr/Text2Frame-MV#117-forlib",
     "typescript": "^5.3.3",
     "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4",
-    "Text2Frame-MV": "github:yktsr/Text2Frame-MV#117-forlib"
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "rpgmz-typescript": "github:katai5plate/rpgmz-typescript"
   }
 }
