@@ -134,8 +134,8 @@
         if (isTest()) console.log("preload:", time / 1000, "sec");
         const js = `${parsePath(location.href).dir}js/text2frame/${$path}.js`;
         import(js).then((mod) => {
-          if (isTest()) console.log("inject:", js);
           const list = Text2FrameJS.convert(mod.default);
+          if (isTest()) console.log("inject:", js, list);
           replacePluginCommandToList(
             this,
             list.map((el) => ({
@@ -143,6 +143,7 @@
               indent: el.indent + this._indent,
             }))
           );
+          this._index--;
           resumeInterpreter(this);
         });
       });
