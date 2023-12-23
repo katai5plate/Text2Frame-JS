@@ -9,8 +9,8 @@
   },
   "scripts": {
     "build": "rimraf dist && vite build",
-    "update-repos": "rimraf node_modules/Text2Frame-MV && rimraf node_modules/Text2Frame-JSX && rimraf node_modules/rpgmz-typescript && npm i",
-    "dev": "npm run build && babel-node test/spec.js"
+    "update-repos": "npm rm Text2Frame-MV && npm rm Text2Frame-JS && npm i -D github:yktsr/Text2Frame-MV#117-forlib && npm i -D github:katai5plate/Text2Frame-JS",
+    "dev": "npm run build && node test/spec.js"
   },
   "repository": {
     "type": "git",
@@ -24,18 +24,13 @@
   },
   "homepage": "https://github.com/katai5plate/Text2Frame-JS#readme",
   "devDependencies": {
-    "@babel/core": "^7.23.6",
-    "@babel/node": "^7.22.19",
-    "@babel/preset-env": "^7.23.6",
-    "@babel/preset-typescript": "^7.23.3",
-    "babel-loader": "^9.1.3",
     "rimraf": "^5.0.5",
+    "Text2Frame-JS": "github:katai5plate/Text2Frame-JS",
     "Text2Frame-MV": "github:yktsr/Text2Frame-MV#117-forlib",
     "typescript": "^5.3.3",
+    "vite": "^5.0.10",
     "vite-plugin-dts": "^3.6.4",
     "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4",
-    "rpgmz-typescript": "github:katai5plate/rpgmz-typescript",
-    "vite": "^5.0.10"
+    "webpack-cli": "^5.1.4"
   }
 }

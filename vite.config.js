@@ -5,6 +5,8 @@ import { name } from "./package.json";
 
 export default defineConfig({
   build: {
+    minify: false,
+    sourcemap: "inline",
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       name,
