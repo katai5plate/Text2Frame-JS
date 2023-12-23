@@ -93,7 +93,7 @@ ev(
         then: ev(
           // ↑ ev で囲む
           cmd.message.Window({ name: "アレックス" }),
-          "Oh No, OMG!"
+          "せやろか工藤"
         ),
       },
       {
