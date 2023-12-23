@@ -9,9 +9,9 @@ export default defineConfig({
     sourcemap: "inline",
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
-      name,
+      name: name.replace(/-/, ""),
       fileName: name,
-      formats: ["es", "cjs"],
+      formats: ["es", "cjs", "umd"],
     },
   },
   plugins: [dts({ rollupTypes: true })],

@@ -1,3 +1,7 @@
+/// <reference types="Text2Frame-MV" />
+
+import TF from 'Text2Frame-MV/Text2Frame.mjs';
+
 declare const $dataActors: any[];
 
 declare const $dataAnimations: any[];
@@ -309,6 +313,8 @@ declare const Comment_2: (text: string) => string;
 declare const CommonEvent: (id: number) => string;
 
 declare const ConfigManager: any;
+
+export declare const convert: typeof TF.convert;
 
 declare type CreaseOperator = "+" | "-";
 

@@ -2,18 +2,16 @@
 
 入力補完付きの JS でイベントコマンドを書きたい！
 
-## 使い方
+## 使い方 (Node.js)
 
 ```
-npm i yktsr/Text2Frame-MV#117-forlib katai5plate/Text2Frame-JS
+npm i katai5plate/Text2Frame-JS
 ```
 
 ### example.js
 
 ```js
-/** @type {import("Text2Frame-MV/Text2Frame.mjs")} */
-const TF = require("Text2Frame-MV");
-const { parse: ev, events } = require("Text2Frame-JS");
+const { parse: ev, events, convert } = require("Text2Frame-JS");
 
 const text = ev(
   events.message.Window({ name: "アレックス" }),
@@ -42,7 +40,7 @@ console.log(text);
 // console.log(globalThis.$gamePlayer._x, globalThis.$gamePlayer._y);
 // </Script>
 
-const list = TF.convert(text);
+const list = convert(text);
 console.log(list);
 // [
 //   { code: 101, indent: 0, parameters: [ '', 0, 0, 2, 'アレックス' ] },
@@ -72,4 +70,44 @@ console.log(list);
 
 ```
 node example.js
+```
+
+## 使い方 (ブラウザ)
+
+### index.html
+
+```html
+<body>
+  <script src="./node_modules/Text2Frame-JS/dist/Text2Frame-JS.umd.js"></script>
+  <script>
+    const { parse: ev, events, convert } = Text2FrameJS;
+
+    const text = ev(
+      events.message.Window({
+        name: "アレックス",
+      }),
+      "暇だなー",
+      events.message.Window({
+        name: "ブライアン",
+      }),
+      "そうだな",
+      events.flow.Check(
+        "$gameSwitches.value(10)",
+        ev(
+          events.message.Window({
+            name: "ぬくりあ",
+          }),
+          "めでてえｗｗｗｗｗｗｗ"
+        )
+      ),
+      events.interpreter.Script((globalThis) => {
+        console.log(globalThis.$gamePlayer._x, globalThis.$gamePlayer._y);
+      })
+    );
+
+    console.log(text);
+    const list = convert(text);
+    console.log(list);
+  </script>
+</body>
 ```

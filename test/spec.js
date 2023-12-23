@@ -1,9 +1,7 @@
 //@ts-check
-
-// import { parse as ev, events } from "Text2Frame-JS";
-/** @type {import("../dist/Text2Frame-JS.d.ts")} */
 const { parse: ev, events: c } = require("../dist/Text2Frame-JS.js");
 
+//@ts-expect-error
 const test = (name, expect, to) => {
   console.log(`=== ${name} ===`);
   console.log(expect);

@@ -1,4 +1,4 @@
-export { ev as parse } from "./parse";
+export { parse } from "./parse";
 
 import * as actor from "./events/actor";
 import * as battle from "./events/battle";
@@ -33,3 +33,6 @@ export const events = {
   battle,
   interpreter,
 };
+
+import TF from "Text2Frame-MV/Text2Frame.mjs";
+export const convert = TF.convert;

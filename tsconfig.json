@@ -8,7 +8,9 @@
     "declaration": true,
     "declarationMap": true,
     "strict": true,
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "allowJs": true,
+    "typeRoots": ["./node_modules/@types", "./@types"]
   },
   "include": ["src/**/*", "test/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

@@ -1,7 +1,5 @@
-/** @type {import("Text2Frame-MV/Text2Frame.mjs")} */
-const TF = require("Text2Frame-MV");
 /** @type {import("../dist/Text2Frame-JS.d.ts")} */
-const { parse: ev, events } = require("../dist/Text2Frame-JS.js");
+const { parse: ev, events, convert } = require("../dist/Text2Frame-JS.js");
 
 const text = ev(
   events.message.Window({ name: "アレックス" }),
@@ -30,7 +28,7 @@ console.log(text);
 // console.log(globalThis.$gamePlayer._x, globalThis.$gamePlayer._y);
 // </Script>
 
-const list = TF.convert(text);
+const list = convert(text);
 console.log(list);
 // [
 //   { code: 101, indent: 0, parameters: [ '', 0, 0, 2, 'アレックス' ] },
