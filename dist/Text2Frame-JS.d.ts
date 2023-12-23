@@ -1,7 +1,3 @@
-/// <reference types="Text2Frame-MV" />
-
-import TF from 'Text2Frame-MV/Text2Frame.mjs';
-
 declare const $dataActors: any[];
 
 declare const $dataAnimations: any[];
@@ -317,9 +313,12 @@ declare const ConfigManager: any;
 /**
  * Text2Frame の文法で書かれた文字列を RPG Maker MV/MZ のイベントコマンドリストに変換する。
  * @param text Text2Frame の文法で書かれた文字列
- * @return {{ code: number; parameters: any[]; indent: number }[]}
  */
-export declare const convert: typeof TF.convert;
+export declare const convert: (text: string) => {
+    code: number;
+    parameters: any[];
+    indent: number;
+}[];
 
 declare type CreaseOperator = "+" | "-";
 
