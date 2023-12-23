@@ -1,10 +1,10 @@
 # Text2Frame-JS
 
-[Text2Frmae-MV](https://github.com/yktsr/Text2Frame-MV) のテキストを JS で書きたい人向けモジュール
+[Text2Frame-MV](https://github.com/yktsr/Text2Frame-MV) のテキストを JS で書きたい人向けモジュール
 
 ## なぜ？
 
-本家 Text2Frmae-MV には以下のデメリットがある
+本家 Text2Frame-MV には以下のデメリットがある
 
 - VSCode でテキストを編集する際、言語固有の構文ハイライトが適用されないため、見通しが悪い。
 - 入力補完機能が利用できず、自前でスニペットを用意するとかしなければならない。
