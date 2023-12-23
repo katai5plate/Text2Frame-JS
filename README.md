@@ -115,8 +115,8 @@ node example.js
         console.log(globalThis.$gamePlayer._x, globalThis.$gamePlayer._y);
       })
     );
-
     console.log(text);
+
     const list = convert(text);
     console.log(list);
   </script>
