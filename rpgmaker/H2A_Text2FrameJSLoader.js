@@ -44,6 +44,7 @@
   document.body.appendChild(lib);
 
   const pluginName = document.currentScript.src.match(/^.*\/(.*).js$/)[1];
+  const isTest = () => Utils.isOptionValid("test");
 
   const parsePath = (path) => {
     const parts = path.split("/");
@@ -78,7 +79,6 @@
       }
       return p;
     }, []);
-    console.log(after);
     interpreter._list = after;
   };
 
@@ -131,23 +131,20 @@
     function ({ $path, $files }) {
       stopInterpreter(this);
       preload($files, this).then((time) => {
-        if (Utils.isOptionValid("test")) {
-          console.log("preload:", time / 1000, "sec");
-        }
-        import(`${parsePath(location.href).dir}js/text2frame/${$path}.js`).then(
-          (mod) => {
-            const list = Text2FrameJS.convert(mod.default);
-            console.log(mod.default, list);
-            replacePluginCommandToList(
-              this,
-              list.map((el) => ({
-                ...el,
-                indent: el.indent + this._indent,
-              }))
-            );
-            resumeInterpreter(this);
-          }
-        );
+        if (isTest()) console.log("preload:", time / 1000, "sec");
+        const js = `${parsePath(location.href).dir}js/text2frame/${$path}.js`;
+        import(js).then((mod) => {
+          if (isTest()) console.log("inject:", js);
+          const list = Text2FrameJS.convert(mod.default);
+          replacePluginCommandToList(
+            this,
+            list.map((el) => ({
+              ...el,
+              indent: el.indent + this._indent,
+            }))
+          );
+          resumeInterpreter(this);
+        });
       });
     }
   );
