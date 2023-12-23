@@ -6,14 +6,7 @@ import {
   WINDOW_POSITION_HORIZONTAL,
   WINDOW_POSITION_VERTICAL,
 } from "../constants";
-import {
-  argId,
-  argPreset,
-  argRange,
-  argVariableId,
-  joinSkip,
-  tag,
-} from "../validate";
+import { argId, argPreset, argRange, joinSkip, tag } from "../validate";
 
 const argChoices = <P extends Record<string, string>>(
   value: keyof P | number,

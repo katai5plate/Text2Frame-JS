@@ -1,16 +1,16 @@
 /** @type {import("../dist/Text2Frame-JS.d.ts")} */
-const { parse: ev, events, convert } = require("../dist/Text2Frame-JS.js");
+const { ev, cmd, convert } = require("../dist/Text2Frame-JS.js");
 
 const text = ev(
-  events.message.Window({ name: "アレックス" }),
+  cmd.message.Window({ name: "アレックス" }),
   "暇だなー",
-  events.message.Window({ name: "ブライアン" }),
+  cmd.message.Window({ name: "ブライアン" }),
   "そうだな",
-  events.flow.Check(
+  cmd.flow.Check(
     "$gameSwitches.value(10)",
-    ev(events.message.Window({ name: "ぬくりあ" }), "めでてえｗｗｗｗｗｗｗ")
+    ev(cmd.message.Window({ name: "ぬくりあ" }), "めでてえｗｗｗｗｗｗｗ")
   ),
-  events.interpreter.Script((globalThis) => {
+  cmd.etc.Script((globalThis) => {
     console.log(globalThis.$gamePlayer._x, globalThis.$gamePlayer._y);
   })
 );

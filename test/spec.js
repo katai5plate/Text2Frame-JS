@@ -1,5 +1,5 @@
 //@ts-check
-const { parse: ev, events: c } = require("../dist/Text2Frame-JS.js");
+const { ev, cmd: c } = require("../dist/Text2Frame-JS.js");
 
 //@ts-expect-error
 const test = (name, expect, to) => {
@@ -129,7 +129,7 @@ test(
 test(
   "Script",
   ev(
-    c.interpreter.Script(() => {
+    c.etc.Script(() => {
       console.log("あいうえお");
     })
   ),

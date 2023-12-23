@@ -22,18 +22,18 @@ npm i katai5plate/Text2Frame-JS
 ### example.js
 
 ```js
-const { parse: ev, events, convert } = require("Text2Frame-JS");
+const { ev, cmd, convert } = require("Text2Frame-JS");
 
 const text = ev(
-  events.message.Window({ name: "アレックス" }),
+  cmd.message.Window({ name: "アレックス" }),
   "暇だなー",
-  events.message.Window({ name: "ブライアン" }),
+  cmd.message.Window({ name: "ブライアン" }),
   "そうだな",
-  events.flow.Check(
+  cmd.flow.Check(
     "$gameSwitches.value(10)",
-    ev(events.message.Window({ name: "ぬくりあ" }), "めでてえｗｗｗｗｗｗｗ")
+    ev(cmd.message.Window({ name: "ぬくりあ" }), "めでてえｗｗｗｗｗｗｗ")
   ),
-  events.interpreter.Script((globalThis) => {
+  cmd.etc.Script((globalThis) => {
     console.log(globalThis.$gamePlayer._x, globalThis.$gamePlayer._y);
   })
 );
@@ -91,27 +91,27 @@ node example.js
 <body>
   <script src="./node_modules/Text2Frame-JS/dist/Text2Frame-JS.umd.js"></script>
   <script>
-    const { parse: ev, events, convert } = Text2FrameJS;
+    const { ev, cmd, convert } = Text2FrameJS;
 
     const text = ev(
-      events.message.Window({
+      cmd.message.Window({
         name: "アレックス",
       }),
       "暇だなー",
-      events.message.Window({
+      cmd.message.Window({
         name: "ブライアン",
       }),
       "そうだな",
-      events.flow.Check(
+      cmd.flow.Check(
         "$gameSwitches.value(10)",
         ev(
-          events.message.Window({
+          cmd.message.Window({
             name: "ぬくりあ",
           }),
           "めでてえｗｗｗｗｗｗｗ"
         )
       ),
-      events.interpreter.Script((globalThis) => {
+      cmd.etc.Script((globalThis) => {
         console.log(globalThis.$gamePlayer._x, globalThis.$gamePlayer._y);
       })
     );

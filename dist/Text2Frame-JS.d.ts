@@ -282,6 +282,39 @@ declare const CHARACTER_SPEED: {
 
 declare const Check: (condition: string, then: string, otherwise?: string) => string;
 
+export declare const cmd: {
+    /** メッセージ */
+    message: typeof message;
+    /** ゲーム進行 */
+    progress: typeof progress;
+    /** フロー制御 */
+    flow: typeof flow;
+    /** パーティ */
+    party: typeof party;
+    /** アクター */
+    actor: typeof actor;
+    /** 移動 */
+    movement: typeof movement;
+    /** キャラクター */
+    character: typeof character;
+    /** ピクチャ */
+    picture: typeof picture;
+    /** 画面 */
+    screen: typeof screen_2;
+    /** オーディオ・ビデオ */
+    media: typeof media;
+    /** シーン制御 */
+    scene: typeof scene;
+    /** システム設定 */
+    system: typeof system;
+    /** マップ*/
+    map: typeof map;
+    /** バトル */
+    battle: typeof battle;
+    /** ウェイト・上級 */
+    etc: typeof etc;
+};
+
 declare interface Color3 {
     r: number;
     g: number;
@@ -312,6 +345,15 @@ declare const ConfigManager: any;
 
 /**
  * Text2Frame の文法で書かれた文字列を RPG Maker MV/MZ のイベントコマンドリストに変換する。
+ *
+ * ```js
+ * const text = ev(
+ *   cmd.message.Window({ name: "アレックス" }),
+ *   "この先生きのこ",
+ * )
+ * const list = convert(text);
+ * ```
+ *
  * @param text Text2Frame の文法で書かれた文字列
  */
 export declare const convert: (text: string) => {
@@ -457,26 +499,41 @@ declare const EraseEvent: () => string;
 
 declare const ErasePicture: (id: number) => string;
 
+declare namespace etc {
+    export {
+        Wait,
+        Script,
+        PluginCommandMV,
+        PluginCommandMZ
+    }
+}
+
+/**
+ * JS で書かれたイベントコマンドを Text2Frame の文法で書かれた文字列に変換する
+ *
+ * イベントコマンド関数を使用するときは必ずこの関数を通すこと
+ *
+ * ```js
+ * ev(
+ *   cmd.message.Window({ name: "アレックス" }),
+ *   "きよ",
+ *   cmd.flow.Check(
+ *     "$gameSwitches.value(10)",
+ *     ev(
+ *       cmd.message.Window({ name: "ブライアン" }),
+ *       "しこのよる",
+ *     )
+ *   )
+ * )
+ * ```
+ *
+ * @param arr イベントコマンド関数リスト
+ * @returns {string}
+ */
+export declare const ev: (...arr: string[]) => string;
+
 declare const EVENT: {
     THIS_EVENT: string;
-};
-
-export declare const events: {
-    message: typeof message;
-    progress: typeof progress;
-    flow: typeof flow;
-    party: typeof party;
-    actor: typeof actor;
-    movement: typeof movement;
-    character: typeof character;
-    picture: typeof picture;
-    screen: typeof screen_2;
-    media: typeof media;
-    scene: typeof scene;
-    system: typeof system;
-    map: typeof map;
-    battle: typeof battle;
-    interpreter: typeof interpreter;
 };
 
 declare const ExitEventProcessing: () => string;
@@ -596,15 +653,6 @@ declare const ImageManager: any;
 declare const Input: any;
 
 declare const InputNumber: (variableId: number, digit: number) => string;
-
-declare namespace interpreter {
-    export {
-        Wait,
-        Script,
-        PluginCommandMV,
-        PluginCommandMZ
-    }
-}
 
 declare const ITEM_TYPE: {
     REGULAR: string;
@@ -740,13 +788,6 @@ declare interface Operations {
         value: number | string;
     };
 }
-
-/**
- * JS で書かれたイベントコマンドを Text2Frame の文法で書かれた文字列に変換する
- * @param arr イベントコマンド関数リスト
- * @returns {string}
- */
-export declare const parse: (...arr: string[]) => string;
 
 declare namespace party {
     export {
