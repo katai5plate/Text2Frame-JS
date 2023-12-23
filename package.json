@@ -26,6 +26,9 @@
   },
   "homepage": "https://github.com/katai5plate/Text2Frame-JS#readme",
   "devDependencies": {
+    "@types/diff": "^5.0.9",
+    "colors": "^1.4.0",
+    "diff": "^5.1.0",
     "rimraf": "^5.0.5",
     "typescript": "^5.3.3",
     "vite": "^5.0.10",

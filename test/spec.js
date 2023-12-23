@@ -1,30 +1,39 @@
 //@ts-check
-const { ev, cmd: c } = require("../dist/Text2Frame-JS");
+const { ev, cmd } = require("../dist/Text2Frame-JS");
+
+require("colors");
+const Diff = require("diff");
 
 //@ts-expect-error
 const test = (name, expect, to) => {
-  console.log(`=== ${name} ===`);
-  console.log(expect);
-  console.log("================== \n");
-  if (to && expect !== to.trimStart()) throw new Error(name + ": test failed!");
+  if (to && expect !== to.trimStart()) {
+    console.log(`=== ${name} ===`);
+    Diff.diffChars(to.trimStart(), expect).forEach((part) => {
+      process.stderr.write(
+        part.value[part.added ? "green" : part.removed ? "red" : "grey"]
+      );
+    });
+    console.log("\n==================\n");
+    throw new Error(name + ": test failed!");
+  }
 };
 
 test(
   "ShowChoices",
   ev(
-    c.message.ShowChoices(
+    cmd.message.ShowChoices(
       [
         {
           name: "あいう",
           then: ev(
-            c.message.Window({ name: "あいう" }),
+            cmd.message.Window({ name: "あいう" }),
             "あいうあいうあいうあいうあいう"
           ),
         },
         {
           name: "えおか",
           then: ev(
-            c.message.Window({ name: "えおか" }),
+            cmd.message.Window({ name: "えおか" }),
             "えおかえおかえおかえおかえおか"
           ),
         },
@@ -57,9 +66,9 @@ test(
 test(
   "ScrollingText",
   ev(
-    c.message.ScrollingText(
+    cmd.message.ScrollingText(
       ev(
-        c.message.Window({ name: "名前" }),
+        cmd.message.Window({ name: "名前" }),
         "てきすとてきすとてきすとてきすと",
         "あいうあいうあいうあいうあいう",
         "えおかえおかえおかえおかえおか",
@@ -91,9 +100,12 @@ test(
 test(
   "Check",
   ev(
-    c.flow.Check(
+    cmd.flow.Check(
       "$gameSwitches.value(10)",
-      ev(c.message.Window({ name: "名前" }), "てきすとてきすとてきすとてきすと")
+      ev(
+        cmd.message.Window({ name: "名前" }),
+        "てきすとてきすとてきすとてきすと"
+      )
     )
   ),
   `
@@ -106,8 +118,11 @@ test(
 test(
   "Loop",
   ev(
-    c.flow.Loop(
-      ev(c.message.Window({ name: "名前" }), "てきすとてきすとてきすとてきすと")
+    cmd.flow.Loop(
+      ev(
+        cmd.message.Window({ name: "名前" }),
+        "てきすとてきすとてきすとてきすと"
+      )
     )
   ),
   `
@@ -119,7 +134,7 @@ test(
 
 test(
   "Comment",
-  ev(c.flow.Comment(ev("てきすとてきすとてきすとてきすと"))),
+  ev(cmd.flow.Comment(ev("てきすとてきすとてきすとてきすと"))),
   `
 <Comment>
 てきすとてきすとてきすとてきすと
@@ -129,7 +144,7 @@ test(
 test(
   "Script",
   ev(
-    c.etc.Script(() => {
+    cmd.etc.Script(() => {
       console.log("あいうえお");
     })
   ),
@@ -142,7 +157,7 @@ console.log("あいうえお");
 test(
   "BattleProcessing",
   ev(
-    c.scene.BattleProcessing(
+    cmd.scene.BattleProcessing(
       { variableId: 123 },
       {
         ifWin: ev("よっしゃあかったぞ"),
@@ -150,7 +165,7 @@ test(
           "ちょっとーーー",
           "",
           "つよすぎんよ",
-          c.flow.Loop(ev("がめおヴぇｒ"))
+          cmd.flow.Loop(ev("がめおヴぇｒ"))
         ),
       }
     )
@@ -172,7 +187,7 @@ test(
 test(
   "SetMovementRoute",
   ev(
-    c.movement.SetMovementRoute(
+    cmd.movement.SetMovementRoute(
       "THIS_EVENT",
       (r) => [
         r.jump(1, 2),
@@ -228,3 +243,78 @@ test(
 <ThroughOff>
 <TransparentOn>`
 );
+
+test(
+  "mix 1",
+  ev(
+    cmd.screen.TintScreen({ r: -68, g: -68, b: -68, x: 0 }, 1),
+    cmd.picture.ShowPicture(1, "path/to", {
+      position: { mode: "DIRECT", origin: "CORNER", x: 48, y: 0 },
+    }),
+    cmd.message.Window({ background: "DIM" }),
+    "あああああああああ",
+    "あああああああああ",
+    "あああああああああ",
+    "あああああああああ",
+    cmd.message.ShowChoices(
+      [
+        {
+          name: "１２３",
+          then: ev(
+            cmd.picture.ShowPicture(1, "play-shisha/02", {
+              position: { mode: "DIRECT", origin: "CORNER", x: 48, y: 0 },
+            }),
+            cmd.etc.Wait(60),
+            cmd.screen.FadeOut()
+          ),
+        },
+        {
+          name: "４５６",
+          then: ev(),
+        },
+        {
+          name: "７８９",
+          then: ev(),
+        },
+        {
+          name: "１０１１",
+          then: ev(),
+        },
+        {
+          name: "１２１３",
+          then: ev(),
+        },
+        {
+          name: "１４１５",
+          then: ev(),
+        },
+      ],
+      {
+        background: "DIM",
+        position: "LEFT",
+        init: "NONE",
+        cancel: "DISALLOW",
+      }
+    )
+  ),
+  `<TintScreen: ColorTone[-68][-68][-68][0], Duration[1][Wait]>
+<ShowPicture: 1, path/to, Position[Upper Left][48][0]>
+<Background: Dim>
+あああああああああ
+あああああああああ
+あああああああああ
+あああああああああ
+<ShowChoices: Dim, Left, None, Disallow>
+<When: １２３>
+<ShowPicture: 1, play-shisha/02, Position[Upper Left][48][0]>
+<Wait: 60>
+<FadeOut>
+<When: ４５６>
+<When: ７８９>
+<When: １０１１>
+<When: １２１３>
+<When: １４１５>
+<End>`
+);
+
+console.log("DONE!");
