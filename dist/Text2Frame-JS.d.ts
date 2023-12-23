@@ -280,8 +280,16 @@ declare const CHARACTER_SPEED: {
     X4_FAST: string;
 };
 
+/**
+ * 条件分岐（スクリプト）
+ * @param condition 条件（JS）
+ * @param then 真のとき
+ * @param otherwise 偽のとき
+ * @returns {string}
+ */
 declare const Check: (condition: string, then: string, otherwise?: string) => string;
 
+/** イベントコマンド関数 */
 export declare const cmd: {
     /** メッセージ */
     message: typeof message;

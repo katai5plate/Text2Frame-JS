@@ -16,6 +16,7 @@ import * as scene from "./events/scene";
 import * as screen from "./events/screen";
 import * as system from "./events/system";
 
+/** イベントコマンド関数 */
 export const cmd = {
   /** メッセージ */
   message,

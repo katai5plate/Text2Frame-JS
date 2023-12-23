@@ -1,5 +1,12 @@
 import { argId, joinSkip, tag } from "../validate";
 
+/**
+ * 条件分岐（スクリプト）
+ * @param condition 条件（JS）
+ * @param then 真のとき
+ * @param otherwise 偽のとき
+ * @returns {string}
+ */
 export const Check = (condition: string, then: string, otherwise?: string) =>
   joinSkip("\n", [
     tag("If", ["Script", condition]),
