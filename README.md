@@ -57,8 +57,97 @@ export default ev(
 );
 ```
 
-- 最初の 3 行を入れることで、VSCode 補完が行われる。
-- `export default ev(...)` で出力する。
+#### 最初の 3 行を入れることで、VSCode 補完が行われる。
+
+- `//@ts-check`
+  - VSCode の TypeScript 型評価が行われる。これにより型エラーがあると警告が出る。
+- `/** @type {import("./Text2Frame-JS")} */`
+  - 先ほど準備した `Text2Frame-JS.d.ts` を関連付ける
+- `const { cmd, ev } = globalThis.Text2FrameJS;`
+  - イベントコマンド関数集の `cmd` と、イベントコマンド関数の文字列化に必要な関数 `ev` が使用可能になる
+
+```js
+//@ts-check
+/** @type {import("./Text2Frame-JS")} */
+const { cmd, ev } = globalThis.Text2FrameJS;
+```
+
+#### コマンド関数は必ず `ev()` で囲むこと。
+
+囲まないと、変なコンマが入ったり、思わぬバグが発生するので注意。
+
+```js
+ev(
+  // 選択肢の表示
+  cmd.message.ShowChoices(
+    [
+      {
+        name: "はい",
+        then: ev(
+          // ↑ ev で囲む
+          "はいはいわろすわろす",
+        ),
+      },
+      {
+        name: "いいえ",
+        then: ev(
+          // ↑ ev で囲む
+          cmd.message.Window({ name: "アレックス" }),
+          "Oh No, OMG!"
+        ),
+      },
+      {
+        name: null, // キャンセル時
+        then: ev(
+          // ↑ ev で囲む
+          "キャンセルキャンセルキャンセルキャンセル"
+        ),
+      },
+    ],
+    {
+      background: "DIM",
+      position: "MIDDLE",
+      init: "NONE",
+      cancel: "BRANCH",
+    }
+  )
+)
+```
+
+#### `export default ev(...)` で出力する。
+
+こうしないと、プラグインがデータを読み込むことができない。
+
+```js
+export default ev(
+  cmd.message.Window({ name: "アレックス" }),
+  "暇だなー",
+  cmd.message.Window({ name: "ブライアン" }),
+  "そうだな"
+);
+```
+
+### 文章の表示は直接文字列を入れる
+
+`ev` には文字列とイベントコマンド関数のみが入る。
+
+```js
+ev(
+  "1行目1行目1行目1行目1行目1行目",
+  "2行目2行目2行目2行目2行目2行目",
+  "3行目3行目3行目3行目3行目3行目",
+  "4行目4行目4行目4行目4行目4行目",
+
+  "1行目1行目1行目1行目1行目1行目",
+  "2行目2行目2行目2行目2行目2行目",
+  "3行目3行目3行目3行目3行目3行目",
+  "", // 文字送り
+  "1行目1行目1行目1行目1行目1行目",
+  "2行目2行目2行目2行目2行目2行目",
+  "3行目3行目3行目3行目3行目3行目",
+)
+```
+
 
 ### ツクール側の設定
 
