@@ -21,5 +21,17 @@ export default defineConfig({
       },
     },
   },
-  plugins: [dts({ rollupTypes: true }), nodePolyfills()],
+  plugins: [
+    {
+      name: "bugfix-text2frame-mv",
+      transform(code, id) {
+        if (id.match("Text2Frame-MV/Text2Frame")) {
+          code = code.replace(`typeof PluginManager === 'undefined'`, "true");
+          return { code, map: null };
+        }
+      },
+    },
+    dts({ rollupTypes: true }),
+    nodePolyfills(),
+  ],
 });
