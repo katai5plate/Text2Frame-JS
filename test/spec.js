@@ -1,5 +1,5 @@
 //@ts-check
-const { ev, cmd: c } = require("../dist/Text2Frame-JS.js");
+const { ev, cmd: c } = require("../dist/Text2Frame-JS");
 
 //@ts-expect-error
 const test = (name, expect, to) => {
