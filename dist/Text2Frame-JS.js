@@ -1,3 +1,12 @@
+/*! Text2Frame-MV (Text2Frame.js)
+(C)2018-2023 Yuki Katsura
+This software is released under the MIT License.
+https://github.com/yktsr/Text2Frame-MV
+-----
+Text2Frame-JS
+Copyright (c) 2023 Had2Apps
+This software is released under the MIT License.
+https://github.com/katai5plate/Text2Frame-JS */
 "use strict";
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const ev = (...arr) => arr.join("\n");

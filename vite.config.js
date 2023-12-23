@@ -1,8 +1,9 @@
 import { resolve } from "path";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
-import { name } from "./package.json";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
+import banner from "vite-plugin-banner";
+import { name } from "./package.json";
 
 export default defineConfig({
   build: {
@@ -49,5 +50,16 @@ export default defineConfig({
     },
     dts({ rollupTypes: true }),
     nodePolyfills(),
+    banner(
+      `Text2Frame-MV (Text2Frame.js)
+(C)2018-2023 Yuki Katsura
+This software is released under the MIT License.
+https://github.com/yktsr/Text2Frame-MV
+-----
+Text2Frame-JS
+Copyright (c) 2023 Had2Apps
+This software is released under the MIT License.
+https://github.com/katai5plate/Text2Frame-JS`
+    ),
   ],
 });
