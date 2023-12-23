@@ -9,7 +9,9 @@
   },
   "scripts": {
     "build": "rimraf dist && vite build",
-    "update-repos": "npm rm Text2Frame-MV && npm rm Text2Frame-JS && npm i -D github:yktsr/Text2Frame-MV#117-forlib && npm i -D github:katai5plate/Text2Frame-JS",
+    "update-repos": "npm run update-mv && npm run update-js",
+    "update-mv": "npm rm Text2Frame-MV && npm i github:yktsr/Text2Frame-MV#117-forlib",
+    "update-js": "npm rm Text2Frame-JS && npm i -no-save github:katai5plate/Text2Frame-JS",
     "dev": "npm run build && node test/spec.js"
   },
   "repository": {
@@ -25,12 +27,13 @@
   "homepage": "https://github.com/katai5plate/Text2Frame-JS#readme",
   "devDependencies": {
     "rimraf": "^5.0.5",
-    "Text2Frame-JS": "github:katai5plate/Text2Frame-JS",
-    "Text2Frame-MV": "github:yktsr/Text2Frame-MV#117-forlib",
     "typescript": "^5.3.3",
     "vite": "^5.0.10",
     "vite-plugin-dts": "^3.6.4",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "Text2Frame-MV": "github:yktsr/Text2Frame-MV#117-forlib"
   }
 }
