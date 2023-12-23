@@ -28,8 +28,9 @@ export const Window = ({
   name?: string;
 }) =>
   joinSkip("\n", [
-    background && tag("Background", [background]),
-    position && tag("WindowPosition", [position]),
+    background && tag("Background", [argPreset(background, WINDOW_BACKGROUND)]),
+    position &&
+      tag("WindowPosition", [argPreset(position, WINDOW_POSITION_VERTICAL)]),
     face &&
       tag("Face", [
         `${face.name}(${argRange(face.index, { from: 0, to: 15 })})`,
@@ -40,7 +41,7 @@ export const Window = ({
 export const ShowChoices = (
   cases: {
     name: string | null;
-    then: string;
+    then?: string;
   }[],
   {
     background,
@@ -69,7 +70,7 @@ export const ShowChoices = (
         joinSkip("\n", [
           joinSkip("\n", [
             name ? tag("When", [name]) : tag("WhenCancel"),
-            joinSkip("\n", [then]),
+            then && then !== "" ? joinSkip("\n", [then]) : undefined,
           ]),
         ])
       )

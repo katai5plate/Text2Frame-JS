@@ -1213,7 +1213,7 @@ declare const ShowBattleAnimation: (index: number, id: number) => string;
 
 declare const ShowChoices: (cases: {
     name: string | null;
-    then: string;
+    then?: string;
 }[], { background, position, init, cancel, }: {
     background?: "WINDOW" | "DIM" | "TRANSPARENT" | undefined;
     position?: "MIDDLE" | "LEFT" | "RIGHT" | undefined;
@@ -1342,7 +1342,7 @@ declare const TIMER_MODE: {
 
 declare const TintPicture: (id: number, color?: keyof typeof COLOR_TONE | Color4, time?: number) => string;
 
-declare const TintScreen: (color?: keyof typeof COLOR_TONE | Color4, time?: number) => string;
+declare const TintScreen: (color?: keyof typeof COLOR_TONE | Color4, time?: number, wait?: boolean) => string;
 
 declare const TouchInput: any;
 

@@ -13,6 +13,60 @@
 このモジュールでは、テキストを書く代わりに、TypeScript 型定義が設定された JS で書くため、視認性と保守性が向上しメンテが楽になる。  
 また、`JS -> テキスト -> JSON` という変換フローが独立した関数で行われるため、関連ツールを作るのも簡単になる。
 
+## 使い方 (ツクール MZ)
+
+### 必要なファイルを配置する
+
+#### Windows (powershell) の場合
+
+```bash
+New-Item -ItemType Directory -Path ./js/text2frame -Force
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/katai5plate/Text2Frame-JS/main/dist/Text2Frame-JS.d.ts -Headers @{"Cache-Control"="no-cache"} | Select-Object -ExpandProperty Content | Out-File -FilePath ./js/text2frame/Text2Frame-JS.d.ts -Force
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/katai5plate/Text2Frame-JS/main/dist/Text2Frame-JS.umd.js -Headers @{"Cache-Control"="no-cache"} | Select-Object -ExpandProperty Content | Out-File -FilePath ./js/libs/Text2Frame-JS.umd.js -Force
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/katai5plate/Text2Frame-JS/main/rpgmaker/H2A_Text2FrameJSLoader.js -Headers @{"Cache-Control"="no-cache"} | Select-Object -ExpandProperty Content | Out-File -FilePath ./js/plugins/H2A_Text2FrameJSLoader.js -Force
+```
+
+#### Mac (curl) の場合
+
+```bash
+curl -H "Cache-Control: no-cache" https://raw.githubusercontent.com/katai5plate/Text2Frame-JS/main/dist/Text2Frame-JS.d.ts --create-dirs -o ./js/text2frame/Text2Frame-JS.d.ts
+curl -H "Cache-Control: no-cache" https://raw.githubusercontent.com/katai5plate/Text2Frame-JS/main/dist/Text2Frame-JS.umd.js --create-dirs -o ./js/libs/Text2Frame-JS.umd.js
+curl -H "Cache-Control: no-cache" https://raw.githubusercontent.com/katai5plate/Text2Frame-JS/main/rpgmaker/H2A_Text2FrameJSLoader.js --create-dirs -o ./js/plugins/H2A_Text2FrameJSLoader.js
+```
+
+#### 手動でやる場合
+
+1. `js/libs` に [これ](https://raw.githubusercontent.com/katai5plate/Text2Frame-JS/main/dist/Text2Frame-JS.umd.js) を入れる
+2. `js/text2frame` を作成し、中に [これ](https://raw.githubusercontent.com/katai5plate/Text2Frame-JS/main/dist/Text2Frame-JS.d.ts) を入れる
+3. `js/plugins` に [これ](https://raw.githubusercontent.com/katai5plate/Text2Frame-JS/main/rpgmaker/H2A_Text2FrameJSLoader.js) を入れる
+
+### イベントコマンドの書き方
+
+JS ファイルは `js/text2frame` に作成する。
+
+```js
+//@ts-check
+/** @type {import("./Text2Frame-JS")} */
+const { cmd, ev } = globalThis.Text2FrameJS;
+
+export default ev(
+  cmd.message.Window({ name: "アレックス" }),
+  "暇だなー",
+  cmd.message.Window({ name: "ブライアン" }),
+  "そうだな"
+);
+```
+
+- 最初の 3 行を入れることで、VSCode 補完が行われる。
+- `export default ev(...)` で出力する。
+
+### ツクール側の設定
+
+1. プラグイン `H2A_Text2FrameJSLoader` をプラグインマネージャで有効化する
+2. プラグインコマンドからプラグインを指定し「実行」を選ぶ
+3. 「実行するファイル名」に `js/text2frame/` 以降のファイルパス（拡張子を省く）を入れる (例: `shop/armor-store`)
+4. 必要に応じて「事前にプリロードする素材」を入力する (実行前に指定された素材がロードされるまでウェイトする)
+
 ## 使い方 (Node.js)
 
 ```

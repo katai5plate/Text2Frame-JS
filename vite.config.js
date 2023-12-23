@@ -16,17 +16,33 @@ export default defineConfig({
     },
     terserOptions: {
       format: {
-        // JSDocコメントを含むすべてのコメントを保持
         comments: "all",
       },
     },
   },
   plugins: [
+    // Text2Frame-MV を非ツクール状態かつブラウザ向けの条件で実行できるようにする
     {
       name: "bugfix-text2frame-mv",
       transform(code, id) {
         if (id.match("Text2Frame-MV/Text2Frame")) {
           code = code.replace(`typeof PluginManager === 'undefined'`, "true");
+          code = code.replace(
+            "globalThis.Game_Interpreter = {};",
+            "globalThis.Game_Interpreter = globalThis.Game_Interpreter || {};"
+          );
+          code = code.replace(
+            "Game_Interpreter.prototype = {};",
+            "Game_Interpreter.prototype = Game_Interpreter.prototype || {};"
+          );
+          code = code.replace(
+            "globalThis.$gameMessage = {};",
+            "globalThis.$gameMessage = globalThis.$gameMessage || {};"
+          );
+          code = code.replace(
+            "$gameMessage.add = function () {};",
+            "$gameMessage.add = $gameMessage.add || function () {};"
+          );
           return { code, map: null };
         }
       },

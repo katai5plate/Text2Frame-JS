@@ -247,7 +247,7 @@ test(
 test(
   "mix 1",
   ev(
-    cmd.screen.TintScreen({ r: -68, g: -68, b: -68, x: 0 }, 1),
+    cmd.screen.TintScreen({ r: -68, g: -68, b: -68, x: 0 }, 1, true),
     cmd.picture.ShowPicture(1, "path/to", {
       position: { mode: "DIRECT", origin: "CORNER", x: 48, y: 0 },
     }),
@@ -317,4 +317,4 @@ test(
 <End>`
 );
 
-console.log("DONE!");
+console.log("NO PROBREM!");

@@ -14,8 +14,15 @@ export const FadeIn = () => tag("FadeIn");
 
 export const TintScreen = (
   color?: keyof typeof COLOR_TONE | Color4,
-  time?: number
-) => tag("TintScreen", [joinSkip(null, [color && argColorTone(color), time])]);
+  time?: number,
+  wait?: boolean
+) =>
+  tag("TintScreen", [
+    joinSkip(null, [
+      color && argColorTone(color),
+      time && `Duration[${time}][${wait ? "Wait" : ""}]`,
+    ]),
+  ]);
 
 export const FlashScreen = (color: Color4, time: number, wait?: boolean) =>
   tag("FlashScreen", [argsColor(color), time, wait]);
