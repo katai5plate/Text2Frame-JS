@@ -13,6 +13,12 @@ export default defineConfig({
       fileName: name,
       formats: ["es", "cjs", "umd"],
     },
+    terserOptions: {
+      format: {
+        // JSDocコメントを含むすべてのコメントを保持
+        comments: "all",
+      },
+    },
   },
   plugins: [dts({ rollupTypes: true })],
 });

@@ -314,6 +314,11 @@ declare const CommonEvent: (id: number) => string;
 
 declare const ConfigManager: any;
 
+/**
+ * Text2Frame の文法で書かれた文字列を RPG Maker MV/MZ のイベントコマンドリストに変換する。
+ * @param text Text2Frame の文法で書かれた文字列
+ * @return {{ code: number; parameters: any[]; indent: number }[]}
+ */
 export declare const convert: typeof TF.convert;
 
 declare type CreaseOperator = "+" | "-";
@@ -737,6 +742,11 @@ declare interface Operations {
     };
 }
 
+/**
+ * JS で書かれたイベントコマンドを Text2Frame の文法で書かれた文字列に変換する
+ * @param arr イベントコマンド関数リスト
+ * @returns {string}
+ */
 export declare const parse: (...arr: string[]) => string;
 
 declare namespace party {

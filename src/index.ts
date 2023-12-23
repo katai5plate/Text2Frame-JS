@@ -35,4 +35,9 @@ export const events = {
 };
 
 import TF from "Text2Frame-MV/Text2Frame.mjs";
+/**
+ * Text2Frame の文法で書かれた文字列を RPG Maker MV/MZ のイベントコマンドリストに変換する。
+ * @param text Text2Frame の文法で書かれた文字列
+ * @return {{ code: number; parameters: any[]; indent: number }[]}
+ */
 export const convert = TF.convert;
